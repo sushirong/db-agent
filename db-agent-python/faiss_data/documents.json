@@ -1,0 +1,447 @@
+[
+  {
+    "tableName": "users",
+    "tableComment": "用户信息表",
+    "schemaText": "表名: users (用户信息表)\n列:\n  - id bigint(20) (用户ID)\n  - username varchar(50) (用户名)\n  - email varchar(100) (邮箱地址)\n  - phone varchar(20) (手机号)\n  - status tinyint(4) (状态: 0-禁用, 1-启用)\n  - created_at datetime (创建时间)\n  - updated_at datetime (更新时间)\n"
+  },
+  {
+    "tableName": "orders",
+    "tableComment": "订单表",
+    "schemaText": "表名: orders (订单表)\n列:\n  - id bigint(20) (订单ID)\n  - order_no varchar(32) (订单编号)\n  - user_id bigint(20) (用户ID)\n  - total_amount decimal(10,2) (订单总金额)\n  - status tinyint(4) (订单状态: 0-待支付, 1-已支付, 2-已发货, 3-已完成, 4-已取消)\n  - created_at datetime (下单时间)\n  - paid_at datetime (支付时间)\n"
+  },
+  {
+    "tableName": "products",
+    "tableComment": "商品表",
+    "schemaText": "表名: products (商品表)\n列:\n  - id bigint(20) (商品ID)\n  - name varchar(200) (商品名称)\n  - category_id bigint(20) (分类ID)\n  - price decimal(10,2) (商品价格)\n  - stock int(11) (库存数量)\n  - status tinyint(4) (状态: 0-下架, 1-上架)\n  - created_at datetime (创建时间)\n"
+  },
+  {
+    "tableName": "order_items",
+    "tableComment": "订单明细表",
+    "schemaText": "表名: order_items (订单明细表)\n列:\n  - id bigint(20) (明细ID)\n  - order_id bigint(20) (订单ID)\n  - product_id bigint(20) (商品ID)\n  - quantity int(11) (购买数量)\n  - unit_price decimal(10,2) (商品单价)\n  - subtotal decimal(10,2) (小计金额)\n"
+  },
+  {
+    "tableName": "agent_conversations",
+    "tableComment": "Agent会话历史表",
+    "schemaText": "表名: agent_conversations (Agent会话历史表)\n列:\n  - id varchar(64) (会话ID)\n  - title varchar(255) (会话标题)\n  - last_message varchar(500) (最近消息摘要)\n  - created_at datetime (创建时间)\n  - updated_at datetime (更新时间)\n"
+  },
+  {
+    "tableName": "agent_messages",
+    "tableComment": "Agent会话消息表",
+    "schemaText": "表名: agent_messages (Agent会话消息表)\n列:\n  - id varchar(64) (消息ID)\n  - conversation_id varchar(64) (会话ID)\n  - role varchar(20) (消息角色)\n  - content longtext (消息内容)\n  - created_at datetime (创建时间)\n"
+  },
+  {
+    "tableName": "ai_backflow_data",
+    "tableComment": "",
+    "schemaText": "表名: ai_backflow_data\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - MODEL_NAME varchar(512)\n  - MODEL_VERSION varchar(16)\n  - CRT_TIME datetime\n  - TOTAL_NUM int(11)\n  - UNMARK_NUM int(11)\n  - MARKED_NUM int(11)\n"
+  },
+  {
+    "tableName": "ai_backflow_data_detail",
+    "tableComment": "",
+    "schemaText": "表名: ai_backflow_data_detail\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - QUESTION text\n  - ANSWER text\n  - EVALUATION_STATE char(1)\n  - MARK_STATE char(1)\n  - EVALUATION_VALUE varchar(8)\n  - SAMPLE_TYPE char(1)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DATA_STATE char(1)\n  - SYSTEM_TITLE varchar(2048)\n  - DATA_BATCH_ID varchar(36)\n  - COM_PLEX_COT text\n  - ROUND varchar(100)\n  - TIMESTAMP datetime\n  - USER_FEEDBACK varchar(1)\n  - VALUE_DETAIL varchar(1024)\n"
+  },
+  {
+    "tableName": "ai_backflow_data_sum",
+    "tableComment": "",
+    "schemaText": "表名: ai_backflow_data_sum\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - BACKFLOW_NUM int(11)\n  - DATA_STATE char(1)\n  - CRT_TIME datetime\n  - SEND_TIME datetime\n  - CALLBACK_TIME datetime\n  - IS_SUCESS char(1)\n  - FAIL_MSG varchar(1024)\n"
+  },
+  {
+    "tableName": "ai_backflow_dataset",
+    "tableComment": "",
+    "schemaText": "表名: ai_backflow_dataset\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - SOURCE_DATA_ID varchar(128)\n  - DATASET_ID varchar(36)\n  - SAMPLE_TYPE char(1)\n  - OSS_BUCKET_NAME varchar(36)\n  - OSS_PATH varchar(512)\n  - OSS_FILE varchar(512)\n  - OSS_URL varchar(512)\n  - FILE_NAME varchar(128)\n  - FILE_SIZE bigint(20)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_backflow_task_info",
+    "tableComment": "",
+    "schemaText": "表名: ai_backflow_task_info\n列:\n  - ID varchar(36)\n  - TASK_NAME varchar(256)\n  - DATA_TYPE varchar(24)\n  - DATE_TYPE_NAME varchar(128)\n  - APP_KIND_ONE_CODE varchar(36)\n  - APP_KIND_ONE_NAME varchar(128)\n  - APP_KIND_TWO_CODE varchar(36)\n  - APP_KIND_TWO_NAME varchar(128)\n  - DATASET_INFO varchar(4096)\n  - TEMPLATE_ID varchar(36)\n  - TASK_DESC varchar(1200)\n  - MODEL_NAME varchar(512)\n  - MODEL_VERSION varchar(16)\n  - TOTAL_NUM int(11)\n  - UNMARK_NUM int(11)\n  - MARKED_NUM int(11)\n  - APIKEY varchar(128)\n  - DATA_STATUS char(1)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n  - CURRENT_NUM int(11)\n  - MODEL_ID varchar(100)\n  - CHANNEL varchar(200)\n  - BUSINESS_SCENARIO varchar(200)\n"
+  },
+  {
+    "tableName": "ai_collect_exec_task",
+    "tableComment": "",
+    "schemaText": "表名: ai_collect_exec_task\n列:\n  - ID varchar(128)\n  - BATCH_ID varchar(128)\n  - SOURCE_DATA_ID varchar(64)\n  - FILE_IDS varchar(20480)\n  - STATE char(1)\n  - CRT_TIME datetime\n  - MACHINE_ID varchar(128)\n  - EXEC_BEGIN_TIME datetime\n  - EXEC_END_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_collect_exec_task_his",
+    "tableComment": "",
+    "schemaText": "表名: ai_collect_exec_task_his\n列:\n  - ID varchar(128)\n  - BATCH_ID varchar(128)\n  - SOURCE_DATA_ID varchar(64)\n  - FILE_IDS varchar(20480)\n  - STATE char(1)\n  - CRT_TIME datetime\n  - MACHINE_ID varchar(128)\n  - EXEC_BEGIN_TIME datetime\n  - EXEC_END_TIME datetime\n  - MIGRATE_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_collect_info",
+    "tableComment": "",
+    "schemaText": "表名: ai_collect_info\n列:\n  - id varchar(128)\n  - user_name varchar(255)\n  - type int(11)\n"
+  },
+  {
+    "tableName": "ai_collect_source_info",
+    "tableComment": "",
+    "schemaText": "表名: ai_collect_source_info\n列:\n  - ID varchar(128)\n  - DATASET_ID varchar(128)\n  - TASK_ID varchar(128)\n  - SOURCE_TYPE char(1)\n  - SOURCE_NAME varchar(100)\n  - SOURCE_ADDR varchar(100)\n  - SOURCE_USER varchar(100)\n  - SOURCE_SECRET varchar(100)\n  - SFTP_CODE varchar(100)\n  - SFTP_OID varchar(100)\n  - SOURCE_PATH varchar(400)\n  - SFTPKEY varchar(100)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n  - UPDATE_TIME datetime\n  - IS_COMPRESSED char(1)\n  - COMPRESS_FILE_SUFFIX varchar(20)\n"
+  },
+  {
+    "tableName": "ai_collect_task_exec_sum",
+    "tableComment": "",
+    "schemaText": "表名: ai_collect_task_exec_sum\n列:\n  - ID varchar(128)\n  - DATASET_ID varchar(128)\n  - TASK_ID varchar(128)\n  - TASK_TYPE char(1)\n  - COLLECT_SOURCE_ID varchar(128)\n  - COLLECT_STATE char(1)\n  - EXEC_STATE char(1)\n  - CUR_SOURCE_ID varchar(128)\n  - BEGIN_TIME datetime\n  - END_TIME datetime\n  - FILE_NUMS int(11)\n  - FILE_SIZE bigint(20)\n  - COLLECTD_FILE_NUMS int(11)\n  - COLLECTD_FILE_SIZE bigint(20)\n  - BUCKET_NAME varchar(100)\n  - MINIO_DIR varchar(300)\n  - ACCT_PERIOD varchar(20)\n  - FAIL_REASON text\n  - DEL_FLAG char(1)\n  - LAST_EXEC_TIME datetime\n  - EXEC_TIMES int(11)\n  - ES_STATE char(1)\n"
+  },
+  {
+    "tableName": "ai_collect_task_info",
+    "tableComment": "",
+    "schemaText": "表名: ai_collect_task_info\n列:\n  - ID varchar(100)\n  - DATASET_ID varchar(100)\n  - COLLECT_TASK_NAME varchar(200)\n  - SOURCE_SYSTEM_NAME varchar(200)\n  - SFTP_SOURCE_NAME varchar(100)\n  - SFTP_IP_ADDR varchar(40)\n  - SFTP_USER varchar(100)\n  - SFTP_DIR varchar(400)\n  - SFTP_CODE varchar(100)\n  - SFTP_OID varchar(100)\n  - DEPOSIT_DIR varchar(400)\n  - COLLECT_DATA_KIND varchar(200)\n  - COLLECT_DATA_ATTR char(1)\n  - COLLECT_STATE char(1)\n  - TASK_TYPE char(1)\n  - START_TIME datetime\n  - END_TIME datetime\n  - DATA_NAME varchar(200)\n  - DATA_DESC varchar(1296)\n  - DATA_FROM varchar(100)\n  - DATA_BELONG varchar(400)\n  - BUSINESS_INFO varchar(400)\n  - TRAINING_PHASE varchar(400)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(300)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(300)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime(6)\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n  - NEXT_COLLECT_TIME bigint(20)\n  - PRE_COLLECT_TIME bigint(20)\n  - PATH_PERIOD_TYPE varchar(20)\n  - COLLECT_TIME_TYPE varchar(20)\n  - COLLECT_DAY varchar(2)\n  - COLLECT_HHMM varchar(20)\n  - COLLECT_TIME datetime\n  - FILE_SUFFIX varchar(400)\n  - CUR_BATCH_ID varchar(128)\n  - EXEC_BATCH_NUMS int(11)\n  - SUCESS_BATCH_NUMS int(11)\n"
+  },
+  {
+    "tableName": "ai_dataset",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset\n列:\n  - ID varchar(50)\n  - DATASET_ID varchar(128)\n  - DATASET_VERSION int(11)\n  - CREATE_FROM char(1)\n  - DATASET_TD varchar(2000)\n  - DATASET_TYPE varchar(50)\n  - CATALOG_NAME varchar(2000)\n  - DATASET_NAME varchar(200)\n  - DATASET_ENGLISH_NAME varchar(200)\n  - DATASET_DESCRIPTION varchar(2000)\n  - COLLECTION_SOURCE varchar(1000)\n  - PUB_NAME varchar(50)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(50)\n  - PUB_PHONE varchar(50)\n  - PUB_EMAIL varchar(50)\n  - OPEN int(11)\n  - FLAG int(11)\n  - DELETE_FLAG char(1)\n  - TENANT_ID varchar(50)\n  - DATASET_STATUS int(11)\n  - ONLINE_TIME datetime\n  - OFFLINE_TIME datetime\n  - ONLINE_NAME varchar(50)\n  - OFFLINE_NAME varchar(50)\n  - PUB_STATUS int(11)\n  - PROJECT_ID varchar(50)\n  - DATASET_TYPE_NAME varchar(50)\n  - PUB_RANGE text\n  - SOURCE_DATA_TYPE varchar(100)\n  - SOURCE_DATA_FROM varchar(100)\n  - BUSINESS_DOMAIN varchar(2000)\n  - TRAINING_PHASE varchar(100)\n  - PUB_RANGE_NAME text\n  - CRT_USER varchar(50)\n  - SEN_LEVEL varchar(50)\n  - DATA_MANAGER varchar(2000)\n  - LOGIC_TYPE varchar(1)\n  - SYS_TISSUE varchar(200)\n  - SYS_NAME varchar(200)\n  - BUSINESS_ONE varchar(200)\n  - BUSINESS_TWO varchar(200)\n  - BUSINESS_THREE varchar(200)\n  - TECHNOLOGY_ONE varchar(200)\n  - TECHNOLOGY_TWO varchar(200)\n  - TECHNOLOGY_THREE varchar(200)\n  - TECHNOLOGY_FOUR varchar(200)\n  - USE_CLASSIFY varchar(200)\n  - DATA_FROM varchar(200)\n  - BROWSE_NUM int(11)\n  - SUB_NUM int(11)\n  - MARK_AFTER_FLAG int(11)\n  - SCENE_ID varchar(200)\n  - MODEL_ID varchar(200)\n"
+  },
+  {
+    "tableName": "ai_dataset_catalog",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_catalog\n列:\n  - ID varchar(20)\n  - NAME varchar(255)\n  - TYPE char(5)\n"
+  },
+  {
+    "tableName": "ai_dataset_catalog_relation",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_catalog_relation\n列:\n  - ID varchar(50)\n  - PARENT_ID varchar(50)\n  - NAME varchar(200)\n  - LEVEL int(11)\n  - DESCRIPTION varchar(2000)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(255)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_dataset_file",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_file\n列:\n  - ID varchar(50)\n  - DATASET_ID varchar(50)\n  - FILE_NAME varchar(200)\n  - FILE_PATH varchar(200)\n  - FILE_TYPE varchar(200)\n  - FILE_SIZE varchar(50)\n  - FILE_DESCRIPTION varchar(500)\n  - CRT_TIME datetime\n  - CRT_USER varchar(255)\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_USER varchar(255)\n  - UPD_NAME varchar(255)\n  - IS_UPDATE char(1)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_dataset_logic_lake",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_logic_lake\n列:\n  - ID varchar(50)\n  - LOGIC_TYPE varchar(50)\n  - SYS_TISSUE varchar(100)\n  - SYS_CODE varchar(100)\n  - SYS_NAME varchar(100)\n  - FRAMEWORK_TYPE varchar(100)\n  - SYS_TYPE varchar(100)\n  - SYS_FRAMEWORK varchar(100)\n  - FIRST_SYS_NAME varchar(100)\n  - SECOND_SYS_NAME varchar(100)\n  - USER_NAME varchar(100)\n  - PHONE varchar(50)\n  - EMAIL varchar(50)\n  - UPT_NAME varchar(50)\n  - CRT_TIME datetime\n  - UPT_TIME datetime\n  - UPT_PHONE varchar(50)\n  - UPT_EMAIL varchar(50)\n  - APPROVE_STATUS int(11)\n"
+  },
+  {
+    "tableName": "ai_dataset_model",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_model\n列:\n  - ID int(11)\n  - PATH varchar(200)\n  - ENG_NAME varchar(200)\n  - UNIT varchar(200)\n  - NAME varchar(200)\n  - FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_dataset_operator_process",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_operator_process\n列:\n  - ID varchar(100)\n  - SOURCE_ID varchar(100)\n  - SOURCE_PROCESS_STATUS char(1)\n  - OPERATOR_JSON text\n  - SAVE_DIRECTORY varchar(255)\n  - SOURCE_PROCESS_TIME datetime\n  - CRT_TIME datetime\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(50)\n  - UPT_TIME datetime\n  - UPT_USER varchar(50)\n  - UPT_NAME varchar(50)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_dataset_operator_tag",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_operator_tag\n列:\n  - ID varchar(50)\n  - PARENT_ID varchar(50)\n  - NAME varchar(200)\n  - LEVEL int(11)\n  - DESCRIPTION varchar(2000)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(255)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_dataset_relation",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_relation\n列:\n  - ID varchar(128)\n  - DATASET_ID varchar(128)\n  - TASK_ID varchar(128)\n  - BATCH_ID varchar(128)\n  - RELATION_TYPE char(1)\n  - SOURCE_DATA_ID varchar(128)\n  - FILE_NAME varchar(256)\n  - FILE_SIZE bigint(20)\n  - FILE_PATH varchar(256)\n  - BUCKET_NAME varchar(64)\n  - SOURCE_PATH varchar(256)\n  - SOURCE_FILE_NAME varchar(256)\n  - DEST_BUCKET_NAME varchar(64)\n  - DEST_PATH varchar(256)\n  - DEST_FILE_NAME varchar(256)\n  - DEST_URL varchar(256)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_dataset_source_data",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_source_data\n列:\n  - ID varchar(100)\n  - DATA_TYPE varchar(50)\n  - TENANT_ID varchar(50)\n  - PROCESS_STATUS int(11)\n  - MARK_STATUS int(11)\n  - TENANT_NAME varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - SOURCE_DATA_LOCATION varchar(255)\n  - LOCATION_IP varchar(255)\n  - LOCATION_DIRECTORY varchar(255)\n  - SOURCE_DATA_DESC varchar(500)\n  - SOURCE_DATA_SOURCE varchar(255)\n  - IS_MARK varchar(100)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - UPT_TIME datetime\n  - UPT_NAME varchar(50)\n  - SOURCE_VERSION int(11)\n  - DEL_FLAG char(1)\n  - CHECK_STATUS int(11)\n  - PROJECT_ID varchar(100)\n  - DATA_ATTR varchar(1)\n  - BUSINESS_INFO varchar(400)\n  - TRAINING_PHASE varchar(400)\n  - DATASET_ID varchar(100)\n  - PROJECT_NAME varchar(200)\n  - DATASET_VERSION int(11)\n  - COLLECT_FILE_NUMS int(11)\n  - COLLECT_FILE_SIZE bigint(20)\n  - PROCESS_FILE_NUMS int(11)\n  - PROCESS_FILE_SIZE bigint(20)\n  - CHECK_FILE_NUMS int(11)\n  - CHECK_FILE_SIZE bigint(20)\n  - MARK_FILE_NUMS int(11)\n  - MARK_FILE_SIZE bigint(20)\n  - SOURCE_FROM int(11)\n  - AFTER_PROCESS_STATUS int(11)\n  - AFTER_PROCESS_FILE_NUMS int(11)\n  - AFTER_PROCESS_FILE_SIZE int(11)\n  - EXTEND_FLAG int(11)\n  - EXTEND_VERSION varchar(50)\n  - CHECK_FAILURE text\n  - PROCESS_FAILURE text\n"
+  },
+  {
+    "tableName": "ai_dataset_subscribe",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_subscribe\n列:\n  - ID varchar(50)\n  - DATASET_ID varchar(50)\n  - DATASET_NAME varchar(200)\n  - APPLY_TENANT varchar(100)\n  - APPLY_PERSON varchar(100)\n  - APPLY_PERSON_TEL varchar(50)\n  - APPLY_PERSON_EMAIL varchar(100)\n  - APPLY_DESC varchar(2000)\n  - APPROVE_PERSON varchar(2000)\n  - APPROVE_TENANT varchar(100)\n  - APPROVE_STATUS int(11)\n  - SUBSCRIBE_DESC varchar(100)\n  - APPLY_PROJECT_ID varchar(100)\n  - DATASET_PUBLISHER varchar(100)\n  - DATASET_TYPE varchar(20)\n  - DATASET_TENANT varchar(100)\n  - DATASET_ADMIN varchar(50)\n  - WORK_ORDER_TYPE varchar(30)\n  - SUBSCRIBE_TYPE int(11)\n  - CRT_USER varchar(100)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - APPROVE_TIME datetime\n  - APPLY_TIME datetime\n  - DEL_FLAG char(1)\n  - APPROVE_PROJECT_ID varchar(50)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(100)\n  - UPDATE_USER varchar(50)\n  - UPDATE_TIME datetime\n  - APPROVE_DESC varchar(2000)\n  - SFTP_CODE varchar(100)\n  - SFTP_OID varchar(100)\n  - USER_ID varchar(100)\n  - LOGIN_ID varchar(100)\n  - ROLE text\n  - SFTP_NAME varchar(100)\n  - SOURCE_DIR varchar(200)\n  - DATASET_VERSION int(11)\n  - SUB_STATUS int(11)\n"
+  },
+  {
+    "tableName": "ai_dataset_tag_dim",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_tag_dim\n列:\n  - ID varchar(100)\n  - PARENT_ID varchar(100)\n  - NAME varchar(200)\n  - LEVEL int(11)\n  - DESCRIPTION varchar(2000)\n  - SORT int(11)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(255)\n  - DEL_FLAG char(1)\n  - DIM_CLASS varchar(200)\n  - IS_LEAF int(11)\n  - DATASET_TYPE varchar(500)\n  - IS_MARK char(1)\n  - PROCESS_AFTER_MARK_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_dataset_total",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_total\n列:\n  - ACCOUNT varchar(50)\n  - ADMIN varchar(50)\n  - MODEL_NAME varchar(50)\n  - TOTAL_SIZE varchar(50)\n  - OBJECT_NUM varchar(50)\n  - CRT_TIME datetime\n  - SEVEN_DAY_UPLOAD int(11)\n  - DATASET_NUM int(11)\n  - SAME_FILE_NUM varchar(50)\n  - EXPANSION_MAP text\n  - CONTENT_TYPE_MAP text\n"
+  },
+  {
+    "tableName": "ai_dataset_type_statistics",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_type_statistics\n列:\n  - ID varchar(100)\n  - LAKE_ID varchar(100)\n  - DATASET_TYPE int(11)\n  - DATASET_TYPE_NAME varchar(100)\n  - DATASET_NAME varchar(500)\n  - DATASET_DESC text\n  - DATASET_FROM varchar(500)\n  - FILE_NUM varchar(100)\n  - FILE_SIZE varchar(100)\n  - SAVE_LOCATION text\n  - FLAG int(11)\n  - TYPE_STATISTICS varchar(100)\n  - EXAMPLE_FILE_URL varchar(512)\n  - COPYRIGHT_DESCRIPTION text\n  - FILE_NAME varchar(500)\n  - CRT_TIME datetime\n  - UPT_TIME datetime\n  - DATASET_VERSION varchar(10)\n  - CRT_NAME varchar(100)\n  - UPT_NAME varchar(100)\n  - TAG_ID varchar(100)\n"
+  },
+  {
+    "tableName": "ai_dataset_type_statistics_tag",
+    "tableComment": "",
+    "schemaText": "表名: ai_dataset_type_statistics_tag\n列:\n  - ID varchar(100)\n  - STATISTICS_ID varchar(100)\n  - BUSINESS_ONE varchar(100)\n  - BUSINESS_ONE_NAME varchar(100)\n  - BUSINESS_TWO varchar(100)\n  - BUSINESS_TWO_NAME varchar(100)\n  - BUSINESS_THREE varchar(100)\n  - BUSINESS_THREE_NAME varchar(100)\n  - TECHNOLOGY_ONE varchar(100)\n  - TECHNOLOGY_ONE_NAME varchar(100)\n  - TECHNOLOGY_TWO varchar(100)\n  - TECHNOLOGY_TWO_NAME varchar(100)\n  - TECHNOLOGY_THREE varchar(100)\n  - TECHNOLOGY_THREE_NAME varchar(100)\n  - TECHNOLOGY_FOUR varchar(100)\n  - TECHNOLOGY_FOUR_NAME varchar(100)\n"
+  },
+  {
+    "tableName": "ai_evaluation_index",
+    "tableComment": "",
+    "schemaText": "表名: ai_evaluation_index\n列:\n  - ID varchar(36)\n  - TEMPLATE_ID varchar(36)\n  - INDEX_NAME varchar(128)\n  - INDEX_DESC varchar(2048)\n  - ZERO_STANDARD varchar(2048)\n  - ONE_STANDARD varchar(2048)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_evaluation_template",
+    "tableComment": "",
+    "schemaText": "表名: ai_evaluation_template\n列:\n  - ID varchar(36)\n  - TEMPLATE_NAME varchar(128)\n  - SYSTEM_TITLE varchar(2048)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_sum_plat",
+    "tableComment": "",
+    "schemaText": "表名: ai_sum_plat\n列:\n  - ID varchar(128)\n  - SUM_YMD int(11)\n  - TENANT_NUM int(11)\n  - PROJECT_NUM int(11)\n  - USER_NUM int(11)\n  - PROCESS_OPERATOR_NUM int(11)\n  - CHECK_OPERATOR_NUM int(11)\n  - MARK_AFTER_OPERATOR_NUM int(11)\n  - COLLECT_TASK_NUM int(11)\n  - COLLECT_DATA_SIZE bigint(20)\n  - DATASET_NUM int(11)\n  - DATASET_DATA_SIZE bigint(20)\n  - DATASET_SUBSCRIBE_NUM int(11)\n  - DATASET_SUBSCRIBE_DATA_SIZE bigint(20)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_sum_tenant",
+    "tableComment": "",
+    "schemaText": "表名: ai_sum_tenant\n列:\n  - ID varchar(128)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - SUM_YMD int(11)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_sum_user_list",
+    "tableComment": "",
+    "schemaText": "表名: ai_sum_user_list\n列:\n  - ID varchar(128)\n  - USER_ID varchar(128)\n  - USER_NAME varchar(128)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "ai_sys_lock_info",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_lock_info\n列:\n  - ID int(11)\n  - NAME varchar(100)\n"
+  },
+  {
+    "tableName": "ai_sys_master_info",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_master_info\n列:\n  - ID varchar(100)\n  - HOSTS_NAME varchar(200)\n  - HOST_IP varchar(40)\n  - CRT_TIME datetime\n  - MASTER_FLAG char(1)\n  - DEL_FLAG char(1)\n  - UPDATE_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_sys_master_info_his",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_master_info_his\n列:\n  - ID varchar(100)\n  - HOSTS_NAME varchar(200)\n  - HOST_IP varchar(40)\n  - CRT_TIME datetime\n  - MASTER_FLAG char(1)\n  - DEL_FLAG char(1)\n  - UPDATE_TIME datetime\n  - MIGRATE_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_sys_queue",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_queue\n列:\n  - ID int(11)\n  - BUSINESS_ID varchar(2048)\n  - BUSINESS_TYPE varchar(5)\n  - STATE varchar(1)\n  - MACHINE_ID varchar(100)\n  - CRT_TIME datetime\n  - DISTRIBUTE_TIME datetime\n  - EXECUTE_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_sys_queue_his",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_queue_his\n列:\n  - ID int(11)\n  - QUEUE_ID int(11)\n  - BUSINESS_ID varchar(2048)\n  - BUSINESS_TYPE varchar(5)\n  - STATE varchar(1)\n  - MACHINE_ID varchar(100)\n  - CRT_TIME datetime\n  - DISTRIBUTE_TIME datetime\n  - EXECUTE_TIME datetime\n  - MIGRATE_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_sys_serial_no",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_serial_no\n列:\n  - ID int(11)\n  - MAX_ID bigint(20)\n  - UPDATE_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_sys_task_info",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_task_info\n列:\n  - ID varchar(30)\n  - BUSINESS_INFO varchar(1024)\n  - BUSINESS_TYPE varchar(2)\n  - TASK_TYPE char(1)\n  - EXECUTE_TIME datetime\n  - EXEC_HHMM varchar(10)\n  - EXEC_DATA_PERIOD tinyint(4)\n  - EXEC_DAY tinyint(4)\n  - NEXT_EXEC_TIME bigint(20)\n  - PRE_EXEC_TIME bigint(20)\n  - VALID_FLAG char(1)\n  - CRT_TIME datetime\n  - CRON_EXPRESS varchar(40)\n  - EXECTOR_NAME varchar(128)\n"
+  },
+  {
+    "tableName": "ai_sys_task_info_his",
+    "tableComment": "",
+    "schemaText": "表名: ai_sys_task_info_his\n列:\n  - ID varchar(30)\n  - BUSINESS_INFO varchar(1024)\n  - BUSINESS_TYPE varchar(2)\n  - TASK_TYPE char(1)\n  - EXECUTE_TIME datetime\n  - EXEC_HHMM varchar(10)\n  - EXEC_DATA_PERIOD tinyint(4)\n  - EXEC_DAY tinyint(4)\n  - NEXT_EXEC_TIME bigint(20)\n  - PRE_EXEC_TIME bigint(20)\n  - VALID_FLAG char(1)\n  - CRT_TIME datetime\n  - UPDATE_TIME datetime\n  - CRON_EXPRESS varchar(40)\n  - EXECTOR_NAME varchar(128)\n"
+  },
+  {
+    "tableName": "ai_task_auto_detail",
+    "tableComment": "",
+    "schemaText": "表名: ai_task_auto_detail\n列:\n  - ID varchar(50)\n  - TASK_TYPE char(1)\n  - TASK_ID varchar(50)\n  - BATCH_ID varchar(50)\n  - CRT_TIME datetime\n"
+  },
+  {
+    "tableName": "ai_task_control_record",
+    "tableComment": "",
+    "schemaText": "表名: ai_task_control_record\n列:\n  - ID varchar(128)\n  - TASK_ID varchar(128)\n  - TASK_TYPE char(1)\n  - TASK_STATE char(1)\n  - LOCK_TIME datetime\n  - UNLOCK_NUM smallint(6)\n  - TENANT_ID varchar(128)\n  - UNLOCK_TIME datetime\n"
+  },
+  {
+    "tableName": "collect_file_detail",
+    "tableComment": "",
+    "schemaText": "表名: collect_file_detail\n列:\n  - ID varchar(100)\n  - COLLECT_TASK_ID varchar(128)\n  - FILE_DIR varchar(400)\n  - FILE_NAME varchar(512)\n  - STATE char(1)\n  - START_TIME datetime\n  - END_TIME datetime\n  - FILE_SIZE bigint(20)\n  - MINIO_BUCKET_NAME varchar(100)\n  - MINIO_DIR_NAME varchar(400)\n  - DEL_FLAG char(1)\n  - DATASET_ID varchar(128)\n  - BATCH_ID varchar(128)\n  - SOURCE_ID varchar(128)\n  - SOURCE_NAME varchar(128)\n  - TASK_TYPE char(1)\n  - MINIO_URL varchar(1024)\n  - MINIO_FIE_NAME varchar(300)\n  - COLLECT_FILE_SIZE bigint(20)\n  - MINIO_FILE_NAME varchar(1024)\n"
+  },
+  {
+    "tableName": "dataset_after_process_operator_info",
+    "tableComment": "",
+    "schemaText": "表名: dataset_after_process_operator_info\n列:\n  - ID varchar(100)\n  - TASK_ID varchar(100)\n  - OPERATOR_ID varchar(100)\n  - OPERATOR_TASK_STATUS tinyint(4)\n  - PROCESS_RESULT varchar(200)\n  - CRT_TIME datetime\n  - FINISH_TIME datetime\n  - UPT_TIME datetime\n  - DEL_FLAG char(1)\n  - SCHEDULE int(11)\n"
+  },
+  {
+    "tableName": "dataset_app_scene_build",
+    "tableComment": "",
+    "schemaText": "表名: dataset_app_scene_build\n列:\n  - ID varchar(50)\n  - MODEL_ID varchar(200)\n  - SCENE_TYPE varchar(50)\n  - SCENE_TAG varchar(2000)\n  - SCENE_NAME varchar(200)\n  - TRAIN_PHASE varchar(200)\n  - SCENE_DESCRIPTION varchar(2000)\n  - PUB_NAME varchar(50)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(50)\n  - PUB_PHONE varchar(50)\n  - PUB_EMAIL varchar(50)\n  - OPEN int(11)\n  - DELETE_FLAG char(1)\n  - TENANT_ID varchar(50)\n  - SCENE_STATUS int(11)\n  - ONLINE_TIME datetime\n  - OFFLINE_TIME datetime\n  - ONLINE_NAME varchar(50)\n  - OFFLINE_NAME varchar(50)\n  - PUB_STATUS int(11)\n  - PROJECT_ID varchar(50)\n  - SCENE_TYPE_NAME varchar(50)\n  - PUB_RANGE text\n  - PUB_RANGE_NAME text\n  - CRT_USER varchar(50)\n  - BROWSE_NUM int(11)\n  - SUB_NUM int(11)\n  - IS_MARK char(1)\n  - PROCESS_AFTER_MARK_FLAG char(1)\n  - TENANT_NAME varchar(300)\n  - TRAIN_PHASE_TYPE varchar(100)\n"
+  },
+  {
+    "tableName": "dataset_approval",
+    "tableComment": "",
+    "schemaText": "表名: dataset_approval\n列:\n  - APPROVAL_ID varchar(50)\n  - DATASET_ID varchar(50)\n  - DATASET_NAME varchar(200)\n  - CRT_TIME datetime\n  - APPROVAL_TIME datetime\n  - APPROVAL_NAME varchar(2000)\n  - APPROVAL_OPINION varchar(500)\n  - APPROVAL_STATUS int(11)\n  - CRT_NAME varchar(50)\n  - APPROVAL_TENANT varchar(50)\n  - APPROVAL_PROJECT varchar(50)\n  - DATASET_VERSION char(1)\n"
+  },
+  {
+    "tableName": "dataset_approval_user",
+    "tableComment": "",
+    "schemaText": "表名: dataset_approval_user\n列:\n  - ID varchar(50)\n  - APPROVAL_NAME varchar(50)\n  - LOGIN_ID varchar(50)\n  - DEL_FLAG int(11)\n"
+  },
+  {
+    "tableName": "dataset_call_log",
+    "tableComment": "",
+    "schemaText": "表名: dataset_call_log\n列:\n  - ID varchar(64)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - BUSINESS_ID varchar(100)\n  - CALL_TYPE bigint(20)\n  - CALL_METHOD bigint(20)\n  - SERVICE_PATH varchar(128)\n  - RESP_CODE varchar(12)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - RESERVE1 varchar(32)\n  - RESERVE2 varchar(32)\n  - RESERVE3 varchar(32)\n"
+  },
+  {
+    "tableName": "dataset_call_log_detail",
+    "tableComment": "",
+    "schemaText": "表名: dataset_call_log_detail\n列:\n  - ID varchar(64)\n  - PARENT_ID varchar(64)\n  - REQ_BODY text\n  - RESP_BODY varchar(8192)\n  - CREATE_TIME datetime\n"
+  },
+  {
+    "tableName": "dataset_check",
+    "tableComment": "",
+    "schemaText": "表名: dataset_check\n列:\n  - CHECK_ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - COLLECTION_TYPE int(11)\n  - OPERATOR_LIST text\n  - CHECK_STATUS int(11)\n  - CHECK_RESULT int(11)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(255)\n  - PROJECT_ID varchar(50)\n  - CREATE_TIME datetime\n  - UPDATE_TIME datetime\n  - START_TIME datetime\n  - END_TIME datetime\n  - CREATE_USER varchar(100)\n  - UPDATE_USER varchar(100)\n  - DEL_FLAG int(11)\n  - SOURCE_PATH text\n  - TARGET_PATH varchar(500)\n  - BUCKET_NAME varchar(50)\n  - PROJECT_NAME varchar(255)\n  - DATASET_ID varchar(100)\n  - DATASET_NAME varchar(255)\n  - CHECK_SCHEDULE varchar(100)\n  - SOURCE_VERSION_STR varchar(100)\n  - SOURCE_VERSION int(11)\n  - DATASET_VERSION int(11)\n  - TASK_NAME varchar(255)\n  - CHECK_FAILURE text\n  - ES_STATE char(1)\n"
+  },
+  {
+    "tableName": "dataset_check_task_detail",
+    "tableComment": "",
+    "schemaText": "表名: dataset_check_task_detail\n列:\n  - DETAIL_ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - CHECK_RESULT int(11)\n  - FAIL_REASON text\n  - CHECK_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - CHECK_ITEM_NAME varchar(100)\n  - CHECK_ITEM_VALUE double\n  - RESERVED_FIELD1 bigint(20)\n"
+  },
+  {
+    "tableName": "dataset_definition_tenant",
+    "tableComment": "",
+    "schemaText": "表名: dataset_definition_tenant\n列:\n  - ID int(11)\n  - TENANT_ID varchar(500)\n  - PROJECT_ID varchar(200)\n  - DATASET_TYPE varchar(100)\n  - DEFINITION_CODE varchar(200)\n  - CRT_TIME datetime\n"
+  },
+  {
+    "tableName": "dataset_file_mark_relation",
+    "tableComment": "",
+    "schemaText": "表名: dataset_file_mark_relation\n列:\n  - ID int(11)\n  - MARK_TASK_ID varchar(100)\n  - FILE_ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - MARK_STATUS varchar(30)\n  - CRT_TIME datetime\n  - UPT_TIME datetime\n"
+  },
+  {
+    "tableName": "dataset_intent_detail",
+    "tableComment": "",
+    "schemaText": "表名: dataset_intent_detail\n列:\n  - ID varchar(128)\n  - TASK_ID varchar(200)\n  - INTENT_ID_ONE varchar(200)\n  - INTENT_NAME_ONE varchar(500)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER varchar(64)\n  - CRT_NAME varchar(64)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n  - INTENT_ID_TWO varchar(200)\n  - INTENT_NAME_TWO varchar(500)\n"
+  },
+  {
+    "tableName": "dataset_mark_after_process_task",
+    "tableComment": "",
+    "schemaText": "表名: dataset_mark_after_process_task\n列:\n  - TASK_ID varchar(150)\n  - SOURCE_DATA_ID varchar(50)\n  - VERSION varchar(150)\n  - SOURCE_PATH text\n  - TARGET_PATH text\n  - OPERATOR_LIST text\n  - SERVER_LOCATION varchar(150)\n  - STATUS varchar(150)\n  - VERSION_DETAIL varchar(600)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - VALID_FLAG varchar(10)\n  - EDITOR varchar(150)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - RESERVE_ONE varchar(150)\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n  - DATASET_ID varchar(150)\n  - DATASET_NAME varchar(255)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(255)\n  - PROJECT_ID varchar(255)\n  - PROCESS_SCHEDULE varchar(255)\n  - UPDATE_TIME datetime\n  - START_TIME datetime\n  - DATASET_VERSION int(11)\n  - TASK_NAME varchar(255)\n  - MARK_TASK_ID varchar(150)\n  - IS_HISTORY int(11)\n"
+  },
+  {
+    "tableName": "dataset_mark_after_task_detail",
+    "tableComment": "",
+    "schemaText": "表名: dataset_mark_after_task_detail\n列:\n  - ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - PROCESS_RESULT int(11)\n  - FAIL_REASON text\n  - PROCESS_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - SOURCE_COS_URL text\n  - TARGER_COS_URL text\n  - FILE_SUFFIX varchar(100)\n  - ORIGIN_FILE_NAME varchar(255)\n  - ORIGIN_FILE_SUFFIX varchar(100)\n"
+  },
+  {
+    "tableName": "dataset_mark_file_result",
+    "tableComment": "",
+    "schemaText": "表名: dataset_mark_file_result\n列:\n  - ID varchar(200)\n  - FILE_NAME varchar(500)\n  - SOURCE_ID varchar(400)\n  - MARK_FILE_COS text\n  - FILE_DIR varchar(1000)\n  - CRT_TIME datetime\n"
+  },
+  {
+    "tableName": "dataset_mark_task",
+    "tableComment": "",
+    "schemaText": "表名: dataset_mark_task\n列:\n  - MARK_TASK_ID varchar(64)\n  - MARK_ID varchar(64)\n  - MARK_TASK_NAME varchar(500)\n  - SOURCE_NAME varchar(500)\n  - TASK_ID varchar(64)\n  - TASK_STATUS varchar(32)\n  - MARK_RET_URL text\n  - MARK_TOOL varchar(64)\n  - MARK_TEAM varchar(64)\n  - MARK_TIME datetime\n  - CRT_TIME datetime\n  - FAILURE_RESULT varchar(8188)\n  - AFTER_PROCESS_STATUS varchar(32)\n  - PROCESS_SCHEDULE varchar(128)\n  - PROCESS_STATUS varchar(5)\n  - START_TIME datetime\n  - FINISH_TIME datetime\n"
+  },
+  {
+    "tableName": "dataset_operator_approval",
+    "tableComment": "",
+    "schemaText": "表名: dataset_operator_approval\n列:\n  - APPROVAL_ID varchar(50)\n  - OPERATOR_ID varchar(64)\n  - APPROVAL_STATUS char(1)\n  - APPROVAL_OPINION varchar(500)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(200)\n  - CRT_USER varchar(50)\n  - PROJECT_ID varchar(50)\n  - PROJECT_NAME varchar(500)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(500)\n  - APPROVAL_TIME datetime\n  - APPROVAL_NAME varchar(200)\n  - APPROVAL_USER varchar(50)\n  - APPROVAL_PROJECT_ID varchar(50)\n  - APPROVAL_PROJECT_NAME varchar(500)\n  - APPROVAL_TENANT_ID varchar(50)\n  - APPROVAL_TENANT_NAME varchar(500)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "dataset_operator_env",
+    "tableComment": "",
+    "schemaText": "表名: dataset_operator_env\n列:\n  - ENV_ID varchar(150)\n  - ENV_NAME varchar(500)\n  - DEL_FLAG int(11)\n  - CRT_TIME datetime\n  - CRT_USER varchar(150)\n  - CRT_NAME varchar(500)\n  - TENANT_ID varchar(150)\n  - TENANT_NAME varchar(500)\n  - PROJECT_ID varchar(150)\n  - PROJECT_NAME varchar(500)\n"
+  },
+  {
+    "tableName": "dataset_operator_template_record",
+    "tableComment": "",
+    "schemaText": "表名: dataset_operator_template_record\n列:\n  - ID varchar(100)\n  - DATASET_ID varchar(100)\n  - DATA_TYPE varchar(100)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(255)\n  - USER_ID varchar(100)\n  - USER_NAME varchar(255)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(255)\n  - CREATE_TIME datetime\n  - OPERATOR_LIST text\n  - USE_SCOPE int(11)\n  - IS_PUBLIC int(11)\n  - SCENE_ID varchar(200)\n"
+  },
+  {
+    "tableName": "dataset_operator_words",
+    "tableComment": "",
+    "schemaText": "表名: dataset_operator_words\n列:\n  - ID varchar(128)\n  - WORDS_TYPE char(1)\n  - WORDS_GROUP char(1)\n  - GROUP_ID varchar(128)\n  - WORDS_NAME varchar(128)\n  - SYNONYM_WORDS varchar(128)\n  - EDITABLE_FLAG char(1)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "dataset_process_file",
+    "tableComment": "",
+    "schemaText": "表名: dataset_process_file\n列:\n  - FILE_ID varchar(50)\n  - SOURCE_ID varchar(50)\n  - FILE_NAME varchar(200)\n  - FILE_URL varchar(2000)\n  - FILE_SIZE varchar(50)\n  - FILE_DSC varchar(500)\n  - CRT_TIME datetime\n  - CRT_USER varchar(255)\n  - CRT_NAME varchar(255)\n  - UPT_TIME datetime\n  - UPT_USER varchar(255)\n  - UPT_NAME varchar(255)\n  - FILE_MARK_STATUS char(1)\n  - IS_UPDATE char(1)\n  - DEL_FLAG char(1)\n  - COS_URL varchar(1024)\n"
+  },
+  {
+    "tableName": "dataset_process_operator",
+    "tableComment": "",
+    "schemaText": "表名: dataset_process_operator\n列:\n  - OPERATOR_ID varchar(150)\n  - OPERATOR_NAME varchar(300)\n  - LEVEL_ZERO varchar(150)\n  - DIM_ID varchar(150)\n  - LEVEL_ONE varchar(150)\n  - LEVEL_TWO varchar(150)\n  - SORT int(11)\n  - VERSION varchar(150)\n  - VERSION_DETAIL varchar(600)\n  - DESCRIPTION varchar(4096)\n  - CREATE_TIME datetime\n  - UPDATE_TIME datetime\n  - VALID_FLAG varchar(10)\n  - EDITOR varchar(150)\n  - PARAMS text\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE text\n  - CALLABLE_FLAG varchar(10)\n  - ENV_CONFIG text\n  - TENANT_ID varchar(150)\n  - TENANT_NAME varchar(500)\n  - PROJECT_ID varchar(150)\n  - PROJECT_NAME varchar(500)\n  - CRT_USER varchar(150)\n  - CODE_FILE_NAME varchar(500)\n  - APPROVAL_STATUS char(1)\n  - EXEC_MODE char(1)\n  - CODE_STATUS char(1)\n  - PROFILE text (简介)\n  - CONTEST_FLAG char(1) (0：非算子大赛算子；1：算子大赛算子)\n"
+  },
+  {
+    "tableName": "dataset_process_operator_info",
+    "tableComment": "",
+    "schemaText": "表名: dataset_process_operator_info\n列:\n  - ID bigint(20)\n  - TASK_ID varchar(100)\n  - OPERATOR_ID varchar(100)\n  - OPERATOR_TASK_STATUS tinyint(4)\n  - PROCESS_RESULT varchar(200)\n  - CRT_TIME datetime\n  - FINISH_TIME datetime\n  - UPT_TIME datetime\n  - DEL_FLAG char(1)\n  - SCHEDULE int(11)\n  - START_TIME datetime\n"
+  },
+  {
+    "tableName": "dataset_process_task",
+    "tableComment": "",
+    "schemaText": "表名: dataset_process_task\n列:\n  - TASK_ID varchar(150)\n  - SOURCE_DATA_ID varchar(50)\n  - VERSION varchar(150)\n  - SOURCE_PATH text\n  - TARGET_PATH varchar(150)\n  - OPERATOR_LIST text\n  - SERVER_LOCATION varchar(150)\n  - STATUS varchar(150)\n  - VERSION_DETAIL varchar(600)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - VALID_FLAG varchar(10)\n  - EDITOR varchar(150)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - PROCESS_FAILURE text\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n  - DATASET_ID varchar(100)\n  - DATASET_NAME varchar(255)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(100)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(255)\n  - PROCESS_SCHEDULE varchar(100)\n  - UPDATE_TIME datetime\n  - START_TIME datetime\n  - DATASET_VERSION int(11)\n  - TASK_NAME varchar(255)\n  - PID varchar(150)\n  - IS_HISTORY int(11)\n  - IS_VERIFIABLE_DETAIL int(11)\n  - ES_STATE char(1)\n"
+  },
+  {
+    "tableName": "dataset_process_task_detail",
+    "tableComment": "",
+    "schemaText": "表名: dataset_process_task_detail\n列:\n  - ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - PROCESS_RESULT int(11)\n  - FAIL_REASON text\n  - PROCESS_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - SOURCE_COS_URL text\n  - TARGER_COS_URL text\n  - FILE_SUFFIX varchar(100)\n  - ORIGIN_FILE_NAME varchar(255)\n  - ORIGIN_FILE_SUFFIX varchar(100)\n"
+  },
+  {
+    "tableName": "dataset_process_task_detail_record",
+    "tableComment": "",
+    "schemaText": "表名: dataset_process_task_detail_record\n列:\n  - ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - PROCESS_RESULT int(11)\n  - FAIL_REASON text\n  - PROCESS_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - SOURCE_COS_URL text\n  - TARGER_COS_URL text\n  - FILE_SUFFIX varchar(100)\n  - ORIGIN_FILE_NAME varchar(255)\n  - ORIGIN_FILE_SUFFIX varchar(100)\n  - CREATE_TIME datetime\n"
+  },
+  {
+    "tableName": "dataset_quality_report",
+    "tableComment": "",
+    "schemaText": "表名: dataset_quality_report\n列:\n  - ID varchar(100)\n  - REPORT_NAME varchar(500)\n  - DATASET_TYPE varchar(50)\n  - CREATE_USER varchar(100)\n  - REPORT_JSON text\n  - DATASET_NAMES text\n  - CREATE_USER_NAME varchar(100)\n  - CREATE_TIME datetime\n  - TENANT_ID varchar(100)\n  - PROJECT_ID varchar(100)\n"
+  },
+  {
+    "tableName": "dataset_quality_report_index_info",
+    "tableComment": "",
+    "schemaText": "表名: dataset_quality_report_index_info\n列:\n  - ID varchar(100)\n  - EVALUATION_INDEX_CODE varchar(50)\n  - EVALUATION_INDEX_NAME varchar(100)\n  - EVALUATION_INDEX_VALUE double\n  - EVALUATION_INDEX_APERTURE text\n  - EVALUATION_INDEX_DESC text\n  - QUALITY_OBJECTIVE double\n  - EVALUATION_METHOD varchar(100)\n  - EVALUATION_METHOD_DESC varchar(500)\n  - EVALUATION_FORMULA varchar(500)\n  - EVALUATION_RESULT varchar(500)\n  - dataset_type varchar(50)\n"
+  },
+  {
+    "tableName": "dataset_scene_sub",
+    "tableComment": "",
+    "schemaText": "表名: dataset_scene_sub\n列:\n  - SUB_ID varchar(50)\n  - SCENE_ID varchar(100)\n  - MODEL_ID varchar(100)\n  - SCENE_NAME varchar(500)\n  - SUB_STATUS char(1)\n  - APPROVE_STATUS char(1)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(200)\n  - CRT_TIME datetime\n  - PROJECT_ID varchar(50)\n  - PROJECT_NAME varchar(500)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(500)\n  - APPROVAL_TIME datetime\n  - APPROVAL_NAME varchar(200)\n  - APPROVAL_USER varchar(50)\n  - APPROVAL_PROJECT_ID varchar(50)\n  - APPROVAL_PROJECT_NAME varchar(500)\n  - APPROVAL_TENANT_ID varchar(50)\n  - APPROVAL_TENANT_NAME varchar(500)\n  - APPROVAL_OPINION varchar(500)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "dataset_scene_tag_user",
+    "tableComment": "",
+    "schemaText": "表名: dataset_scene_tag_user\n列:\n  - ID varchar(50)\n  - SCENE_TAG text\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - TENANT_ID varchar(200)\n  - PROJECT_ID varchar(50)\n  - CRT_USER varchar(50)\n"
+  },
+  {
+    "tableName": "dataset_source_after_process_status",
+    "tableComment": "",
+    "schemaText": "表名: dataset_source_after_process_status\n列:\n  - STATUS_ID varchar(150)\n  - SOURCE_ID varchar(150)\n  - TASK_ID varchar(100)\n  - VERSION varchar(150)\n  - SOURCE_PATH varchar(1000)\n  - TARGET_PATH varchar(150)\n  - STATUS varchar(10)\n  - DESCRIPTION varchar(500)\n  - VALID_FLAG varchar(10)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - RESERVE_ONE varchar(150)\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n"
+  },
+  {
+    "tableName": "dataset_source_mark",
+    "tableComment": "",
+    "schemaText": "表名: dataset_source_mark\n列:\n  - MARK_ID varchar(100)\n  - SOURCE_ID varchar(100)\n  - SOURCE_MARK_STATUS tinyint(4)\n  - SOURCE_MARK_NUM varchar(50)\n  - SOURCE_DATA_NUM varchar(50)\n  - SOURCE_MARK_TIME datetime\n  - CRT_TIME datetime\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(50)\n  - UPT_TIME datetime\n  - UPT_USER varchar(50)\n  - UPT_NAME varchar(50)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "dataset_source_process_status",
+    "tableComment": "",
+    "schemaText": "表名: dataset_source_process_status\n列:\n  - STATUS_ID varchar(150)\n  - SOURCE_ID varchar(150)\n  - TASK_ID varchar(100)\n  - VERSION varchar(150)\n  - SOURCE_PATH text\n  - TARGET_PATH varchar(150)\n  - STATUS varchar(10)\n  - DESCRIPTION varchar(1000)\n  - VALID_FLAG varchar(10)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - RESERVE_ONE varchar(150)\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n"
+  },
+  {
+    "tableName": "dataset_tenant_domain",
+    "tableComment": "",
+    "schemaText": "表名: dataset_tenant_domain\n列:\n  - ID int(11)\n  - TENANT_ID varchar(300)\n  - DOMAIN_NAME varchar(500)\n  - CREATE_TIME datetime\n  - UPDATE_TIME datetime\n"
+  },
+  {
+    "tableName": "digital_transformation_tianti_sysextend",
+    "tableComment": "",
+    "schemaText": "表名: digital_transformation_tianti_sysextend\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - ATTR_CODE text\n  - ATTR_VALUE text\n  - CREATE_TIME datetime\n  - REMARK text\n"
+  },
+  {
+    "tableName": "digital_transformation_tianti_sysextend_his",
+    "tableComment": "",
+    "schemaText": "表名: digital_transformation_tianti_sysextend_his\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - ATTR_CODE text\n  - ATTR_VALUE text\n  - CREATE_TIME datetime\n  - REMARK text\n"
+  },
+  {
+    "tableName": "digital_transformation_tianti_syslist",
+    "tableComment": "",
+    "schemaText": "表名: digital_transformation_tianti_syslist\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - SYS_LEVEL varchar(4)\n  - SYS_NAME varchar(100)\n  - SYS_FRAMEWORK varchar(100)\n  - DOMAIN_TYPE varchar(100)\n  - PARENT_SYS_CODE varchar(100)\n  - CREATE_TIME datetime\n  - REMARK varchar(255)\n"
+  },
+  {
+    "tableName": "digital_transformation_tianti_syslist_his",
+    "tableComment": "",
+    "schemaText": "表名: digital_transformation_tianti_syslist_his\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - SYS_LEVEL varchar(4)\n  - SYS_NAME varchar(100)\n  - SYS_FRAMEWORK varchar(100)\n  - DOMAIN_TYPE varchar(100)\n  - PARENT_SYS_CODE varchar(100)\n  - CREATE_TIME datetime\n  - REMARK varchar(255)\n"
+  },
+  {
+    "tableName": "quality_report_select_dataset",
+    "tableComment": "",
+    "schemaText": "表名: quality_report_select_dataset\n列:\n  - ID varchar(100)\n  - REPORT_ID varchar(100)\n  - DATASET_ID varchar(100)\n"
+  },
+  {
+    "tableName": "sftp_dir_config",
+    "tableComment": "",
+    "schemaText": "表名: sftp_dir_config\n列:\n  - ID varchar(100)\n  - SFTP_SOURCE_NAME varchar(100)\n  - SFTP_DIR varchar(400)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(300)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(300)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "source_data_system",
+    "tableComment": "",
+    "schemaText": "表名: source_data_system\n列:\n  - ID varchar(100)\n  - SOURCE_SYSTEM_NAME varchar(200)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+  },
+  {
+    "tableName": "sys_para_config",
+    "tableComment": "",
+    "schemaText": "表名: sys_para_config\n列:\n  - ID varchar(100)\n  - PARA_KIND varchar(50)\n  - PARA_KEY varchar(100)\n  - PARA_VALUE varchar(400)\n  - NOTE varchar(200)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+  }
+]

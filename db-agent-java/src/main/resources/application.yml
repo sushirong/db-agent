@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: db-agent-java
+
+  # 主数据源配置 (模拟主业务库)
+  datasource:
+    primary:
+      jdbc-url: ${MYSQL_PRIMARY_URL:jdbc:mysql://192.168.11.18:3308/dataset?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=true&useSSL=false}
+      username: ${MYSQL_PRIMARY_USERNAME:aidataset}
+      password: ${MYSQL_PRIMARY_PASSWORD:Bonc@dataset123}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 10
+      max-lifetime: 1200000  # 20分钟，需小于 MySQL wait_timeout
+      idle-timeout: 600000   # 10分钟
+      connection-timeout: 30000
+
+    # 只读数据源配置 (AI 沙箱账号)
+    readonly:
+      jdbc-url: ${MYSQL_PRIMARY_URL:jdbc:mysql://192.168.11.18:3308/dataset?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=true&useSSL=false}
+      username: ${MYSQL_PRIMARY_USERNAME:aidataset}
+      password: ${MYSQL_PRIMARY_PASSWORD:Bonc@dataset123}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 5
+      max-lifetime: 1200000
+      idle-timeout: 600000
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+# 应用自定义配置
+app:
+  # AI 服务地址
+  ai-service-url: ${PYTHON_SERVICE_URL:http://localhost:8000}
+
+logging:
+  level:
+    com.dbagent: ${JAVA_APP_LOG_LEVEL:INFO}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
