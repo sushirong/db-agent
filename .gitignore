@@ -3,6 +3,9 @@
 .vscode/
 *.iml
 
+# Claude
+.claude/
+
 # Python
 __pycache__/
 *.py[cod]
