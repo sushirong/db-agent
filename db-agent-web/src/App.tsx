@@ -7,9 +7,10 @@ import {
   listConversations,
   queryAgentStream,
   saveConversationMessage,
-  syncAllSchemas,
+  syncAllSchemasStream,
 } from './api';
-import type { AgentStreamEvent, Message, Conversation } from './types';
+import type { AgentStreamEvent, Message, Conversation, SchemaSyncEvent } from './types';
+import type { SyncProgress } from './components/layout/Sidebar';
 
 // 生成唯一 ID
 const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -77,6 +78,9 @@ export default function App() {
 
   // 历史会话加载状态
   const [isHistoryLoading, setIsHistoryLoading] = useState(false);
+
+  // 同步进度状态
+  const [syncProgress, setSyncProgress] = useState<SyncProgress | null>(null);
 
   // 历史会话使用更新时间倒序展示
   const sortedConversations = useMemo(
@@ -294,15 +298,34 @@ export default function App() {
     }
   }, [activeConversationId, persistMessage]);
 
-  // 同步表结构
-  const handleSyncSchema = useCallback(async () => {
+  // 同步表结构 (SSE 流式进度，默认增量，force=true 全量)
+  const handleSyncSchema = useCallback(async (force: boolean = false) => {
+    setSyncProgress(null);
     try {
-      const result = await syncAllSchemas('dataset');
-      setToast({
-        message: result.message || '表结构同步成功',
-        type: 'success',
-      });
+      await syncAllSchemasStream('dataset', (event: SchemaSyncEvent) => {
+        if (event.type === 'start') {
+          setSyncProgress({ current: 0, total: event.total, tableName: '', status: 'syncing' });
+        }
+
+        if (event.type === 'progress') {
+          setSyncProgress({
+            current: event.current,
+            total: event.total,
+            tableName: event.tableName,
+            status: event.status === 'success' ? 'success' : 'fail',
+          });
+        }
+
+        if (event.type === 'complete') {
+          setSyncProgress(null);
+          setToast({
+            message: event.message || '表结构同步成功',
+            type: event.fail > 0 ? 'error' : 'success',
+          });
+        }
+      }, force);
     } catch (error) {
+      setSyncProgress(null);
       setToast({
         message: '同步失败: ' + (error instanceof Error ? error.message : '未知错误'),
         type: 'error',
@@ -320,6 +343,7 @@ export default function App() {
         onNewConversation={handleNewConversation}
         onSyncSchema={handleSyncSchema}
         isHistoryLoading={isHistoryLoading}
+        syncProgress={syncProgress}
       />
 
       {/* 主对话区 */}

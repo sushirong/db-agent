@@ -5,6 +5,7 @@ import type {
   AgentStreamEvent,
   Conversation,
   Message,
+  SchemaSyncEvent,
   SchemaSyncResponse,
 } from '../types';
 
@@ -122,6 +123,78 @@ export async function syncSchema(tableName: string, schemaText: string, tableCom
 export async function syncAllSchemas(databaseName: string): Promise<{ success: boolean; message: string }> {
   const response = await javaApiClient.post(`/api/schema/${databaseName}/sync`);
   return response.data;
+}
+
+/**
+ * 同步表结构 (SSE 流式推送进度)
+ * 默认增量同步，force=true 时全量同步
+ */
+export async function syncAllSchemasStream(
+  databaseName: string,
+  onEvent: (event: SchemaSyncEvent) => void,
+  force: boolean = false
+): Promise<void> {
+  const response = await fetch(`http://localhost:8080/api/schema/${databaseName}/sync?force=${force}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'text/event-stream',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`同步请求失败: ${response.status}`);
+  }
+
+  if (!response.body) {
+    throw new Error('当前浏览器不支持流式响应读取');
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder('utf-8');
+  let buffer = '';
+
+  const emitBufferedEvents = () => {
+    let eventEndIndex = buffer.indexOf('\n\n');
+    while (eventEndIndex !== -1) {
+      const eventBlock = buffer.slice(0, eventEndIndex).trim();
+      buffer = buffer.slice(eventEndIndex + 2);
+
+      const dataText = eventBlock
+        .split('\n')
+        .filter((line) => line.startsWith('data:'))
+        .map((line) => line.slice(5).trimStart())
+        .join('\n');
+
+      if (dataText) {
+        onEvent(JSON.parse(dataText) as SchemaSyncEvent);
+      }
+
+      eventEndIndex = buffer.indexOf('\n\n');
+    }
+  };
+
+  while (true) {
+    const { done, value } = await reader.read();
+    buffer += decoder.decode(value, { stream: !done });
+    emitBufferedEvents();
+
+    if (done) {
+      break;
+    }
+  }
+
+  if (buffer.trim()) {
+    const dataText = buffer
+      .split('\n')
+      .filter((line) => line.startsWith('data:'))
+      .map((line) => line.slice(5).trimStart())
+      .join('\n');
+
+    if (dataText) {
+      onEvent(JSON.parse(dataText) as SchemaSyncEvent);
+    }
+  }
 }
 
 /**

@@ -1,14 +1,22 @@
-import { useState } from 'react';
-import { Database, RefreshCw, MessageSquarePlus, Loader2 } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Database, RefreshCw, MessageSquarePlus, Loader2, CheckCircle2, XCircle } from 'lucide-react';
 import type { Conversation } from '../../types';
+
+export interface SyncProgress {
+  current: number;
+  total: number;
+  tableName: string;
+  status: 'syncing' | 'success' | 'fail';
+}
 
 interface SidebarProps {
   conversations: Conversation[];
   activeConversationId: string | null;
   onSelectConversation: (id: string) => void | Promise<void>;
   onNewConversation: () => void;
-  onSyncSchema: () => Promise<void>;
+  onSyncSchema: (force?: boolean) => Promise<void>;
   isHistoryLoading: boolean;
+  syncProgress: SyncProgress | null;
 }
 
 export default function Sidebar({
@@ -18,17 +26,41 @@ export default function Sidebar({
   onNewConversation,
   onSyncSchema,
   isHistoryLoading,
+  syncProgress,
 }: SidebarProps) {
   const [isSyncing, setIsSyncing] = useState(false);
+  const [showContextMenu, setShowContextMenu] = useState(false);
+  const contextMenuRef = useRef<HTMLDivElement>(null);
+  const syncButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleSync = async () => {
+  const handleSync = async (force: boolean = false) => {
+    setShowContextMenu(false);
     setIsSyncing(true);
     try {
-      await onSyncSchema();
+      await onSyncSchema(force);
     } finally {
       setIsSyncing(false);
     }
   };
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isSyncing) {
+      setShowContextMenu(true);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (contextMenuRef.current && !contextMenuRef.current.contains(e.target as Node)) {
+        setShowContextMenu(false);
+      }
+    };
+    if (showContextMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showContextMenu]);
 
   return (
     <div className="w-64 bg-gray-900 text-white flex flex-col flex-shrink-0">
@@ -89,10 +121,13 @@ export default function Sidebar({
       </div>
 
       {/* 底部同步按钮 */}
-      <div className="p-3 border-t border-gray-700/50">
+      <div className="p-3 border-t border-gray-700/50 relative">
         <button
-          onClick={handleSync}
+          ref={syncButtonRef}
+          onClick={() => handleSync(false)}
+          onContextMenu={handleContextMenu}
           disabled={isSyncing}
+          title="左键增量同步，右键全量同步"
           className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:bg-blue-800 disabled:cursor-not-allowed transition-colors text-sm font-medium"
         >
           {isSyncing ? (
@@ -103,10 +138,49 @@ export default function Sidebar({
           ) : (
             <>
               <RefreshCw className="w-4 h-4" />
-              同步最新表结构
+              同步表结构
             </>
           )}
         </button>
+
+        {/* 右键上下文菜单 */}
+        {showContextMenu && (
+          <div
+            ref={contextMenuRef}
+            className="absolute bottom-full left-3 right-3 mb-1 bg-gray-800 border border-gray-700 rounded-lg shadow-xl overflow-hidden"
+          >
+            <button
+              onClick={() => handleSync(true)}
+              className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-gray-200 hover:bg-gray-700 transition-colors text-left"
+            >
+              <RefreshCw className="w-4 h-4" />
+              全量同步
+            </button>
+          </div>
+        )}
+
+        {/* 同步进度条 */}
+        {isSyncing && syncProgress && (
+          <div className="mt-3 space-y-1.5">
+            <div className="flex items-center justify-between text-[11px] text-gray-400">
+              <span className="truncate max-w-[160px]">
+                {syncProgress.status === 'syncing'
+                  ? `正在同步 ${syncProgress.tableName}`
+                  : syncProgress.status === 'success'
+                    ? <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-green-400" /> {syncProgress.tableName}</span>
+                    : <span className="flex items-center gap-1"><XCircle className="w-3 h-3 text-red-400" /> {syncProgress.tableName}</span>
+                }
+              </span>
+              <span>{syncProgress.current}/{syncProgress.total}</span>
+            </div>
+            <div className="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-blue-500 rounded-full transition-all duration-300"
+                style={{ width: `${(syncProgress.current / syncProgress.total) * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

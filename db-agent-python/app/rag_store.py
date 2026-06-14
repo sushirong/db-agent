@@ -3,6 +3,7 @@ RAG 知识库模块
 使用 FAISS 存储和检索表结构向量
 """
 
+import hashlib
 import os
 import json
 import logging
@@ -298,6 +299,55 @@ def get_all_tables() -> list[dict]:
         }
         for doc in _documents
     ]
+
+
+def get_tables_metadata() -> list[dict]:
+    """
+    获取所有已存储表的轻量元数据（表名 + schemaText 哈希）
+    用于增量同步时对比差异
+    """
+    result = []
+    for doc in _documents:
+        schema_hash = hashlib.md5(doc["schemaText"].encode("utf-8")).hexdigest()
+        result.append({
+            "tableName": doc["tableName"],
+            "schemaHash": schema_hash
+        })
+    logger.info("获取表元数据完成 count=%d", len(result))
+    return result
+
+
+def remove_schema(tableName: str) -> bool:
+    """
+    从 FAISS 中移除指定表的结构数据
+
+    Args:
+        tableName: 要移除的表名
+
+    Returns:
+        是否成功
+    """
+    global _index, _documents
+
+    try:
+        existing_idx = None
+        for i, doc in enumerate(_documents):
+            if doc["tableName"] == tableName:
+                existing_idx = i
+                break
+
+        if existing_idx is None:
+            logger.warning("移除表结构失败，表不存在 tableName=%s", tableName)
+            return False
+
+        _documents.pop(existing_idx)
+        _rebuild_index()
+        _save_to_disk()
+        logger.info("表结构移除成功 tableName=%s, remainingCount=%d", tableName, len(_documents))
+        return True
+    except Exception:
+        logger.exception("移除表结构异常 tableName=%s", tableName)
+        return False
 
 
 def clear_all() -> bool:

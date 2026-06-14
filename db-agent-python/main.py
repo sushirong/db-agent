@@ -23,6 +23,7 @@ from app.models import (
     SchemaSyncRequest,
     SchemaSyncResponse,
 )
+from app.schema_enricher import enrich_schema_comments
 
 # 加载环境变量
 load_dotenv()
@@ -90,10 +91,13 @@ async def sync_schema(request: SchemaSyncRequest):
         len(request.schemaText or "")
     )
     try:
+        # 使用 LLM 推断缺失的注释
+        enriched = enrich_schema_comments(request.schemaText)
+
         success = rag_store.add_schema(
             tableName=request.tableName,
-            schemaText=request.schemaText,
-            tableComment=request.tableComment
+            schemaText=enriched["schemaText"],
+            tableComment=enriched["tableComment"] or request.tableComment
         )
 
         if success:
@@ -134,6 +138,35 @@ async def list_schemas():
         "count": len(tables),
         "tables": [{"tableName": t["tableName"], "metadata": t["metadata"]} for t in tables]
     }
+
+
+@app.get("/ai/schema/metadata")
+async def get_schema_metadata():
+    """获取已存储表的轻量元数据（表名 + schema 哈希），用于增量同步对比"""
+    start_time = time.perf_counter()
+    logger.info("收到表元数据查询请求")
+    metadata = rag_store.get_tables_metadata()
+    logger.info(
+        "表元数据查询完成 count=%d, costMs=%d",
+        len(metadata),
+        int((time.perf_counter() - start_time) * 1000)
+    )
+    return metadata
+
+
+@app.delete("/ai/schema/{tableName}")
+async def delete_schema(tableName: str):
+    """删除指定表的结构数据"""
+    start_time = time.perf_counter()
+    logger.info("收到表结构删除请求 tableName=%s", tableName)
+    success = rag_store.remove_schema(tableName)
+    logger.info(
+        "表结构删除完成 tableName=%s, success=%s, costMs=%d",
+        tableName, success, int((time.perf_counter() - start_time) * 1000)
+    )
+    if success:
+        return {"success": True, "message": f"表 [{tableName}] 已删除"}
+    raise HTTPException(status_code=404, detail=f"表 [{tableName}] 不存在")
 
 
 @app.delete("/ai/schema/clear")

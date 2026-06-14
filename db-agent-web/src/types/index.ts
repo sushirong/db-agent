@@ -77,6 +77,28 @@ export interface SchemaSyncResponse {
   message: string;
 }
 
+// 表结构同步 SSE 事件类型
+export type SchemaSyncEvent =
+  | {
+      type: 'start';
+      total: number;
+    }
+  | {
+      type: 'progress';
+      current: number;
+      total: number;
+      tableName: string;
+      status: 'success' | 'fail';
+      message?: string;
+    }
+  | {
+      type: 'complete';
+      total: number;
+      success: number;
+      fail: number;
+      message: string;
+    };
+
 // 会话接口
 export interface Conversation {
   id: string;

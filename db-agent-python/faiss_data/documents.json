@@ -31,417 +31,417 @@
   },
   {
     "tableName": "ai_backflow_data",
-    "tableComment": "",
-    "schemaText": "表名: ai_backflow_data\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - MODEL_NAME varchar(512)\n  - MODEL_VERSION varchar(16)\n  - CRT_TIME datetime\n  - TOTAL_NUM int(11)\n  - UNMARK_NUM int(11)\n  - MARKED_NUM int(11)\n"
+    "tableComment": "AI回流数据表",
+    "schemaText": "表名: ai_backflow_data ([AI推断]AI回流数据表)\n列:\n  - ID varchar(36) ([AI推断]标识符)\n  - TASK_ID varchar(36) ([AI推断]任务ID)\n  - MODEL_NAME varchar(512) ([AI推断]模型名称)\n  - MODEL_VERSION varchar(16) ([AI推断]模型版本)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - TOTAL_NUM int(11) ([AI推断]总数)\n  - UNMARK_NUM int(11) ([AI推断]未标记数)\n  - MARKED_NUM int(11) ([AI推断]已标记数)"
   },
   {
     "tableName": "ai_backflow_data_detail",
-    "tableComment": "",
-    "schemaText": "表名: ai_backflow_data_detail\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - QUESTION text\n  - ANSWER text\n  - EVALUATION_STATE char(1)\n  - MARK_STATE char(1)\n  - EVALUATION_VALUE varchar(8)\n  - SAMPLE_TYPE char(1)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DATA_STATE char(1)\n  - SYSTEM_TITLE varchar(2048)\n  - DATA_BATCH_ID varchar(36)\n  - COM_PLEX_COT text\n  - ROUND varchar(100)\n  - TIMESTAMP datetime\n  - USER_FEEDBACK varchar(1)\n  - VALUE_DETAIL varchar(1024)\n"
+    "tableComment": "人工智能回流数据详情表",
+    "schemaText": "表名: ai_backflow_data_detail ([AI推断]人工智能回流数据详情表)\n列:\n  - ID varchar(36) ([AI推断]主键ID)\n  - TASK_ID varchar(36) ([AI推断]任务ID)\n  - QUESTION text ([AI推断]问题内容)\n  - ANSWER text ([AI推断]答案内容)\n  - EVALUATION_STATE char(1) ([AI推断]评估状态)\n  - MARK_STATE char(1) ([AI推断]标记状态)\n  - EVALUATION_VALUE varchar(8) ([AI推断]评估值)\n  - SAMPLE_TYPE char(1) ([AI推断]样本类型)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_USER_ID varchar(64) ([AI推断]更新用户ID)\n  - UPDATE_USER_NAME varchar(64) ([AI推断]更新用户名称)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DATA_STATE char(1) ([AI推断]数据状态)\n  - SYSTEM_TITLE varchar(2048) ([AI推断]系统标题)\n  - DATA_BATCH_ID varchar(36) ([AI推断]数据批次ID)\n  - COM_PLEX_COT text ([AI推断]复杂思维链)\n  - ROUND varchar(100) ([AI推断]轮次)\n  - TIMESTAMP datetime ([AI推断]时间戳)\n  - USER_FEEDBACK varchar(1) ([AI推断]用户反馈)\n  - VALUE_DETAIL varchar(1024) ([AI推断]价值详情)"
   },
   {
     "tableName": "ai_backflow_data_sum",
-    "tableComment": "",
-    "schemaText": "表名: ai_backflow_data_sum\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - BACKFLOW_NUM int(11)\n  - DATA_STATE char(1)\n  - CRT_TIME datetime\n  - SEND_TIME datetime\n  - CALLBACK_TIME datetime\n  - IS_SUCESS char(1)\n  - FAIL_MSG varchar(1024)\n"
+    "tableComment": "AI回流数据汇总表",
+    "schemaText": "表名: ai_backflow_data_sum ([AI推断]AI回流数据汇总表)\n列:\n  - ID varchar(36) ([AI推断]ID标识)\n  - TASK_ID varchar(36) ([AI推断]任务ID)\n  - BACKFLOW_NUM int(11) ([AI推断]回流数量)\n  - DATA_STATE char(1) ([AI推断]数据状态)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - SEND_TIME datetime ([AI推断]发送时间)\n  - CALLBACK_TIME datetime ([AI推断]回调时间)\n  - IS_SUCESS char(1) ([AI推断]是否成功)\n  - FAIL_MSG varchar(1024) ([AI推断]失败信息)"
   },
   {
     "tableName": "ai_backflow_dataset",
-    "tableComment": "",
-    "schemaText": "表名: ai_backflow_dataset\n列:\n  - ID varchar(36)\n  - TASK_ID varchar(36)\n  - SOURCE_DATA_ID varchar(128)\n  - DATASET_ID varchar(36)\n  - SAMPLE_TYPE char(1)\n  - OSS_BUCKET_NAME varchar(36)\n  - OSS_PATH varchar(512)\n  - OSS_FILE varchar(512)\n  - OSS_URL varchar(512)\n  - FILE_NAME varchar(128)\n  - FILE_SIZE bigint(20)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI回流数据集",
+    "schemaText": "表名: ai_backflow_dataset ([AI推断]AI回流数据集)\n列:\n  - ID varchar(36) ([AI推断]标识)\n  - TASK_ID varchar(36) ([AI推断]任务ID)\n  - SOURCE_DATA_ID varchar(128) ([AI推断]源数据ID)\n  - DATASET_ID varchar(36) ([AI推断]数据集ID)\n  - SAMPLE_TYPE char(1) ([AI推断]样本类型)\n  - OSS_BUCKET_NAME varchar(36) ([AI推断]OSS存储桶名称)\n  - OSS_PATH varchar(512) ([AI推断]OSS路径)\n  - OSS_FILE varchar(512) ([AI推断]OSS文件)\n  - OSS_URL varchar(512) ([AI推断]OSS链接)\n  - FILE_NAME varchar(128) ([AI推断]文件名)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - CRT_USER_ID varchar(64) ([AI推断]创建用户ID)\n  - CRT_USER_NAME varchar(64) ([AI推断]创建用户名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_backflow_task_info",
-    "tableComment": "",
-    "schemaText": "表名: ai_backflow_task_info\n列:\n  - ID varchar(36)\n  - TASK_NAME varchar(256)\n  - DATA_TYPE varchar(24)\n  - DATE_TYPE_NAME varchar(128)\n  - APP_KIND_ONE_CODE varchar(36)\n  - APP_KIND_ONE_NAME varchar(128)\n  - APP_KIND_TWO_CODE varchar(36)\n  - APP_KIND_TWO_NAME varchar(128)\n  - DATASET_INFO varchar(4096)\n  - TEMPLATE_ID varchar(36)\n  - TASK_DESC varchar(1200)\n  - MODEL_NAME varchar(512)\n  - MODEL_VERSION varchar(16)\n  - TOTAL_NUM int(11)\n  - UNMARK_NUM int(11)\n  - MARKED_NUM int(11)\n  - APIKEY varchar(128)\n  - DATA_STATUS char(1)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n  - CURRENT_NUM int(11)\n  - MODEL_ID varchar(100)\n  - CHANNEL varchar(200)\n  - BUSINESS_SCENARIO varchar(200)\n"
+    "tableComment": "AI回流任务信息表",
+    "schemaText": "表名: ai_backflow_task_info ([AI推断]AI回流任务信息表)\n列:\n  - ID varchar(36) ([AI推断]任务ID)\n  - TASK_NAME varchar(256) ([AI推断]任务名称)\n  - DATA_TYPE varchar(24) ([AI推断]数据类型)\n  - DATE_TYPE_NAME varchar(128) ([AI推断]日期类型名称)\n  - APP_KIND_ONE_CODE varchar(36) ([AI推断]应用类型一级代码)\n  - APP_KIND_ONE_NAME varchar(128) ([AI推断]应用类型一级名称)\n  - APP_KIND_TWO_CODE varchar(36) ([AI推断]应用类型二级代码)\n  - APP_KIND_TWO_NAME varchar(128) ([AI推断]应用类型二级名称)\n  - DATASET_INFO varchar(4096) ([AI推断]数据集信息)\n  - TEMPLATE_ID varchar(36) ([AI推断]模板ID)\n  - TASK_DESC varchar(1200) ([AI推断]任务描述)\n  - MODEL_NAME varchar(512) ([AI推断]模型名称)\n  - MODEL_VERSION varchar(16) ([AI推断]模型版本)\n  - TOTAL_NUM int(11) ([AI推断]总数)\n  - UNMARK_NUM int(11) ([AI推断]未标记数量)\n  - MARKED_NUM int(11) ([AI推断]已标记数量)\n  - APIKEY varchar(128) ([AI推断]API密钥)\n  - DATA_STATUS char(1) ([AI推断]数据状态)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - CRT_USER_ID varchar(64) ([AI推断]创建用户ID)\n  - CRT_USER_NAME varchar(64) ([AI推断]创建用户名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_USER_ID varchar(64) ([AI推断]更新用户ID)\n  - UPDATE_USER_NAME varchar(64) ([AI推断]更新用户名称)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - CURRENT_NUM int(11) ([AI推断]当前数量)\n  - MODEL_ID varchar(100) ([AI推断]模型ID)\n  - CHANNEL varchar(200) ([AI推断]渠道)\n  - BUSINESS_SCENARIO varchar(200) ([AI推断]业务场景)"
   },
   {
     "tableName": "ai_collect_exec_task",
-    "tableComment": "",
-    "schemaText": "表名: ai_collect_exec_task\n列:\n  - ID varchar(128)\n  - BATCH_ID varchar(128)\n  - SOURCE_DATA_ID varchar(64)\n  - FILE_IDS varchar(20480)\n  - STATE char(1)\n  - CRT_TIME datetime\n  - MACHINE_ID varchar(128)\n  - EXEC_BEGIN_TIME datetime\n  - EXEC_END_TIME datetime\n"
+    "tableComment": "AI收集执行任务表",
+    "schemaText": "表名: ai_collect_exec_task ([AI推断]AI收集执行任务表)\n列:\n  - ID varchar(128) ([AI推断]任务ID)\n  - BATCH_ID varchar(128) ([AI推断]批次ID)\n  - SOURCE_DATA_ID varchar(64) ([AI推断]源数据ID)\n  - FILE_IDS varchar(20480) ([AI推断]文件ID列表)\n  - STATE char(1) ([AI推断]任务状态)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - MACHINE_ID varchar(128) ([AI推断]机器ID)\n  - EXEC_BEGIN_TIME datetime ([AI推断]执行开始时间)\n  - EXEC_END_TIME datetime ([AI推断]执行结束时间)"
   },
   {
     "tableName": "ai_collect_exec_task_his",
-    "tableComment": "",
-    "schemaText": "表名: ai_collect_exec_task_his\n列:\n  - ID varchar(128)\n  - BATCH_ID varchar(128)\n  - SOURCE_DATA_ID varchar(64)\n  - FILE_IDS varchar(20480)\n  - STATE char(1)\n  - CRT_TIME datetime\n  - MACHINE_ID varchar(128)\n  - EXEC_BEGIN_TIME datetime\n  - EXEC_END_TIME datetime\n  - MIGRATE_TIME datetime\n"
+    "tableComment": "AI收集执行任务历史",
+    "schemaText": "表名: ai_collect_exec_task_his ([AI推断]AI收集执行任务历史)\n列:\n  - ID varchar(128) ([AI推断]任务ID)\n  - BATCH_ID varchar(128) ([AI推断]批次ID)\n  - SOURCE_DATA_ID varchar(64) ([AI推断]源数据ID)\n  - FILE_IDS varchar(20480) ([AI推断]文件ID列表)\n  - STATE char(1) ([AI推断]状态)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - MACHINE_ID varchar(128) ([AI推断]机器ID)\n  - EXEC_BEGIN_TIME datetime ([AI推断]执行开始时间)\n  - EXEC_END_TIME datetime ([AI推断]执行结束时间)\n  - MIGRATE_TIME datetime ([AI推断]迁移时间)"
   },
   {
     "tableName": "ai_collect_info",
-    "tableComment": "",
-    "schemaText": "表名: ai_collect_info\n列:\n  - id varchar(128)\n  - user_name varchar(255)\n  - type int(11)\n"
+    "tableComment": "AI采集信息表",
+    "schemaText": "表名: ai_collect_info ([AI推断]AI采集信息表)\n列:\n  - id varchar(128) ([AI推断]记录ID)\n  - user_name varchar(255) ([AI推断]用户名)\n  - type int(11) ([AI推断]采集类型)"
   },
   {
     "tableName": "ai_collect_source_info",
-    "tableComment": "",
-    "schemaText": "表名: ai_collect_source_info\n列:\n  - ID varchar(128)\n  - DATASET_ID varchar(128)\n  - TASK_ID varchar(128)\n  - SOURCE_TYPE char(1)\n  - SOURCE_NAME varchar(100)\n  - SOURCE_ADDR varchar(100)\n  - SOURCE_USER varchar(100)\n  - SOURCE_SECRET varchar(100)\n  - SFTP_CODE varchar(100)\n  - SFTP_OID varchar(100)\n  - SOURCE_PATH varchar(400)\n  - SFTPKEY varchar(100)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n  - UPDATE_TIME datetime\n  - IS_COMPRESSED char(1)\n  - COMPRESS_FILE_SUFFIX varchar(20)\n"
+    "tableComment": "AI收集来源信息表",
+    "schemaText": "表名: ai_collect_source_info ([AI推断]AI收集来源信息表)\n列:\n  - ID varchar(128) ([AI推断]ID)\n  - DATASET_ID varchar(128) ([AI推断]数据集ID)\n  - TASK_ID varchar(128) ([AI推断]任务ID)\n  - SOURCE_TYPE char(1) ([AI推断]来源类型)\n  - SOURCE_NAME varchar(100) ([AI推断]来源名称)\n  - SOURCE_ADDR varchar(100) ([AI推断]来源地址)\n  - SOURCE_USER varchar(100) ([AI推断]来源用户)\n  - SOURCE_SECRET varchar(100) ([AI推断]来源密码)\n  - SFTP_CODE varchar(100) ([AI推断]SFTP代码)\n  - SFTP_OID varchar(100) ([AI推断]SFTP对象ID)\n  - SOURCE_PATH varchar(400) ([AI推断]来源路径)\n  - SFTPKEY varchar(100) ([AI推断]SFTP密钥)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - IS_COMPRESSED char(1) ([AI推断]是否压缩)\n  - COMPRESS_FILE_SUFFIX varchar(20) ([AI推断]压缩文件后缀)"
   },
   {
     "tableName": "ai_collect_task_exec_sum",
-    "tableComment": "",
-    "schemaText": "表名: ai_collect_task_exec_sum\n列:\n  - ID varchar(128)\n  - DATASET_ID varchar(128)\n  - TASK_ID varchar(128)\n  - TASK_TYPE char(1)\n  - COLLECT_SOURCE_ID varchar(128)\n  - COLLECT_STATE char(1)\n  - EXEC_STATE char(1)\n  - CUR_SOURCE_ID varchar(128)\n  - BEGIN_TIME datetime\n  - END_TIME datetime\n  - FILE_NUMS int(11)\n  - FILE_SIZE bigint(20)\n  - COLLECTD_FILE_NUMS int(11)\n  - COLLECTD_FILE_SIZE bigint(20)\n  - BUCKET_NAME varchar(100)\n  - MINIO_DIR varchar(300)\n  - ACCT_PERIOD varchar(20)\n  - FAIL_REASON text\n  - DEL_FLAG char(1)\n  - LAST_EXEC_TIME datetime\n  - EXEC_TIMES int(11)\n  - ES_STATE char(1)\n"
+    "tableComment": "AI收集任务执行摘要",
+    "schemaText": "表名: ai_collect_task_exec_sum ([AI推断]AI收集任务执行摘要)\n列:\n  - ID varchar(128) ([AI推断]标识)\n  - DATASET_ID varchar(128) ([AI推断]数据集ID)\n  - TASK_ID varchar(128) ([AI推断]任务ID)\n  - TASK_TYPE char(1) ([AI推断]任务类型)\n  - COLLECT_SOURCE_ID varchar(128) ([AI推断]收集源ID)\n  - COLLECT_STATE char(1) ([AI推断]收集状态)\n  - EXEC_STATE char(1) ([AI推断]执行状态)\n  - CUR_SOURCE_ID varchar(128) ([AI推断]当前源ID)\n  - BEGIN_TIME datetime ([AI推断]开始时间)\n  - END_TIME datetime ([AI推断]结束时间)\n  - FILE_NUMS int(11) ([AI推断]文件数量)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - COLLECTD_FILE_NUMS int(11) ([AI推断]已收集文件数量)\n  - COLLECTD_FILE_SIZE bigint(20) ([AI推断]已收集文件大小)\n  - BUCKET_NAME varchar(100) ([AI推断]桶名称)\n  - MINIO_DIR varchar(300) ([AI推断]MinIO目录)\n  - ACCT_PERIOD varchar(20) ([AI推断]账户期间)\n  - FAIL_REASON text ([AI推断]失败原因)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - LAST_EXEC_TIME datetime ([AI推断]最后执行时间)\n  - EXEC_TIMES int(11) ([AI推断]执行次数)\n  - ES_STATE char(1) ([AI推断]ES状态)"
   },
   {
     "tableName": "ai_collect_task_info",
-    "tableComment": "",
-    "schemaText": "表名: ai_collect_task_info\n列:\n  - ID varchar(100)\n  - DATASET_ID varchar(100)\n  - COLLECT_TASK_NAME varchar(200)\n  - SOURCE_SYSTEM_NAME varchar(200)\n  - SFTP_SOURCE_NAME varchar(100)\n  - SFTP_IP_ADDR varchar(40)\n  - SFTP_USER varchar(100)\n  - SFTP_DIR varchar(400)\n  - SFTP_CODE varchar(100)\n  - SFTP_OID varchar(100)\n  - DEPOSIT_DIR varchar(400)\n  - COLLECT_DATA_KIND varchar(200)\n  - COLLECT_DATA_ATTR char(1)\n  - COLLECT_STATE char(1)\n  - TASK_TYPE char(1)\n  - START_TIME datetime\n  - END_TIME datetime\n  - DATA_NAME varchar(200)\n  - DATA_DESC varchar(1296)\n  - DATA_FROM varchar(100)\n  - DATA_BELONG varchar(400)\n  - BUSINESS_INFO varchar(400)\n  - TRAINING_PHASE varchar(400)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(300)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(300)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime(6)\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n  - NEXT_COLLECT_TIME bigint(20)\n  - PRE_COLLECT_TIME bigint(20)\n  - PATH_PERIOD_TYPE varchar(20)\n  - COLLECT_TIME_TYPE varchar(20)\n  - COLLECT_DAY varchar(2)\n  - COLLECT_HHMM varchar(20)\n  - COLLECT_TIME datetime\n  - FILE_SUFFIX varchar(400)\n  - CUR_BATCH_ID varchar(128)\n  - EXEC_BATCH_NUMS int(11)\n  - SUCESS_BATCH_NUMS int(11)\n"
+    "tableComment": "AI收集任务信息",
+    "schemaText": "表名: ai_collect_task_info ([AI推断]AI收集任务信息)\n列:\n  - ID varchar(100) ([AI推断]ID标识)\n  - DATASET_ID varchar(100) ([AI推断]数据集ID)\n  - COLLECT_TASK_NAME varchar(200) ([AI推断]收集任务名称)\n  - SOURCE_SYSTEM_NAME varchar(200) ([AI推断]源系统名称)\n  - SFTP_SOURCE_NAME varchar(100) ([AI推断]SFTP源名称)\n  - SFTP_IP_ADDR varchar(40) ([AI推断]SFTP IP地址)\n  - SFTP_USER varchar(100) ([AI推断]SFTP用户)\n  - SFTP_DIR varchar(400) ([AI推断]SFTP目录)\n  - SFTP_CODE varchar(100) ([AI推断]SFTP代码)\n  - SFTP_OID varchar(100) ([AI推断]SFTP对象标识符)\n  - DEPOSIT_DIR varchar(400) ([AI推断]存储目录)\n  - COLLECT_DATA_KIND varchar(200) ([AI推断]收集数据种类)\n  - COLLECT_DATA_ATTR char(1) ([AI推断]收集数据属性)\n  - COLLECT_STATE char(1) ([AI推断]收集状态)\n  - TASK_TYPE char(1) ([AI推断]任务类型)\n  - START_TIME datetime ([AI推断]开始时间)\n  - END_TIME datetime ([AI推断]结束时间)\n  - DATA_NAME varchar(200) ([AI推断]数据名称)\n  - DATA_DESC varchar(1296) ([AI推断]数据描述)\n  - DATA_FROM varchar(100) ([AI推断]数据来源)\n  - DATA_BELONG varchar(400) ([AI推断]数据归属)\n  - BUSINESS_INFO varchar(400) ([AI推断]业务信息)\n  - TRAINING_PHASE varchar(400) ([AI推断]训练阶段)\n  - TENANT_ID varchar(100) ([AI推断]租户ID)\n  - TENANT_NAME varchar(300) ([AI推断]租户名称)\n  - PROJECT_ID varchar(100) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(300) ([AI推断]项目名称)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - CRT_NAME varchar(100) ([AI推断]创建名称)\n  - CRT_TIME datetime(6) ([AI推断]创建时间)\n  - UPDATE_USER varchar(50) ([AI推断]更新用户)\n  - UPDATE_NAME varchar(100) ([AI推断]更新名称)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - NEXT_COLLECT_TIME bigint(20) ([AI推断]下次收集时间)\n  - PRE_COLLECT_TIME bigint(20) ([AI推断]上次收集时间)\n  - PATH_PERIOD_TYPE varchar(20) ([AI推断]路径周期类型)\n  - COLLECT_TIME_TYPE varchar(20) ([AI推断]收集时间类型)\n  - COLLECT_DAY varchar(2) ([AI推断]收集日)\n  - COLLECT_HHMM varchar(20) ([AI推断]收集时间(时分))\n  - COLLECT_TIME datetime ([AI推断]收集时间)\n  - FILE_SUFFIX varchar(400) ([AI推断]文件后缀)\n  - CUR_BATCH_ID varchar(128) ([AI推断]当前批次ID)\n  - EXEC_BATCH_NUMS int(11) ([AI推断]执行批次数量)\n  - SUCESS_BATCH_NUMS int(11) ([AI推断]成功批次数量)"
   },
   {
     "tableName": "ai_dataset",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset\n列:\n  - ID varchar(50)\n  - DATASET_ID varchar(128)\n  - DATASET_VERSION int(11)\n  - CREATE_FROM char(1)\n  - DATASET_TD varchar(2000)\n  - DATASET_TYPE varchar(50)\n  - CATALOG_NAME varchar(2000)\n  - DATASET_NAME varchar(200)\n  - DATASET_ENGLISH_NAME varchar(200)\n  - DATASET_DESCRIPTION varchar(2000)\n  - COLLECTION_SOURCE varchar(1000)\n  - PUB_NAME varchar(50)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(50)\n  - PUB_PHONE varchar(50)\n  - PUB_EMAIL varchar(50)\n  - OPEN int(11)\n  - FLAG int(11)\n  - DELETE_FLAG char(1)\n  - TENANT_ID varchar(50)\n  - DATASET_STATUS int(11)\n  - ONLINE_TIME datetime\n  - OFFLINE_TIME datetime\n  - ONLINE_NAME varchar(50)\n  - OFFLINE_NAME varchar(50)\n  - PUB_STATUS int(11)\n  - PROJECT_ID varchar(50)\n  - DATASET_TYPE_NAME varchar(50)\n  - PUB_RANGE text\n  - SOURCE_DATA_TYPE varchar(100)\n  - SOURCE_DATA_FROM varchar(100)\n  - BUSINESS_DOMAIN varchar(2000)\n  - TRAINING_PHASE varchar(100)\n  - PUB_RANGE_NAME text\n  - CRT_USER varchar(50)\n  - SEN_LEVEL varchar(50)\n  - DATA_MANAGER varchar(2000)\n  - LOGIC_TYPE varchar(1)\n  - SYS_TISSUE varchar(200)\n  - SYS_NAME varchar(200)\n  - BUSINESS_ONE varchar(200)\n  - BUSINESS_TWO varchar(200)\n  - BUSINESS_THREE varchar(200)\n  - TECHNOLOGY_ONE varchar(200)\n  - TECHNOLOGY_TWO varchar(200)\n  - TECHNOLOGY_THREE varchar(200)\n  - TECHNOLOGY_FOUR varchar(200)\n  - USE_CLASSIFY varchar(200)\n  - DATA_FROM varchar(200)\n  - BROWSE_NUM int(11)\n  - SUB_NUM int(11)\n  - MARK_AFTER_FLAG int(11)\n  - SCENE_ID varchar(200)\n  - MODEL_ID varchar(200)\n"
+    "tableComment": "人工智能数据集",
+    "schemaText": "表名: ai_dataset ([AI推断]人工智能数据集)\n列:\n  - ID varchar(50) ([AI推断]ID)\n  - DATASET_ID varchar(128) ([AI推断]数据集ID)\n  - DATASET_VERSION int(11) ([AI推断]数据集版本)\n  - CREATE_FROM char(1) ([AI推断]创建来源)\n  - DATASET_TD varchar(2000) ([AI推断]数据集技术详情)\n  - DATASET_TYPE varchar(50) ([AI推断]数据集类型)\n  - CATALOG_NAME varchar(2000) ([AI推断]目录名称)\n  - DATASET_NAME varchar(200) ([AI推断]数据集名称)\n  - DATASET_ENGLISH_NAME varchar(200) ([AI推断]数据集英文名称)\n  - DATASET_DESCRIPTION varchar(2000) ([AI推断]数据集描述)\n  - COLLECTION_SOURCE varchar(1000) ([AI推断]收集来源)\n  - PUB_NAME varchar(50) ([AI推断]发布者名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(50) ([AI推断]创建者名称)\n  - UPD_TIME datetime ([AI推断]更新时间)\n  - UPD_NAME varchar(50) ([AI推断]更新者名称)\n  - PUB_PHONE varchar(50) ([AI推断]发布者电话)\n  - PUB_EMAIL varchar(50) ([AI推断]发布者邮箱)\n  - OPEN int(11) ([AI推断]开放状态)\n  - FLAG int(11) ([AI推断]标志)\n  - DELETE_FLAG char(1) ([AI推断]删除标志)\n  - TENANT_ID varchar(50) ([AI推断]租户ID)\n  - DATASET_STATUS int(11) ([AI推断]数据集状态)\n  - ONLINE_TIME datetime ([AI推断]上线时间)\n  - OFFLINE_TIME datetime ([AI推断]下线时间)\n  - ONLINE_NAME varchar(50) ([AI推断]上线操作者)\n  - OFFLINE_NAME varchar(50) ([AI推断]下线操作者)\n  - PUB_STATUS int(11) ([AI推断]发布状态)\n  - PROJECT_ID varchar(50) ([AI推断]项目ID)\n  - DATASET_TYPE_NAME varchar(50) ([AI推断]数据集类型名称)\n  - PUB_RANGE text ([AI推断]发布范围)\n  - SOURCE_DATA_TYPE varchar(100) ([AI推断]源数据类型)\n  - SOURCE_DATA_FROM varchar(100) ([AI推断]源数据来源)\n  - BUSINESS_DOMAIN varchar(2000) ([AI推断]业务领域)\n  - TRAINING_PHASE varchar(100) ([AI推断]训练阶段)\n  - PUB_RANGE_NAME text ([AI推断]发布范围名称)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - SEN_LEVEL varchar(50) ([AI推断]敏感级别)\n  - DATA_MANAGER varchar(2000) ([AI推断]数据管理者)\n  - LOGIC_TYPE varchar(1) ([AI推断]逻辑类型)\n  - SYS_TISSUE varchar(200) ([AI推断]系统组织)\n  - SYS_NAME varchar(200) ([AI推断]系统名称)\n  - BUSINESS_ONE varchar(200) ([AI推断]业务分类一)\n  - BUSINESS_TWO varchar(200) ([AI推断]业务分类二)\n  - BUSINESS_THREE varchar(200) ([AI推断]业务分类三)\n  - TECHNOLOGY_ONE varchar(200) ([AI推断]技术分类一)\n  - TECHNOLOGY_TWO varchar(200) ([AI推断]技术分类二)\n  - TECHNOLOGY_THREE varchar(200) ([AI推断]技术分类三)\n  - TECHNOLOGY_FOUR varchar(200) ([AI推断]技术分类四)\n  - USE_CLASSIFY varchar(200) ([AI推断]使用分类)\n  - DATA_FROM varchar(200) ([AI推断]数据来源)\n  - BROWSE_NUM int(11) ([AI推断]浏览次数)\n  - SUB_NUM int(11) ([AI推断]订阅次数)\n  - MARK_AFTER_FLAG int(11) ([AI推断]标记后标志)\n  - SCENE_ID varchar(200) ([AI推断]场景ID)\n  - MODEL_ID varchar(200) ([AI推断]模型ID)"
   },
   {
     "tableName": "ai_dataset_catalog",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_catalog\n列:\n  - ID varchar(20)\n  - NAME varchar(255)\n  - TYPE char(5)\n"
+    "tableComment": "人工智能数据集目录",
+    "schemaText": "表名: ai_dataset_catalog ([AI推断]人工智能数据集目录)\n列:\n  - ID varchar(20) ([AI推断]标识)\n  - NAME varchar(255) ([AI推断]名称)\n  - TYPE char(5) ([AI推断]类型)"
   },
   {
     "tableName": "ai_dataset_catalog_relation",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_catalog_relation\n列:\n  - ID varchar(50)\n  - PARENT_ID varchar(50)\n  - NAME varchar(200)\n  - LEVEL int(11)\n  - DESCRIPTION varchar(2000)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(255)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI数据集目录关系表",
+    "schemaText": "表名: ai_dataset_catalog_relation ([AI推断]AI数据集目录关系表)\n列:\n  - ID varchar(50) ([AI推断]主键ID)\n  - PARENT_ID varchar(50) ([AI推断]父目录ID)\n  - NAME varchar(200) ([AI推断]名称)\n  - LEVEL int(11) ([AI推断]层级)\n  - DESCRIPTION varchar(2000) ([AI推断]描述)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(255) ([AI推断]创建人)\n  - UPD_TIME datetime ([AI推断]更新时间)\n  - UPD_NAME varchar(255) ([AI推断]更新人)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_dataset_file",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_file\n列:\n  - ID varchar(50)\n  - DATASET_ID varchar(50)\n  - FILE_NAME varchar(200)\n  - FILE_PATH varchar(200)\n  - FILE_TYPE varchar(200)\n  - FILE_SIZE varchar(50)\n  - FILE_DESCRIPTION varchar(500)\n  - CRT_TIME datetime\n  - CRT_USER varchar(255)\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_USER varchar(255)\n  - UPD_NAME varchar(255)\n  - IS_UPDATE char(1)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "人工智能数据集文件表",
+    "schemaText": "表名: ai_dataset_file ([AI推断]人工智能数据集文件表)\n列:\n  - ID varchar(50) ([AI推断]记录标识)\n  - DATASET_ID varchar(50) ([AI推断]数据集标识)\n  - FILE_NAME varchar(200) ([AI推断]文件名)\n  - FILE_PATH varchar(200) ([AI推断]文件路径)\n  - FILE_TYPE varchar(200) ([AI推断]文件类型)\n  - FILE_SIZE varchar(50) ([AI推断]文件大小)\n  - FILE_DESCRIPTION varchar(500) ([AI推断]文件描述)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_USER varchar(255) ([AI推断]创建用户)\n  - CRT_NAME varchar(255) ([AI推断]创建者名称)\n  - UPD_TIME datetime ([AI推断]更新时间)\n  - UPD_USER varchar(255) ([AI推断]更新用户)\n  - UPD_NAME varchar(255) ([AI推断]更新者名称)\n  - IS_UPDATE char(1) ([AI推断]是否更新)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_dataset_logic_lake",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_logic_lake\n列:\n  - ID varchar(50)\n  - LOGIC_TYPE varchar(50)\n  - SYS_TISSUE varchar(100)\n  - SYS_CODE varchar(100)\n  - SYS_NAME varchar(100)\n  - FRAMEWORK_TYPE varchar(100)\n  - SYS_TYPE varchar(100)\n  - SYS_FRAMEWORK varchar(100)\n  - FIRST_SYS_NAME varchar(100)\n  - SECOND_SYS_NAME varchar(100)\n  - USER_NAME varchar(100)\n  - PHONE varchar(50)\n  - EMAIL varchar(50)\n  - UPT_NAME varchar(50)\n  - CRT_TIME datetime\n  - UPT_TIME datetime\n  - UPT_PHONE varchar(50)\n  - UPT_EMAIL varchar(50)\n  - APPROVE_STATUS int(11)\n"
+    "tableComment": "人工智能数据集逻辑湖表",
+    "schemaText": "表名: ai_dataset_logic_lake ([AI推断]人工智能数据集逻辑湖表)\n列:\n  - ID varchar(50) ([AI推断]标识符)\n  - LOGIC_TYPE varchar(50) ([AI推断]逻辑类型)\n  - SYS_TISSUE varchar(100) ([AI推断]系统组织)\n  - SYS_CODE varchar(100) ([AI推断]系统代码)\n  - SYS_NAME varchar(100) ([AI推断]系统名称)\n  - FRAMEWORK_TYPE varchar(100) ([AI推断]框架类型)\n  - SYS_TYPE varchar(100) ([AI推断]系统类型)\n  - SYS_FRAMEWORK varchar(100) ([AI推断]系统框架)\n  - FIRST_SYS_NAME varchar(100) ([AI推断]主系统名称)\n  - SECOND_SYS_NAME varchar(100) ([AI推断]子系统名称)\n  - USER_NAME varchar(100) ([AI推断]用户名)\n  - PHONE varchar(50) ([AI推断]电话)\n  - EMAIL varchar(50) ([AI推断]电子邮件)\n  - UPT_NAME varchar(50) ([AI推断]更新人名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - UPT_PHONE varchar(50) ([AI推断]更新电话)\n  - UPT_EMAIL varchar(50) ([AI推断]更新电子邮件)\n  - APPROVE_STATUS int(11) ([AI推断]审批状态)"
   },
   {
     "tableName": "ai_dataset_model",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_model\n列:\n  - ID int(11)\n  - PATH varchar(200)\n  - ENG_NAME varchar(200)\n  - UNIT varchar(200)\n  - NAME varchar(200)\n  - FLAG char(1)\n"
+    "tableComment": "AI数据集模型",
+    "schemaText": "表名: ai_dataset_model ([AI推断]AI数据集模型)\n列:\n  - ID int(11) ([AI推断]ID)\n  - PATH varchar(200) ([AI推断]路径)\n  - ENG_NAME varchar(200) ([AI推断]英文名称)\n  - UNIT varchar(200) ([AI推断]单位)\n  - NAME varchar(200) ([AI推断]名称)\n  - FLAG char(1) ([AI推断]标志)"
   },
   {
     "tableName": "ai_dataset_operator_process",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_operator_process\n列:\n  - ID varchar(100)\n  - SOURCE_ID varchar(100)\n  - SOURCE_PROCESS_STATUS char(1)\n  - OPERATOR_JSON text\n  - SAVE_DIRECTORY varchar(255)\n  - SOURCE_PROCESS_TIME datetime\n  - CRT_TIME datetime\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(50)\n  - UPT_TIME datetime\n  - UPT_USER varchar(50)\n  - UPT_NAME varchar(50)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI数据集操作流程表",
+    "schemaText": "表名: ai_dataset_operator_process ([AI推断]AI数据集操作流程表)\n列:\n  - ID varchar(100) ([AI推断]操作ID)\n  - SOURCE_ID varchar(100) ([AI推断]来源ID)\n  - SOURCE_PROCESS_STATUS char(1) ([AI推断]来源处理状态)\n  - OPERATOR_JSON text ([AI推断]操作员JSON数据)\n  - SAVE_DIRECTORY varchar(255) ([AI推断]保存目录)\n  - SOURCE_PROCESS_TIME datetime ([AI推断]来源处理时间)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - CRT_NAME varchar(50) ([AI推断]创建者姓名)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - UPT_USER varchar(50) ([AI推断]更新用户)\n  - UPT_NAME varchar(50) ([AI推断]更新者姓名)\n  - TENANT_ID varchar(50) ([AI推断]租户ID)\n  - TENANT_NAME varchar(50) ([AI推断]租户名称)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_dataset_operator_tag",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_operator_tag\n列:\n  - ID varchar(50)\n  - PARENT_ID varchar(50)\n  - NAME varchar(200)\n  - LEVEL int(11)\n  - DESCRIPTION varchar(2000)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(255)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI数据集操作标签表",
+    "schemaText": "表名: ai_dataset_operator_tag ([AI推断]AI数据集操作标签表)\n列:\n  - ID varchar(50) ([AI推断]标签ID)\n  - PARENT_ID varchar(50) ([AI推断]父标签ID)\n  - NAME varchar(200) ([AI推断]标签名称)\n  - LEVEL int(11) ([AI推断]层级)\n  - DESCRIPTION varchar(2000) ([AI推断]描述)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(255) ([AI推断]创建人)\n  - UPD_TIME datetime ([AI推断]更新时间)\n  - UPD_NAME varchar(255) ([AI推断]更新人)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_dataset_relation",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_relation\n列:\n  - ID varchar(128)\n  - DATASET_ID varchar(128)\n  - TASK_ID varchar(128)\n  - BATCH_ID varchar(128)\n  - RELATION_TYPE char(1)\n  - SOURCE_DATA_ID varchar(128)\n  - FILE_NAME varchar(256)\n  - FILE_SIZE bigint(20)\n  - FILE_PATH varchar(256)\n  - BUCKET_NAME varchar(64)\n  - SOURCE_PATH varchar(256)\n  - SOURCE_FILE_NAME varchar(256)\n  - DEST_BUCKET_NAME varchar(64)\n  - DEST_PATH varchar(256)\n  - DEST_FILE_NAME varchar(256)\n  - DEST_URL varchar(256)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI数据集关系表",
+    "schemaText": "表名: ai_dataset_relation ([AI推断]AI数据集关系表)\n列:\n  - ID varchar(128) ([AI推断]记录ID)\n  - DATASET_ID varchar(128) ([AI推断]数据集ID)\n  - TASK_ID varchar(128) ([AI推断]任务ID)\n  - BATCH_ID varchar(128) ([AI推断]批次ID)\n  - RELATION_TYPE char(1) ([AI推断]关系类型)\n  - SOURCE_DATA_ID varchar(128) ([AI推断]源数据ID)\n  - FILE_NAME varchar(256) ([AI推断]文件名)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - FILE_PATH varchar(256) ([AI推断]文件路径)\n  - BUCKET_NAME varchar(64) ([AI推断]存储桶名称)\n  - SOURCE_PATH varchar(256) ([AI推断]源路径)\n  - SOURCE_FILE_NAME varchar(256) ([AI推断]源文件名)\n  - DEST_BUCKET_NAME varchar(64) ([AI推断]目标存储桶名称)\n  - DEST_PATH varchar(256) ([AI推断]目标路径)\n  - DEST_FILE_NAME varchar(256) ([AI推断]目标文件名)\n  - DEST_URL varchar(256) ([AI推断]目标URL)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_dataset_source_data",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_source_data\n列:\n  - ID varchar(100)\n  - DATA_TYPE varchar(50)\n  - TENANT_ID varchar(50)\n  - PROCESS_STATUS int(11)\n  - MARK_STATUS int(11)\n  - TENANT_NAME varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - SOURCE_DATA_LOCATION varchar(255)\n  - LOCATION_IP varchar(255)\n  - LOCATION_DIRECTORY varchar(255)\n  - SOURCE_DATA_DESC varchar(500)\n  - SOURCE_DATA_SOURCE varchar(255)\n  - IS_MARK varchar(100)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - UPT_TIME datetime\n  - UPT_NAME varchar(50)\n  - SOURCE_VERSION int(11)\n  - DEL_FLAG char(1)\n  - CHECK_STATUS int(11)\n  - PROJECT_ID varchar(100)\n  - DATA_ATTR varchar(1)\n  - BUSINESS_INFO varchar(400)\n  - TRAINING_PHASE varchar(400)\n  - DATASET_ID varchar(100)\n  - PROJECT_NAME varchar(200)\n  - DATASET_VERSION int(11)\n  - COLLECT_FILE_NUMS int(11)\n  - COLLECT_FILE_SIZE bigint(20)\n  - PROCESS_FILE_NUMS int(11)\n  - PROCESS_FILE_SIZE bigint(20)\n  - CHECK_FILE_NUMS int(11)\n  - CHECK_FILE_SIZE bigint(20)\n  - MARK_FILE_NUMS int(11)\n  - MARK_FILE_SIZE bigint(20)\n  - SOURCE_FROM int(11)\n  - AFTER_PROCESS_STATUS int(11)\n  - AFTER_PROCESS_FILE_NUMS int(11)\n  - AFTER_PROCESS_FILE_SIZE int(11)\n  - EXTEND_FLAG int(11)\n  - EXTEND_VERSION varchar(50)\n  - CHECK_FAILURE text\n  - PROCESS_FAILURE text\n"
+    "tableComment": "AI数据集源数据",
+    "schemaText": "表名: ai_dataset_source_data ([AI推断]AI数据集源数据)\n列:\n  - ID varchar(100) ([AI推断]ID)\n  - DATA_TYPE varchar(50) ([AI推断]数据类型)\n  - TENANT_ID varchar(50) ([AI推断]租户ID)\n  - PROCESS_STATUS int(11) ([AI推断]处理状态)\n  - MARK_STATUS int(11) ([AI推断]标记状态)\n  - TENANT_NAME varchar(100) ([AI推断]租户名称)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]源数据名称)\n  - SOURCE_DATA_LOCATION varchar(255) ([AI推断]源数据位置)\n  - LOCATION_IP varchar(255) ([AI推断]位置IP地址)\n  - LOCATION_DIRECTORY varchar(255) ([AI推断]位置目录)\n  - SOURCE_DATA_DESC varchar(500) ([AI推断]源数据描述)\n  - SOURCE_DATA_SOURCE varchar(255) ([AI推断]源数据来源)\n  - IS_MARK varchar(100) ([AI推断]是否标记)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(50) ([AI推断]创建人)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - UPT_NAME varchar(50) ([AI推断]更新人)\n  - SOURCE_VERSION int(11) ([AI推断]源数据版本)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - CHECK_STATUS int(11) ([AI推断]检查状态)\n  - PROJECT_ID varchar(100) ([AI推断]项目ID)\n  - DATA_ATTR varchar(1) ([AI推断]数据属性)\n  - BUSINESS_INFO varchar(400) ([AI推断]业务信息)\n  - TRAINING_PHASE varchar(400) ([AI推断]训练阶段)\n  - DATASET_ID varchar(100) ([AI推断]数据集ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - DATASET_VERSION int(11) ([AI推断]数据集版本)\n  - COLLECT_FILE_NUMS int(11) ([AI推断]收集文件数量)\n  - COLLECT_FILE_SIZE bigint(20) ([AI推断]收集文件大小)\n  - PROCESS_FILE_NUMS int(11) ([AI推断]处理文件数量)\n  - PROCESS_FILE_SIZE bigint(20) ([AI推断]处理文件大小)\n  - CHECK_FILE_NUMS int(11) ([AI推断]检查文件数量)\n  - CHECK_FILE_SIZE bigint(20) ([AI推断]检查文件大小)\n  - MARK_FILE_NUMS int(11) ([AI推断]标记文件数量)\n  - MARK_FILE_SIZE bigint(20) ([AI推断]标记文件大小)\n  - SOURCE_FROM int(11) ([AI推断]源数据来源类型)\n  - AFTER_PROCESS_STATUS int(11) ([AI推断]后处理状态)\n  - AFTER_PROCESS_FILE_NUMS int(11) ([AI推断]后处理文件数量)\n  - AFTER_PROCESS_FILE_SIZE int(11) ([AI推断]后处理文件大小)\n  - EXTEND_FLAG int(11) ([AI推断]扩展标志)\n  - EXTEND_VERSION varchar(50) ([AI推断]扩展版本)\n  - CHECK_FAILURE text ([AI推断]检查失败信息)\n  - PROCESS_FAILURE text ([AI推断]处理失败信息)"
   },
   {
     "tableName": "ai_dataset_subscribe",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_subscribe\n列:\n  - ID varchar(50)\n  - DATASET_ID varchar(50)\n  - DATASET_NAME varchar(200)\n  - APPLY_TENANT varchar(100)\n  - APPLY_PERSON varchar(100)\n  - APPLY_PERSON_TEL varchar(50)\n  - APPLY_PERSON_EMAIL varchar(100)\n  - APPLY_DESC varchar(2000)\n  - APPROVE_PERSON varchar(2000)\n  - APPROVE_TENANT varchar(100)\n  - APPROVE_STATUS int(11)\n  - SUBSCRIBE_DESC varchar(100)\n  - APPLY_PROJECT_ID varchar(100)\n  - DATASET_PUBLISHER varchar(100)\n  - DATASET_TYPE varchar(20)\n  - DATASET_TENANT varchar(100)\n  - DATASET_ADMIN varchar(50)\n  - WORK_ORDER_TYPE varchar(30)\n  - SUBSCRIBE_TYPE int(11)\n  - CRT_USER varchar(100)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - APPROVE_TIME datetime\n  - APPLY_TIME datetime\n  - DEL_FLAG char(1)\n  - APPROVE_PROJECT_ID varchar(50)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(100)\n  - UPDATE_USER varchar(50)\n  - UPDATE_TIME datetime\n  - APPROVE_DESC varchar(2000)\n  - SFTP_CODE varchar(100)\n  - SFTP_OID varchar(100)\n  - USER_ID varchar(100)\n  - LOGIN_ID varchar(100)\n  - ROLE text\n  - SFTP_NAME varchar(100)\n  - SOURCE_DIR varchar(200)\n  - DATASET_VERSION int(11)\n  - SUB_STATUS int(11)\n"
+    "tableComment": "AI数据集订阅表",
+    "schemaText": "表名: ai_dataset_subscribe ([AI推断]AI数据集订阅表)\n列:\n  - ID varchar(50) ([AI推断]订阅ID)\n  - DATASET_ID varchar(50) ([AI推断]数据集ID)\n  - DATASET_NAME varchar(200) ([AI推断]数据集名称)\n  - APPLY_TENANT varchar(100) ([AI推断]申请租户)\n  - APPLY_PERSON varchar(100) ([AI推断]申请人)\n  - APPLY_PERSON_TEL varchar(50) ([AI推断]申请人电话)\n  - APPLY_PERSON_EMAIL varchar(100) ([AI推断]申请人邮箱)\n  - APPLY_DESC varchar(2000) ([AI推断]申请描述)\n  - APPROVE_PERSON varchar(2000) ([AI推断]审批人)\n  - APPROVE_TENANT varchar(100) ([AI推断]审批租户)\n  - APPROVE_STATUS int(11) ([AI推断]审批状态)\n  - SUBSCRIBE_DESC varchar(100) ([AI推断]订阅描述)\n  - APPLY_PROJECT_ID varchar(100) ([AI推断]申请项目ID)\n  - DATASET_PUBLISHER varchar(100) ([AI推断]数据集发布者)\n  - DATASET_TYPE varchar(20) ([AI推断]数据集类型)\n  - DATASET_TENANT varchar(100) ([AI推断]数据集所属租户)\n  - DATASET_ADMIN varchar(50) ([AI推断]数据集管理员)\n  - WORK_ORDER_TYPE varchar(30) ([AI推断]工单类型)\n  - SUBSCRIBE_TYPE int(11) ([AI推断]订阅类型)\n  - CRT_USER varchar(100) ([AI推断]创建用户)\n  - CRT_NAME varchar(100) ([AI推断]创建人姓名)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - APPROVE_TIME datetime ([AI推断]审批时间)\n  - APPLY_TIME datetime ([AI推断]申请时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - APPROVE_PROJECT_ID varchar(50) ([AI推断]审批项目ID)\n  - TENANT_ID varchar(100) ([AI推断]租户ID)\n  - TENANT_NAME varchar(100) ([AI推断]租户名称)\n  - UPDATE_USER varchar(50) ([AI推断]更新用户)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - APPROVE_DESC varchar(2000) ([AI推断]审批描述)\n  - SFTP_CODE varchar(100) ([AI推断]SFTP代码)\n  - SFTP_OID varchar(100) ([AI推断]SFTP对象ID)\n  - USER_ID varchar(100) ([AI推断]用户ID)\n  - LOGIN_ID varchar(100) ([AI推断]登录ID)\n  - ROLE text ([AI推断]角色)\n  - SFTP_NAME varchar(100) ([AI推断]SFTP名称)\n  - SOURCE_DIR varchar(200) ([AI推断]源目录)\n  - DATASET_VERSION int(11) ([AI推断]数据集版本)\n  - SUB_STATUS int(11) ([AI推断]订阅状态)"
   },
   {
     "tableName": "ai_dataset_tag_dim",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_tag_dim\n列:\n  - ID varchar(100)\n  - PARENT_ID varchar(100)\n  - NAME varchar(200)\n  - LEVEL int(11)\n  - DESCRIPTION varchar(2000)\n  - SORT int(11)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(255)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(255)\n  - DEL_FLAG char(1)\n  - DIM_CLASS varchar(200)\n  - IS_LEAF int(11)\n  - DATASET_TYPE varchar(500)\n  - IS_MARK char(1)\n  - PROCESS_AFTER_MARK_FLAG char(1)\n"
+    "tableComment": "AI数据集标签维度表",
+    "schemaText": "表名: ai_dataset_tag_dim ([AI推断]AI数据集标签维度表)\n列:\n  - ID varchar(100) ([AI推断]标签ID)\n  - PARENT_ID varchar(100) ([AI推断]父ID)\n  - NAME varchar(200) ([AI推断]标签名称)\n  - LEVEL int(11) ([AI推断]层级)\n  - DESCRIPTION varchar(2000) ([AI推断]描述)\n  - SORT int(11) ([AI推断]排序)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(255) ([AI推断]创建人)\n  - UPD_TIME datetime ([AI推断]更新时间)\n  - UPD_NAME varchar(255) ([AI推断]更新人)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - DIM_CLASS varchar(200) ([AI推断]维度类别)\n  - IS_LEAF int(11) ([AI推断]是否叶子节点)\n  - DATASET_TYPE varchar(500) ([AI推断]数据集类型)\n  - IS_MARK char(1) ([AI推断]是否标记)\n  - PROCESS_AFTER_MARK_FLAG char(1) ([AI推断]标记后处理标志)"
   },
   {
     "tableName": "ai_dataset_total",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_total\n列:\n  - ACCOUNT varchar(50)\n  - ADMIN varchar(50)\n  - MODEL_NAME varchar(50)\n  - TOTAL_SIZE varchar(50)\n  - OBJECT_NUM varchar(50)\n  - CRT_TIME datetime\n  - SEVEN_DAY_UPLOAD int(11)\n  - DATASET_NUM int(11)\n  - SAME_FILE_NUM varchar(50)\n  - EXPANSION_MAP text\n  - CONTENT_TYPE_MAP text\n"
+    "tableComment": "AI数据集总览",
+    "schemaText": "表名: ai_dataset_total ([AI推断]AI数据集总览)\n列:\n  - ACCOUNT varchar(50) ([AI推断]账户)\n  - ADMIN varchar(50) ([AI推断]管理员)\n  - MODEL_NAME varchar(50) ([AI推断]模型名称)\n  - TOTAL_SIZE varchar(50) ([AI推断]总大小)\n  - OBJECT_NUM varchar(50) ([AI推断]对象数量)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - SEVEN_DAY_UPLOAD int(11) ([AI推断]七天上传量)\n  - DATASET_NUM int(11) ([AI推断]数据集数量)\n  - SAME_FILE_NUM varchar(50) ([AI推断]相同文件数量)\n  - EXPANSION_MAP text ([AI推断]扩展映射)\n  - CONTENT_TYPE_MAP text ([AI推断]内容类型映射)"
   },
   {
     "tableName": "ai_dataset_type_statistics",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_type_statistics\n列:\n  - ID varchar(100)\n  - LAKE_ID varchar(100)\n  - DATASET_TYPE int(11)\n  - DATASET_TYPE_NAME varchar(100)\n  - DATASET_NAME varchar(500)\n  - DATASET_DESC text\n  - DATASET_FROM varchar(500)\n  - FILE_NUM varchar(100)\n  - FILE_SIZE varchar(100)\n  - SAVE_LOCATION text\n  - FLAG int(11)\n  - TYPE_STATISTICS varchar(100)\n  - EXAMPLE_FILE_URL varchar(512)\n  - COPYRIGHT_DESCRIPTION text\n  - FILE_NAME varchar(500)\n  - CRT_TIME datetime\n  - UPT_TIME datetime\n  - DATASET_VERSION varchar(10)\n  - CRT_NAME varchar(100)\n  - UPT_NAME varchar(100)\n  - TAG_ID varchar(100)\n"
+    "tableComment": "AI数据集类型统计表",
+    "schemaText": "表名: ai_dataset_type_statistics ([AI推断]AI数据集类型统计表)\n列:\n  - ID varchar(100) ([AI推断]标识)\n  - LAKE_ID varchar(100) ([AI推断]数据湖ID)\n  - DATASET_TYPE int(11) ([AI推断]数据集类型)\n  - DATASET_TYPE_NAME varchar(100) ([AI推断]数据集类型名称)\n  - DATASET_NAME varchar(500) ([AI推断]数据集名称)\n  - DATASET_DESC text ([AI推断]数据集描述)\n  - DATASET_FROM varchar(500) ([AI推断]数据集来源)\n  - FILE_NUM varchar(100) ([AI推断]文件数量)\n  - FILE_SIZE varchar(100) ([AI推断]文件大小)\n  - SAVE_LOCATION text ([AI推断]保存位置)\n  - FLAG int(11) ([AI推断]标志)\n  - TYPE_STATISTICS varchar(100) ([AI推断]类型统计)\n  - EXAMPLE_FILE_URL varchar(512) ([AI推断]示例文件URL)\n  - COPYRIGHT_DESCRIPTION text ([AI推断]版权描述)\n  - FILE_NAME varchar(500) ([AI推断]文件名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - DATASET_VERSION varchar(10) ([AI推断]数据集版本)\n  - CRT_NAME varchar(100) ([AI推断]创建人名称)\n  - UPT_NAME varchar(100) ([AI推断]更新人名称)\n  - TAG_ID varchar(100) ([AI推断]标签ID)"
   },
   {
     "tableName": "ai_dataset_type_statistics_tag",
-    "tableComment": "",
-    "schemaText": "表名: ai_dataset_type_statistics_tag\n列:\n  - ID varchar(100)\n  - STATISTICS_ID varchar(100)\n  - BUSINESS_ONE varchar(100)\n  - BUSINESS_ONE_NAME varchar(100)\n  - BUSINESS_TWO varchar(100)\n  - BUSINESS_TWO_NAME varchar(100)\n  - BUSINESS_THREE varchar(100)\n  - BUSINESS_THREE_NAME varchar(100)\n  - TECHNOLOGY_ONE varchar(100)\n  - TECHNOLOGY_ONE_NAME varchar(100)\n  - TECHNOLOGY_TWO varchar(100)\n  - TECHNOLOGY_TWO_NAME varchar(100)\n  - TECHNOLOGY_THREE varchar(100)\n  - TECHNOLOGY_THREE_NAME varchar(100)\n  - TECHNOLOGY_FOUR varchar(100)\n  - TECHNOLOGY_FOUR_NAME varchar(100)\n"
+    "tableComment": "AI数据集类型统计标签表",
+    "schemaText": "表名: ai_dataset_type_statistics_tag ([AI推断]AI数据集类型统计标签表)\n列:\n  - ID varchar(100) ([AI推断]主键ID)\n  - STATISTICS_ID varchar(100) ([AI推断]统计ID)\n  - BUSINESS_ONE varchar(100) ([AI推断]业务一级分类)\n  - BUSINESS_ONE_NAME varchar(100) ([AI推断]业务一级分类名称)\n  - BUSINESS_TWO varchar(100) ([AI推断]业务二级分类)\n  - BUSINESS_TWO_NAME varchar(100) ([AI推断]业务二级分类名称)\n  - BUSINESS_THREE varchar(100) ([AI推断]业务三级分类)\n  - BUSINESS_THREE_NAME varchar(100) ([AI推断]业务三级分类名称)\n  - TECHNOLOGY_ONE varchar(100) ([AI推断]技术一级分类)\n  - TECHNOLOGY_ONE_NAME varchar(100) ([AI推断]技术一级分类名称)\n  - TECHNOLOGY_TWO varchar(100) ([AI推断]技术二级分类)\n  - TECHNOLOGY_TWO_NAME varchar(100) ([AI推断]技术二级分类名称)\n  - TECHNOLOGY_THREE varchar(100) ([AI推断]技术三级分类)\n  - TECHNOLOGY_THREE_NAME varchar(100) ([AI推断]技术三级分类名称)\n  - TECHNOLOGY_FOUR varchar(100) ([AI推断]技术四级分类)\n  - TECHNOLOGY_FOUR_NAME varchar(100) ([AI推断]技术四级分类名称)"
   },
   {
     "tableName": "ai_evaluation_index",
-    "tableComment": "",
-    "schemaText": "表名: ai_evaluation_index\n列:\n  - ID varchar(36)\n  - TEMPLATE_ID varchar(36)\n  - INDEX_NAME varchar(128)\n  - INDEX_DESC varchar(2048)\n  - ZERO_STANDARD varchar(2048)\n  - ONE_STANDARD varchar(2048)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI评估指标",
+    "schemaText": "表名: ai_evaluation_index ([AI推断]AI评估指标)\n列:\n  - ID varchar(36) ([AI推断]ID)\n  - TEMPLATE_ID varchar(36) ([AI推断]模板ID)\n  - INDEX_NAME varchar(128) ([AI推断]指标名称)\n  - INDEX_DESC varchar(2048) ([AI推断]指标描述)\n  - ZERO_STANDARD varchar(2048) ([AI推断]零分标准)\n  - ONE_STANDARD varchar(2048) ([AI推断]一分标准)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - CRT_USER_ID varchar(64) ([AI推断]创建用户ID)\n  - CRT_USER_NAME varchar(64) ([AI推断]创建用户名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_USER_ID varchar(64) ([AI推断]更新用户ID)\n  - UPDATE_USER_NAME varchar(64) ([AI推断]更新用户名称)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_evaluation_template",
-    "tableComment": "",
-    "schemaText": "表名: ai_evaluation_template\n列:\n  - ID varchar(36)\n  - TEMPLATE_NAME varchar(128)\n  - SYSTEM_TITLE varchar(2048)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - UPDATE_USER_ID varchar(64)\n  - UPDATE_USER_NAME varchar(64)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI评估模板",
+    "schemaText": "表名: ai_evaluation_template ([AI推断]AI评估模板)\n列:\n  - ID varchar(36) ([AI推断]ID)\n  - TEMPLATE_NAME varchar(128) ([AI推断]模板名称)\n  - SYSTEM_TITLE varchar(2048) ([AI推断]系统标题)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - CRT_USER_ID varchar(64) ([AI推断]创建用户ID)\n  - CRT_USER_NAME varchar(64) ([AI推断]创建用户名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_USER_ID varchar(64) ([AI推断]更新用户ID)\n  - UPDATE_USER_NAME varchar(64) ([AI推断]更新用户名称)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_sum_plat",
-    "tableComment": "",
-    "schemaText": "表名: ai_sum_plat\n列:\n  - ID varchar(128)\n  - SUM_YMD int(11)\n  - TENANT_NUM int(11)\n  - PROJECT_NUM int(11)\n  - USER_NUM int(11)\n  - PROCESS_OPERATOR_NUM int(11)\n  - CHECK_OPERATOR_NUM int(11)\n  - MARK_AFTER_OPERATOR_NUM int(11)\n  - COLLECT_TASK_NUM int(11)\n  - COLLECT_DATA_SIZE bigint(20)\n  - DATASET_NUM int(11)\n  - DATASET_DATA_SIZE bigint(20)\n  - DATASET_SUBSCRIBE_NUM int(11)\n  - DATASET_SUBSCRIBE_DATA_SIZE bigint(20)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI汇总平台统计表",
+    "schemaText": "表名: ai_sum_plat ([AI推断]AI汇总平台统计表)\n列:\n  - ID varchar(128) ([AI推断]主键ID)\n  - SUM_YMD int(11) ([AI推断]汇总日期)\n  - TENANT_NUM int(11) ([AI推断]租户数量)\n  - PROJECT_NUM int(11) ([AI推断]项目数量)\n  - USER_NUM int(11) ([AI推断]用户数量)\n  - PROCESS_OPERATOR_NUM int(11) ([AI推断]处理操作员数量)\n  - CHECK_OPERATOR_NUM int(11) ([AI推断]检查操作员数量)\n  - MARK_AFTER_OPERATOR_NUM int(11) ([AI推断]后标记操作员数量)\n  - COLLECT_TASK_NUM int(11) ([AI推断]采集任务数量)\n  - COLLECT_DATA_SIZE bigint(20) ([AI推断]采集数据大小)\n  - DATASET_NUM int(11) ([AI推断]数据集数量)\n  - DATASET_DATA_SIZE bigint(20) ([AI推断]数据集数据大小)\n  - DATASET_SUBSCRIBE_NUM int(11) ([AI推断]数据集订阅数量)\n  - DATASET_SUBSCRIBE_DATA_SIZE bigint(20) ([AI推断]数据集订阅数据大小)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_sum_tenant",
-    "tableComment": "",
-    "schemaText": "表名: ai_sum_tenant\n列:\n  - ID varchar(128)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - SUM_YMD int(11)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI租户汇总表",
+    "schemaText": "表名: ai_sum_tenant ([AI推断]AI租户汇总表)\n列:\n  - ID varchar(128) ([AI推断]主键ID)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - SUM_YMD int(11) ([AI推断]汇总日期)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_sum_user_list",
-    "tableComment": "",
-    "schemaText": "表名: ai_sum_user_list\n列:\n  - ID varchar(128)\n  - USER_ID varchar(128)\n  - USER_NAME varchar(128)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "AI用户汇总列表",
+    "schemaText": "表名: ai_sum_user_list ([AI推断]AI用户汇总列表)\n列:\n  - ID varchar(128) ([AI推断]记录ID)\n  - USER_ID varchar(128) ([AI推断]用户ID)\n  - USER_NAME varchar(128) ([AI推断]用户名)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "ai_sys_lock_info",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_lock_info\n列:\n  - ID int(11)\n  - NAME varchar(100)\n"
+    "tableComment": "AI系统锁信息",
+    "schemaText": "表名: ai_sys_lock_info ([AI推断]AI系统锁信息)\n列:\n  - ID int(11) ([AI推断]ID)\n  - NAME varchar(100) ([AI推断]名称)"
   },
   {
     "tableName": "ai_sys_master_info",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_master_info\n列:\n  - ID varchar(100)\n  - HOSTS_NAME varchar(200)\n  - HOST_IP varchar(40)\n  - CRT_TIME datetime\n  - MASTER_FLAG char(1)\n  - DEL_FLAG char(1)\n  - UPDATE_TIME datetime\n"
+    "tableComment": "AI系统主机主信息表",
+    "schemaText": "表名: ai_sys_master_info ([AI推断]AI系统主机主信息表)\n列:\n  - ID varchar(100) ([AI推断]标识)\n  - HOSTS_NAME varchar(200) ([AI推断]主机名)\n  - HOST_IP varchar(40) ([AI推断]主机IP地址)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - MASTER_FLAG char(1) ([AI推断]主标志)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - UPDATE_TIME datetime ([AI推断]更新时间)"
   },
   {
     "tableName": "ai_sys_master_info_his",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_master_info_his\n列:\n  - ID varchar(100)\n  - HOSTS_NAME varchar(200)\n  - HOST_IP varchar(40)\n  - CRT_TIME datetime\n  - MASTER_FLAG char(1)\n  - DEL_FLAG char(1)\n  - UPDATE_TIME datetime\n  - MIGRATE_TIME datetime\n"
+    "tableComment": "AI系统主信息历史表",
+    "schemaText": "表名: ai_sys_master_info_his ([AI推断]AI系统主信息历史表)\n列:\n  - ID varchar(100) ([AI推断]主键标识符)\n  - HOSTS_NAME varchar(200) ([AI推断]主机名称)\n  - HOST_IP varchar(40) ([AI推断]主机IP地址)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - MASTER_FLAG char(1) ([AI推断]主节点标志)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - MIGRATE_TIME datetime ([AI推断]迁移时间)"
   },
   {
     "tableName": "ai_sys_queue",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_queue\n列:\n  - ID int(11)\n  - BUSINESS_ID varchar(2048)\n  - BUSINESS_TYPE varchar(5)\n  - STATE varchar(1)\n  - MACHINE_ID varchar(100)\n  - CRT_TIME datetime\n  - DISTRIBUTE_TIME datetime\n  - EXECUTE_TIME datetime\n"
+    "tableComment": "AI系统队列表",
+    "schemaText": "表名: ai_sys_queue ([AI推断]AI系统队列表)\n列:\n  - ID int(11) ([AI推断]标识)\n  - BUSINESS_ID varchar(2048) ([AI推断]业务标识)\n  - BUSINESS_TYPE varchar(5) ([AI推断]业务类型)\n  - STATE varchar(1) ([AI推断]状态)\n  - MACHINE_ID varchar(100) ([AI推断]机器标识)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DISTRIBUTE_TIME datetime ([AI推断]分发时间)\n  - EXECUTE_TIME datetime ([AI推断]执行时间)"
   },
   {
     "tableName": "ai_sys_queue_his",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_queue_his\n列:\n  - ID int(11)\n  - QUEUE_ID int(11)\n  - BUSINESS_ID varchar(2048)\n  - BUSINESS_TYPE varchar(5)\n  - STATE varchar(1)\n  - MACHINE_ID varchar(100)\n  - CRT_TIME datetime\n  - DISTRIBUTE_TIME datetime\n  - EXECUTE_TIME datetime\n  - MIGRATE_TIME datetime\n"
+    "tableComment": "AI系统队列历史表",
+    "schemaText": "表名: ai_sys_queue_his ([AI推断]AI系统队列历史表)\n列:\n  - ID int(11) ([AI推断]记录ID)\n  - QUEUE_ID int(11) ([AI推断]队列ID)\n  - BUSINESS_ID varchar(2048) ([AI推断]业务ID)\n  - BUSINESS_TYPE varchar(5) ([AI推断]业务类型)\n  - STATE varchar(1) ([AI推断]状态)\n  - MACHINE_ID varchar(100) ([AI推断]机器ID)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DISTRIBUTE_TIME datetime ([AI推断]分发时间)\n  - EXECUTE_TIME datetime ([AI推断]执行时间)\n  - MIGRATE_TIME datetime ([AI推断]迁移时间)"
   },
   {
     "tableName": "ai_sys_serial_no",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_serial_no\n列:\n  - ID int(11)\n  - MAX_ID bigint(20)\n  - UPDATE_TIME datetime\n"
+    "tableComment": "AI系统序列表",
+    "schemaText": "表名: ai_sys_serial_no ([AI推断]AI系统序列表)\n列:\n  - ID int(11) ([AI推断]编号)\n  - MAX_ID bigint(20) ([AI推断]最大编号)\n  - UPDATE_TIME datetime ([AI推断]更新时间)"
   },
   {
     "tableName": "ai_sys_task_info",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_task_info\n列:\n  - ID varchar(30)\n  - BUSINESS_INFO varchar(1024)\n  - BUSINESS_TYPE varchar(2)\n  - TASK_TYPE char(1)\n  - EXECUTE_TIME datetime\n  - EXEC_HHMM varchar(10)\n  - EXEC_DATA_PERIOD tinyint(4)\n  - EXEC_DAY tinyint(4)\n  - NEXT_EXEC_TIME bigint(20)\n  - PRE_EXEC_TIME bigint(20)\n  - VALID_FLAG char(1)\n  - CRT_TIME datetime\n  - CRON_EXPRESS varchar(40)\n  - EXECTOR_NAME varchar(128)\n"
+    "tableComment": "AI系统任务信息表",
+    "schemaText": "表名: ai_sys_task_info ([AI推断]AI系统任务信息表)\n列:\n  - ID varchar(30) ([AI推断]任务ID)\n  - BUSINESS_INFO varchar(1024) ([AI推断]业务信息)\n  - BUSINESS_TYPE varchar(2) ([AI推断]业务类型)\n  - TASK_TYPE char(1) ([AI推断]任务类型)\n  - EXECUTE_TIME datetime ([AI推断]执行时间)\n  - EXEC_HHMM varchar(10) ([AI推断]执行时间时分)\n  - EXEC_DATA_PERIOD tinyint(4) ([AI推断]执行数据周期)\n  - EXEC_DAY tinyint(4) ([AI推断]执行日)\n  - NEXT_EXEC_TIME bigint(20) ([AI推断]下一次执行时间)\n  - PRE_EXEC_TIME bigint(20) ([AI推断]上一次执行时间)\n  - VALID_FLAG char(1) ([AI推断]有效标志)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRON_EXPRESS varchar(40) ([AI推断]CRON表达式)\n  - EXECTOR_NAME varchar(128) ([AI推断]执行者名称)"
   },
   {
     "tableName": "ai_sys_task_info_his",
-    "tableComment": "",
-    "schemaText": "表名: ai_sys_task_info_his\n列:\n  - ID varchar(30)\n  - BUSINESS_INFO varchar(1024)\n  - BUSINESS_TYPE varchar(2)\n  - TASK_TYPE char(1)\n  - EXECUTE_TIME datetime\n  - EXEC_HHMM varchar(10)\n  - EXEC_DATA_PERIOD tinyint(4)\n  - EXEC_DAY tinyint(4)\n  - NEXT_EXEC_TIME bigint(20)\n  - PRE_EXEC_TIME bigint(20)\n  - VALID_FLAG char(1)\n  - CRT_TIME datetime\n  - UPDATE_TIME datetime\n  - CRON_EXPRESS varchar(40)\n  - EXECTOR_NAME varchar(128)\n"
+    "tableComment": "AI系统任务信息历史表",
+    "schemaText": "表名: ai_sys_task_info_his ([AI推断]AI系统任务信息历史表)\n列:\n  - ID varchar(30) ([AI推断]标识)\n  - BUSINESS_INFO varchar(1024) ([AI推断]业务信息)\n  - BUSINESS_TYPE varchar(2) ([AI推断]业务类型)\n  - TASK_TYPE char(1) ([AI推断]任务类型)\n  - EXECUTE_TIME datetime ([AI推断]执行时间)\n  - EXEC_HHMM varchar(10) ([AI推断]执行时分)\n  - EXEC_DATA_PERIOD tinyint(4) ([AI推断]执行数据周期)\n  - EXEC_DAY tinyint(4) ([AI推断]执行日)\n  - NEXT_EXEC_TIME bigint(20) ([AI推断]下次执行时间)\n  - PRE_EXEC_TIME bigint(20) ([AI推断]上次执行时间)\n  - VALID_FLAG char(1) ([AI推断]有效标志)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - CRON_EXPRESS varchar(40) ([AI推断]cron表达式)\n  - EXECTOR_NAME varchar(128) ([AI推断]执行器名称)"
   },
   {
     "tableName": "ai_task_auto_detail",
-    "tableComment": "",
-    "schemaText": "表名: ai_task_auto_detail\n列:\n  - ID varchar(50)\n  - TASK_TYPE char(1)\n  - TASK_ID varchar(50)\n  - BATCH_ID varchar(50)\n  - CRT_TIME datetime\n"
+    "tableComment": "AI任务自动详情",
+    "schemaText": "表名: ai_task_auto_detail ([AI推断]AI任务自动详情)\n列:\n  - ID varchar(50) ([AI推断]标识)\n  - TASK_TYPE char(1) ([AI推断]任务类型)\n  - TASK_ID varchar(50) ([AI推断]任务标识)\n  - BATCH_ID varchar(50) ([AI推断]批次标识)\n  - CRT_TIME datetime ([AI推断]创建时间)"
   },
   {
     "tableName": "ai_task_control_record",
-    "tableComment": "",
-    "schemaText": "表名: ai_task_control_record\n列:\n  - ID varchar(128)\n  - TASK_ID varchar(128)\n  - TASK_TYPE char(1)\n  - TASK_STATE char(1)\n  - LOCK_TIME datetime\n  - UNLOCK_NUM smallint(6)\n  - TENANT_ID varchar(128)\n  - UNLOCK_TIME datetime\n"
+    "tableComment": "AI任务控制记录",
+    "schemaText": "表名: ai_task_control_record ([AI推断]AI任务控制记录)\n列:\n  - ID varchar(128) ([AI推断]ID标识)\n  - TASK_ID varchar(128) ([AI推断]任务ID)\n  - TASK_TYPE char(1) ([AI推断]任务类型)\n  - TASK_STATE char(1) ([AI推断]任务状态)\n  - LOCK_TIME datetime ([AI推断]锁定时间)\n  - UNLOCK_NUM smallint(6) ([AI推断]解锁次数)\n  - TENANT_ID varchar(128) ([AI推断]租户ID)\n  - UNLOCK_TIME datetime ([AI推断]解锁时间)"
   },
   {
     "tableName": "collect_file_detail",
-    "tableComment": "",
-    "schemaText": "表名: collect_file_detail\n列:\n  - ID varchar(100)\n  - COLLECT_TASK_ID varchar(128)\n  - FILE_DIR varchar(400)\n  - FILE_NAME varchar(512)\n  - STATE char(1)\n  - START_TIME datetime\n  - END_TIME datetime\n  - FILE_SIZE bigint(20)\n  - MINIO_BUCKET_NAME varchar(100)\n  - MINIO_DIR_NAME varchar(400)\n  - DEL_FLAG char(1)\n  - DATASET_ID varchar(128)\n  - BATCH_ID varchar(128)\n  - SOURCE_ID varchar(128)\n  - SOURCE_NAME varchar(128)\n  - TASK_TYPE char(1)\n  - MINIO_URL varchar(1024)\n  - MINIO_FIE_NAME varchar(300)\n  - COLLECT_FILE_SIZE bigint(20)\n  - MINIO_FILE_NAME varchar(1024)\n"
+    "tableComment": "采集文件详情表",
+    "schemaText": "表名: collect_file_detail ([AI推断]采集文件详情表)\n列:\n  - ID varchar(100) ([AI推断]标识)\n  - COLLECT_TASK_ID varchar(128) ([AI推断]采集任务ID)\n  - FILE_DIR varchar(400) ([AI推断]文件目录)\n  - FILE_NAME varchar(512) ([AI推断]文件名)\n  - STATE char(1) ([AI推断]状态)\n  - START_TIME datetime ([AI推断]开始时间)\n  - END_TIME datetime ([AI推断]结束时间)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - MINIO_BUCKET_NAME varchar(100) ([AI推断]MinIO存储桶名称)\n  - MINIO_DIR_NAME varchar(400) ([AI推断]MinIO目录名称)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - DATASET_ID varchar(128) ([AI推断]数据集ID)\n  - BATCH_ID varchar(128) ([AI推断]批次ID)\n  - SOURCE_ID varchar(128) ([AI推断]来源ID)\n  - SOURCE_NAME varchar(128) ([AI推断]来源名称)\n  - TASK_TYPE char(1) ([AI推断]任务类型)\n  - MINIO_URL varchar(1024) ([AI推断]MinIO链接)\n  - MINIO_FIE_NAME varchar(300) ([AI推断]MinIO文件名)\n  - COLLECT_FILE_SIZE bigint(20) ([AI推断]采集文件大小)\n  - MINIO_FILE_NAME varchar(1024) ([AI推断]MinIO文件名)"
   },
   {
     "tableName": "dataset_after_process_operator_info",
-    "tableComment": "",
-    "schemaText": "表名: dataset_after_process_operator_info\n列:\n  - ID varchar(100)\n  - TASK_ID varchar(100)\n  - OPERATOR_ID varchar(100)\n  - OPERATOR_TASK_STATUS tinyint(4)\n  - PROCESS_RESULT varchar(200)\n  - CRT_TIME datetime\n  - FINISH_TIME datetime\n  - UPT_TIME datetime\n  - DEL_FLAG char(1)\n  - SCHEDULE int(11)\n"
+    "tableComment": "数据集后处理操作员信息",
+    "schemaText": "表名: dataset_after_process_operator_info ([AI推断]数据集后处理操作员信息)\n列:\n  - ID varchar(100) ([AI推断]标识符)\n  - TASK_ID varchar(100) ([AI推断]任务标识符)\n  - OPERATOR_ID varchar(100) ([AI推断]操作员标识符)\n  - OPERATOR_TASK_STATUS tinyint(4) ([AI推断]操作员任务状态)\n  - PROCESS_RESULT varchar(200) ([AI推断]处理结果)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - SCHEDULE int(11) ([AI推断]调度)"
   },
   {
     "tableName": "dataset_app_scene_build",
-    "tableComment": "",
-    "schemaText": "表名: dataset_app_scene_build\n列:\n  - ID varchar(50)\n  - MODEL_ID varchar(200)\n  - SCENE_TYPE varchar(50)\n  - SCENE_TAG varchar(2000)\n  - SCENE_NAME varchar(200)\n  - TRAIN_PHASE varchar(200)\n  - SCENE_DESCRIPTION varchar(2000)\n  - PUB_NAME varchar(50)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - UPD_TIME datetime\n  - UPD_NAME varchar(50)\n  - PUB_PHONE varchar(50)\n  - PUB_EMAIL varchar(50)\n  - OPEN int(11)\n  - DELETE_FLAG char(1)\n  - TENANT_ID varchar(50)\n  - SCENE_STATUS int(11)\n  - ONLINE_TIME datetime\n  - OFFLINE_TIME datetime\n  - ONLINE_NAME varchar(50)\n  - OFFLINE_NAME varchar(50)\n  - PUB_STATUS int(11)\n  - PROJECT_ID varchar(50)\n  - SCENE_TYPE_NAME varchar(50)\n  - PUB_RANGE text\n  - PUB_RANGE_NAME text\n  - CRT_USER varchar(50)\n  - BROWSE_NUM int(11)\n  - SUB_NUM int(11)\n  - IS_MARK char(1)\n  - PROCESS_AFTER_MARK_FLAG char(1)\n  - TENANT_NAME varchar(300)\n  - TRAIN_PHASE_TYPE varchar(100)\n"
+    "tableComment": "应用场景构建数据集",
+    "schemaText": "表名: dataset_app_scene_build ([AI推断]应用场景构建数据集)\n列:\n  - ID varchar(50) ([AI推断]主键标识符)\n  - MODEL_ID varchar(200) ([AI推断]模型标识符)\n  - SCENE_TYPE varchar(50) ([AI推断]场景类型)\n  - SCENE_TAG varchar(2000) ([AI推断]场景标签)\n  - SCENE_NAME varchar(200) ([AI推断]场景名称)\n  - TRAIN_PHASE varchar(200) ([AI推断]训练阶段)\n  - SCENE_DESCRIPTION varchar(2000) ([AI推断]场景描述)\n  - PUB_NAME varchar(50) ([AI推断]发布者名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(50) ([AI推断]创建者名称)\n  - UPD_TIME datetime ([AI推断]更新时间)\n  - UPD_NAME varchar(50) ([AI推断]更新者名称)\n  - PUB_PHONE varchar(50) ([AI推断]发布者电话)\n  - PUB_EMAIL varchar(50) ([AI推断]发布者邮箱)\n  - OPEN int(11) ([AI推断]开放状态)\n  - DELETE_FLAG char(1) ([AI推断]删除标志)\n  - TENANT_ID varchar(50) ([AI推断]租户标识符)\n  - SCENE_STATUS int(11) ([AI推断]场景状态)\n  - ONLINE_TIME datetime ([AI推断]上线时间)\n  - OFFLINE_TIME datetime ([AI推断]下线时间)\n  - ONLINE_NAME varchar(50) ([AI推断]上线操作者)\n  - OFFLINE_NAME varchar(50) ([AI推断]下线操作者)\n  - PUB_STATUS int(11) ([AI推断]发布状态)\n  - PROJECT_ID varchar(50) ([AI推断]项目标识符)\n  - SCENE_TYPE_NAME varchar(50) ([AI推断]场景类型名称)\n  - PUB_RANGE text ([AI推断]发布范围)\n  - PUB_RANGE_NAME text ([AI推断]发布范围名称)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - BROWSE_NUM int(11) ([AI推断]浏览次数)\n  - SUB_NUM int(11) ([AI推断]订阅数量)\n  - IS_MARK char(1) ([AI推断]是否标记)\n  - PROCESS_AFTER_MARK_FLAG char(1) ([AI推断]标记后处理标志)\n  - TENANT_NAME varchar(300) ([AI推断]租户名称)\n  - TRAIN_PHASE_TYPE varchar(100) ([AI推断]训练阶段类型)"
   },
   {
     "tableName": "dataset_approval",
-    "tableComment": "",
-    "schemaText": "表名: dataset_approval\n列:\n  - APPROVAL_ID varchar(50)\n  - DATASET_ID varchar(50)\n  - DATASET_NAME varchar(200)\n  - CRT_TIME datetime\n  - APPROVAL_TIME datetime\n  - APPROVAL_NAME varchar(2000)\n  - APPROVAL_OPINION varchar(500)\n  - APPROVAL_STATUS int(11)\n  - CRT_NAME varchar(50)\n  - APPROVAL_TENANT varchar(50)\n  - APPROVAL_PROJECT varchar(50)\n  - DATASET_VERSION char(1)\n"
+    "tableComment": "数据集审批",
+    "schemaText": "表名: dataset_approval ([AI推断]数据集审批)\n列:\n  - APPROVAL_ID varchar(50) ([AI推断]审批ID)\n  - DATASET_ID varchar(50) ([AI推断]数据集ID)\n  - DATASET_NAME varchar(200) ([AI推断]数据集名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - APPROVAL_TIME datetime ([AI推断]审批时间)\n  - APPROVAL_NAME varchar(2000) ([AI推断]审批名称)\n  - APPROVAL_OPINION varchar(500) ([AI推断]审批意见)\n  - APPROVAL_STATUS int(11) ([AI推断]审批状态)\n  - CRT_NAME varchar(50) ([AI推断]创建人名称)\n  - APPROVAL_TENANT varchar(50) ([AI推断]审批租户)\n  - APPROVAL_PROJECT varchar(50) ([AI推断]审批项目)\n  - DATASET_VERSION char(1) ([AI推断]数据集版本)"
   },
   {
     "tableName": "dataset_approval_user",
-    "tableComment": "",
-    "schemaText": "表名: dataset_approval_user\n列:\n  - ID varchar(50)\n  - APPROVAL_NAME varchar(50)\n  - LOGIN_ID varchar(50)\n  - DEL_FLAG int(11)\n"
+    "tableComment": "数据集审批用户表",
+    "schemaText": "表名: dataset_approval_user ([AI推断]数据集审批用户表)\n列:\n  - ID varchar(50) ([AI推断]审批用户ID)\n  - APPROVAL_NAME varchar(50) ([AI推断]审批名称)\n  - LOGIN_ID varchar(50) ([AI推断]登录ID)\n  - DEL_FLAG int(11) ([AI推断]删除标志)"
   },
   {
     "tableName": "dataset_call_log",
-    "tableComment": "",
-    "schemaText": "表名: dataset_call_log\n列:\n  - ID varchar(64)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - BUSINESS_ID varchar(100)\n  - CALL_TYPE bigint(20)\n  - CALL_METHOD bigint(20)\n  - SERVICE_PATH varchar(128)\n  - RESP_CODE varchar(12)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - RESERVE1 varchar(32)\n  - RESERVE2 varchar(32)\n  - RESERVE3 varchar(32)\n"
+    "tableComment": "服务调用日志表",
+    "schemaText": "表名: dataset_call_log ([AI推断]服务调用日志表)\n列:\n  - ID varchar(64) ([AI推断]主键ID)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - BUSINESS_ID varchar(100) ([AI推断]业务ID)\n  - CALL_TYPE bigint(20) ([AI推断]调用类型)\n  - CALL_METHOD bigint(20) ([AI推断]调用方法)\n  - SERVICE_PATH varchar(128) ([AI推断]服务路径)\n  - RESP_CODE varchar(12) ([AI推断]响应代码)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)\n  - RESERVE1 varchar(32) ([AI推断]预留字段1)\n  - RESERVE2 varchar(32) ([AI推断]预留字段2)\n  - RESERVE3 varchar(32) ([AI推断]预留字段3)"
   },
   {
     "tableName": "dataset_call_log_detail",
-    "tableComment": "",
-    "schemaText": "表名: dataset_call_log_detail\n列:\n  - ID varchar(64)\n  - PARENT_ID varchar(64)\n  - REQ_BODY text\n  - RESP_BODY varchar(8192)\n  - CREATE_TIME datetime\n"
+    "tableComment": "数据集调用日志明细",
+    "schemaText": "表名: dataset_call_log_detail ([AI推断]数据集调用日志明细)\n列:\n  - ID varchar(64) ([AI推断]标识ID)\n  - PARENT_ID varchar(64) ([AI推断]父级ID)\n  - REQ_BODY text ([AI推断]请求体)\n  - RESP_BODY varchar(8192) ([AI推断]响应体)\n  - CREATE_TIME datetime ([AI推断]创建时间)"
   },
   {
     "tableName": "dataset_check",
-    "tableComment": "",
-    "schemaText": "表名: dataset_check\n列:\n  - CHECK_ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - COLLECTION_TYPE int(11)\n  - OPERATOR_LIST text\n  - CHECK_STATUS int(11)\n  - CHECK_RESULT int(11)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(255)\n  - PROJECT_ID varchar(50)\n  - CREATE_TIME datetime\n  - UPDATE_TIME datetime\n  - START_TIME datetime\n  - END_TIME datetime\n  - CREATE_USER varchar(100)\n  - UPDATE_USER varchar(100)\n  - DEL_FLAG int(11)\n  - SOURCE_PATH text\n  - TARGET_PATH varchar(500)\n  - BUCKET_NAME varchar(50)\n  - PROJECT_NAME varchar(255)\n  - DATASET_ID varchar(100)\n  - DATASET_NAME varchar(255)\n  - CHECK_SCHEDULE varchar(100)\n  - SOURCE_VERSION_STR varchar(100)\n  - SOURCE_VERSION int(11)\n  - DATASET_VERSION int(11)\n  - TASK_NAME varchar(255)\n  - CHECK_FAILURE text\n  - ES_STATE char(1)\n"
+    "tableComment": "数据集检查表",
+    "schemaText": "表名: dataset_check ([AI推断]数据集检查表)\n列:\n  - CHECK_ID varchar(100) ([AI推断]检查ID)\n  - SOURCE_DATA_ID varchar(100) ([AI推断]源数据ID)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]源数据名称)\n  - DATA_TYPE varchar(50) ([AI推断]数据类型)\n  - COLLECTION_TYPE int(11) ([AI推断]收集类型)\n  - OPERATOR_LIST text ([AI推断]操作员列表)\n  - CHECK_STATUS int(11) ([AI推断]检查状态)\n  - CHECK_RESULT int(11) ([AI推断]检查结果)\n  - TENANT_ID varchar(100) ([AI推断]租户ID)\n  - TENANT_NAME varchar(255) ([AI推断]租户名称)\n  - PROJECT_ID varchar(50) ([AI推断]项目ID)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - START_TIME datetime ([AI推断]开始时间)\n  - END_TIME datetime ([AI推断]结束时间)\n  - CREATE_USER varchar(100) ([AI推断]创建用户)\n  - UPDATE_USER varchar(100) ([AI推断]更新用户)\n  - DEL_FLAG int(11) ([AI推断]删除标志)\n  - SOURCE_PATH text ([AI推断]源路径)\n  - TARGET_PATH varchar(500) ([AI推断]目标路径)\n  - BUCKET_NAME varchar(50) ([AI推断]存储桶名称)\n  - PROJECT_NAME varchar(255) ([AI推断]项目名称)\n  - DATASET_ID varchar(100) ([AI推断]数据集ID)\n  - DATASET_NAME varchar(255) ([AI推断]数据集名称)\n  - CHECK_SCHEDULE varchar(100) ([AI推断]检查计划)\n  - SOURCE_VERSION_STR varchar(100) ([AI推断]源版本字符串)\n  - SOURCE_VERSION int(11) ([AI推断]源版本)\n  - DATASET_VERSION int(11) ([AI推断]数据集版本)\n  - TASK_NAME varchar(255) ([AI推断]任务名称)\n  - CHECK_FAILURE text ([AI推断]检查失败详情)\n  - ES_STATE char(1) ([AI推断]执行状态)"
   },
   {
     "tableName": "dataset_check_task_detail",
-    "tableComment": "",
-    "schemaText": "表名: dataset_check_task_detail\n列:\n  - DETAIL_ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - CHECK_RESULT int(11)\n  - FAIL_REASON text\n  - CHECK_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - CHECK_ITEM_NAME varchar(100)\n  - CHECK_ITEM_VALUE double\n  - RESERVED_FIELD1 bigint(20)\n"
+    "tableComment": "数据集检查任务详情表",
+    "schemaText": "表名: dataset_check_task_detail ([AI推断]数据集检查任务详情表)\n列:\n  - DETAIL_ID varchar(100) ([AI推断]详情ID)\n  - SOURCE_DATA_ID varchar(100) ([AI推断]源数据ID)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]源数据名称)\n  - DATA_TYPE varchar(50) ([AI推断]数据类型)\n  - SOURCE_PATH varchar(500) ([AI推断]源路径)\n  - TARGET_PATH varchar(500) ([AI推断]目标路径)\n  - FILE_NAME varchar(255) ([AI推断]文件名称)\n  - CHECK_RESULT int(11) ([AI推断]检查结果)\n  - FAIL_REASON text ([AI推断]失败原因)\n  - CHECK_ID varchar(100) ([AI推断]检查ID)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - OPERATOR_ID varchar(100) ([AI推断]操作员ID)\n  - CHECK_ITEM_NAME varchar(100) ([AI推断]检查项名称)\n  - CHECK_ITEM_VALUE double ([AI推断]检查项值)\n  - RESERVED_FIELD1 bigint(20) ([AI推断]保留字段1)"
   },
   {
     "tableName": "dataset_definition_tenant",
-    "tableComment": "",
-    "schemaText": "表名: dataset_definition_tenant\n列:\n  - ID int(11)\n  - TENANT_ID varchar(500)\n  - PROJECT_ID varchar(200)\n  - DATASET_TYPE varchar(100)\n  - DEFINITION_CODE varchar(200)\n  - CRT_TIME datetime\n"
+    "tableComment": "租户数据集定义表",
+    "schemaText": "表名: dataset_definition_tenant ([AI推断]租户数据集定义表)\n列:\n  - ID int(11) ([AI推断]主键标识符)\n  - TENANT_ID varchar(500) ([AI推断]租户标识)\n  - PROJECT_ID varchar(200) ([AI推断]项目标识)\n  - DATASET_TYPE varchar(100) ([AI推断]数据集类型)\n  - DEFINITION_CODE varchar(200) ([AI推断]定义编码)\n  - CRT_TIME datetime ([AI推断]创建时间)"
   },
   {
     "tableName": "dataset_file_mark_relation",
-    "tableComment": "",
-    "schemaText": "表名: dataset_file_mark_relation\n列:\n  - ID int(11)\n  - MARK_TASK_ID varchar(100)\n  - FILE_ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - MARK_STATUS varchar(30)\n  - CRT_TIME datetime\n  - UPT_TIME datetime\n"
+    "tableComment": "数据集文件标记关系表",
+    "schemaText": "表名: dataset_file_mark_relation ([AI推断]数据集文件标记关系表)\n列:\n  - ID int(11) ([AI推断]记录标识)\n  - MARK_TASK_ID varchar(100) ([AI推断]标记任务ID)\n  - FILE_ID varchar(100) ([AI推断]文件ID)\n  - SOURCE_DATA_ID varchar(100) ([AI推断]源数据ID)\n  - MARK_STATUS varchar(30) ([AI推断]标记状态)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPT_TIME datetime ([AI推断]更新时间)"
   },
   {
     "tableName": "dataset_intent_detail",
-    "tableComment": "",
-    "schemaText": "表名: dataset_intent_detail\n列:\n  - ID varchar(128)\n  - TASK_ID varchar(200)\n  - INTENT_ID_ONE varchar(200)\n  - INTENT_NAME_ONE varchar(500)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER varchar(64)\n  - CRT_NAME varchar(64)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n  - INTENT_ID_TWO varchar(200)\n  - INTENT_NAME_TWO varchar(500)\n"
+    "tableComment": "数据集意图详情",
+    "schemaText": "表名: dataset_intent_detail ([AI推断]数据集意图详情)\n列:\n  - ID varchar(128) ([AI推断]标识)\n  - TASK_ID varchar(200) ([AI推断]任务ID)\n  - INTENT_ID_ONE varchar(200) ([AI推断]意图ID一)\n  - INTENT_NAME_ONE varchar(500) ([AI推断]意图名称一)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - CRT_USER varchar(64) ([AI推断]创建用户)\n  - CRT_NAME varchar(64) ([AI推断]创建者名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - INTENT_ID_TWO varchar(200) ([AI推断]意图ID二)\n  - INTENT_NAME_TWO varchar(500) ([AI推断]意图名称二)"
   },
   {
     "tableName": "dataset_mark_after_process_task",
-    "tableComment": "",
-    "schemaText": "表名: dataset_mark_after_process_task\n列:\n  - TASK_ID varchar(150)\n  - SOURCE_DATA_ID varchar(50)\n  - VERSION varchar(150)\n  - SOURCE_PATH text\n  - TARGET_PATH text\n  - OPERATOR_LIST text\n  - SERVER_LOCATION varchar(150)\n  - STATUS varchar(150)\n  - VERSION_DETAIL varchar(600)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - VALID_FLAG varchar(10)\n  - EDITOR varchar(150)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - RESERVE_ONE varchar(150)\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n  - DATASET_ID varchar(150)\n  - DATASET_NAME varchar(255)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(255)\n  - PROJECT_ID varchar(255)\n  - PROCESS_SCHEDULE varchar(255)\n  - UPDATE_TIME datetime\n  - START_TIME datetime\n  - DATASET_VERSION int(11)\n  - TASK_NAME varchar(255)\n  - MARK_TASK_ID varchar(150)\n  - IS_HISTORY int(11)\n"
+    "tableComment": "数据集标注后处理任务",
+    "schemaText": "表名: dataset_mark_after_process_task ([AI推断]数据集标注后处理任务)\n列:\n  - TASK_ID varchar(150) ([AI推断]任务ID)\n  - SOURCE_DATA_ID varchar(50) ([AI推断]源数据ID)\n  - VERSION varchar(150) ([AI推断]版本)\n  - SOURCE_PATH text ([AI推断]源路径)\n  - TARGET_PATH text ([AI推断]目标路径)\n  - OPERATOR_LIST text ([AI推断]操作员列表)\n  - SERVER_LOCATION varchar(150) ([AI推断]服务器位置)\n  - STATUS varchar(150) ([AI推断]状态)\n  - VERSION_DETAIL varchar(600) ([AI推断]版本详情)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)\n  - VALID_FLAG varchar(10) ([AI推断]有效标志)\n  - EDITOR varchar(150) ([AI推断]编辑者)\n  - TENANT_ID varchar(50) ([AI推断]租户ID)\n  - TENANT_NAME varchar(50) ([AI推断]租户名称)\n  - RESERVE_ONE varchar(150) ([AI推断]预留字段一)\n  - RESERVE_TWO varchar(150) ([AI推断]预留字段二)\n  - RESERVE_THREE varchar(150) ([AI推断]预留字段三)\n  - DATASET_ID varchar(150) ([AI推断]数据集ID)\n  - DATASET_NAME varchar(255) ([AI推断]数据集名称)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]源数据名称)\n  - DATA_TYPE varchar(255) ([AI推断]数据类型)\n  - PROJECT_ID varchar(255) ([AI推断]项目ID)\n  - PROCESS_SCHEDULE varchar(255) ([AI推断]处理调度)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - START_TIME datetime ([AI推断]开始时间)\n  - DATASET_VERSION int(11) ([AI推断]数据集版本)\n  - TASK_NAME varchar(255) ([AI推断]任务名称)\n  - MARK_TASK_ID varchar(150) ([AI推断]标注任务ID)\n  - IS_HISTORY int(11) ([AI推断]是否历史记录)"
   },
   {
     "tableName": "dataset_mark_after_task_detail",
-    "tableComment": "",
-    "schemaText": "表名: dataset_mark_after_task_detail\n列:\n  - ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - PROCESS_RESULT int(11)\n  - FAIL_REASON text\n  - PROCESS_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - SOURCE_COS_URL text\n  - TARGER_COS_URL text\n  - FILE_SUFFIX varchar(100)\n  - ORIGIN_FILE_NAME varchar(255)\n  - ORIGIN_FILE_SUFFIX varchar(100)\n"
+    "tableComment": "数据标记后任务详情表",
+    "schemaText": "表名: dataset_mark_after_task_detail ([AI推断]数据标记后任务详情表)\n列:\n  - ID varchar(100) ([AI推断]标识符)\n  - SOURCE_DATA_ID varchar(100) ([AI推断]源数据ID)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]源数据名称)\n  - DATA_TYPE varchar(50) ([AI推断]数据类型)\n  - SOURCE_PATH varchar(500) ([AI推断]源路径)\n  - TARGET_PATH varchar(500) ([AI推断]目标路径)\n  - FILE_NAME varchar(255) ([AI推断]文件名)\n  - PROCESS_RESULT int(11) ([AI推断]处理结果)\n  - FAIL_REASON text ([AI推断]失败原因)\n  - PROCESS_ID varchar(100) ([AI推断]处理ID)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - OPERATOR_ID varchar(100) ([AI推断]操作员ID)\n  - SOURCE_COS_URL text ([AI推断]源COS地址)\n  - TARGER_COS_URL text ([AI推断]目标COS地址)\n  - FILE_SUFFIX varchar(100) ([AI推断]文件后缀)\n  - ORIGIN_FILE_NAME varchar(255) ([AI推断]原始文件名)\n  - ORIGIN_FILE_SUFFIX varchar(100) ([AI推断]原始文件后缀)"
   },
   {
     "tableName": "dataset_mark_file_result",
-    "tableComment": "",
-    "schemaText": "表名: dataset_mark_file_result\n列:\n  - ID varchar(200)\n  - FILE_NAME varchar(500)\n  - SOURCE_ID varchar(400)\n  - MARK_FILE_COS text\n  - FILE_DIR varchar(1000)\n  - CRT_TIME datetime\n"
+    "tableComment": "数据集标记文件结果表",
+    "schemaText": "表名: dataset_mark_file_result ([AI推断]数据集标记文件结果表)\n列:\n  - ID varchar(200) ([AI推断]标识ID)\n  - FILE_NAME varchar(500) ([AI推断]文件名)\n  - SOURCE_ID varchar(400) ([AI推断]源ID)\n  - MARK_FILE_COS text ([AI推断]标记文件内容)\n  - FILE_DIR varchar(1000) ([AI推断]文件目录路径)\n  - CRT_TIME datetime ([AI推断]创建时间)"
   },
   {
     "tableName": "dataset_mark_task",
-    "tableComment": "",
-    "schemaText": "表名: dataset_mark_task\n列:\n  - MARK_TASK_ID varchar(64)\n  - MARK_ID varchar(64)\n  - MARK_TASK_NAME varchar(500)\n  - SOURCE_NAME varchar(500)\n  - TASK_ID varchar(64)\n  - TASK_STATUS varchar(32)\n  - MARK_RET_URL text\n  - MARK_TOOL varchar(64)\n  - MARK_TEAM varchar(64)\n  - MARK_TIME datetime\n  - CRT_TIME datetime\n  - FAILURE_RESULT varchar(8188)\n  - AFTER_PROCESS_STATUS varchar(32)\n  - PROCESS_SCHEDULE varchar(128)\n  - PROCESS_STATUS varchar(5)\n  - START_TIME datetime\n  - FINISH_TIME datetime\n"
+    "tableComment": "数据集标记任务表",
+    "schemaText": "表名: dataset_mark_task ([AI推断]数据集标记任务表)\n列:\n  - MARK_TASK_ID varchar(64) ([AI推断]标记任务ID)\n  - MARK_ID varchar(64) ([AI推断]标记ID)\n  - MARK_TASK_NAME varchar(500) ([AI推断]标记任务名称)\n  - SOURCE_NAME varchar(500) ([AI推断]来源名称)\n  - TASK_ID varchar(64) ([AI推断]任务ID)\n  - TASK_STATUS varchar(32) ([AI推断]任务状态)\n  - MARK_RET_URL text ([AI推断]标记结果URL)\n  - MARK_TOOL varchar(64) ([AI推断]标记工具)\n  - MARK_TEAM varchar(64) ([AI推断]标记团队)\n  - MARK_TIME datetime ([AI推断]标记时间)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - FAILURE_RESULT varchar(8188) ([AI推断]失败结果)\n  - AFTER_PROCESS_STATUS varchar(32) ([AI推断]处理后状态)\n  - PROCESS_SCHEDULE varchar(128) ([AI推断]处理计划)\n  - PROCESS_STATUS varchar(5) ([AI推断]处理状态)\n  - START_TIME datetime ([AI推断]开始时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)"
   },
   {
     "tableName": "dataset_operator_approval",
-    "tableComment": "",
-    "schemaText": "表名: dataset_operator_approval\n列:\n  - APPROVAL_ID varchar(50)\n  - OPERATOR_ID varchar(64)\n  - APPROVAL_STATUS char(1)\n  - APPROVAL_OPINION varchar(500)\n  - CRT_TIME datetime\n  - CRT_NAME varchar(200)\n  - CRT_USER varchar(50)\n  - PROJECT_ID varchar(50)\n  - PROJECT_NAME varchar(500)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(500)\n  - APPROVAL_TIME datetime\n  - APPROVAL_NAME varchar(200)\n  - APPROVAL_USER varchar(50)\n  - APPROVAL_PROJECT_ID varchar(50)\n  - APPROVAL_PROJECT_NAME varchar(500)\n  - APPROVAL_TENANT_ID varchar(50)\n  - APPROVAL_TENANT_NAME varchar(500)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "数据集操作员审批表",
+    "schemaText": "表名: dataset_operator_approval ([AI推断]数据集操作员审批表)\n列:\n  - APPROVAL_ID varchar(50) ([AI推断]审批ID)\n  - OPERATOR_ID varchar(64) ([AI推断]操作员ID)\n  - APPROVAL_STATUS char(1) ([AI推断]审批状态)\n  - APPROVAL_OPINION varchar(500) ([AI推断]审批意见)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(200) ([AI推断]创建名称)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - PROJECT_ID varchar(50) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(500) ([AI推断]项目名称)\n  - TENANT_ID varchar(50) ([AI推断]租户ID)\n  - TENANT_NAME varchar(500) ([AI推断]租户名称)\n  - APPROVAL_TIME datetime ([AI推断]审批时间)\n  - APPROVAL_NAME varchar(200) ([AI推断]审批名称)\n  - APPROVAL_USER varchar(50) ([AI推断]审批用户)\n  - APPROVAL_PROJECT_ID varchar(50) ([AI推断]审批项目ID)\n  - APPROVAL_PROJECT_NAME varchar(500) ([AI推断]审批项目名称)\n  - APPROVAL_TENANT_ID varchar(50) ([AI推断]审批租户ID)\n  - APPROVAL_TENANT_NAME varchar(500) ([AI推断]审批租户名称)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "dataset_operator_env",
-    "tableComment": "",
-    "schemaText": "表名: dataset_operator_env\n列:\n  - ENV_ID varchar(150)\n  - ENV_NAME varchar(500)\n  - DEL_FLAG int(11)\n  - CRT_TIME datetime\n  - CRT_USER varchar(150)\n  - CRT_NAME varchar(500)\n  - TENANT_ID varchar(150)\n  - TENANT_NAME varchar(500)\n  - PROJECT_ID varchar(150)\n  - PROJECT_NAME varchar(500)\n"
+    "tableComment": "数据集操作员环境",
+    "schemaText": "表名: dataset_operator_env ([AI推断]数据集操作员环境)\n列:\n  - ENV_ID varchar(150) ([AI推断]环境标识)\n  - ENV_NAME varchar(500) ([AI推断]环境名称)\n  - DEL_FLAG int(11) ([AI推断]删除标志)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_USER varchar(150) ([AI推断]创建用户)\n  - CRT_NAME varchar(500) ([AI推断]创建者名称)\n  - TENANT_ID varchar(150) ([AI推断]租户标识)\n  - TENANT_NAME varchar(500) ([AI推断]租户名称)\n  - PROJECT_ID varchar(150) ([AI推断]项目标识)\n  - PROJECT_NAME varchar(500) ([AI推断]项目名称)"
   },
   {
     "tableName": "dataset_operator_template_record",
-    "tableComment": "",
-    "schemaText": "表名: dataset_operator_template_record\n列:\n  - ID varchar(100)\n  - DATASET_ID varchar(100)\n  - DATA_TYPE varchar(100)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(255)\n  - USER_ID varchar(100)\n  - USER_NAME varchar(255)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(255)\n  - CREATE_TIME datetime\n  - OPERATOR_LIST text\n  - USE_SCOPE int(11)\n  - IS_PUBLIC int(11)\n  - SCENE_ID varchar(200)\n"
+    "tableComment": "数据集操作员模板记录",
+    "schemaText": "表名: dataset_operator_template_record ([AI推断]数据集操作员模板记录)\n列:\n  - ID varchar(100) ([AI推断]标识符)\n  - DATASET_ID varchar(100) ([AI推断]数据集ID)\n  - DATA_TYPE varchar(100) ([AI推断]数据类型)\n  - TENANT_ID varchar(100) ([AI推断]租户ID)\n  - TENANT_NAME varchar(255) ([AI推断]租户名称)\n  - USER_ID varchar(100) ([AI推断]用户ID)\n  - USER_NAME varchar(255) ([AI推断]用户名)\n  - PROJECT_ID varchar(100) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(255) ([AI推断]项目名称)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - OPERATOR_LIST text ([AI推断]操作员列表)\n  - USE_SCOPE int(11) ([AI推断]使用范围)\n  - IS_PUBLIC int(11) ([AI推断]是否公开)\n  - SCENE_ID varchar(200) ([AI推断]场景ID)"
   },
   {
     "tableName": "dataset_operator_words",
-    "tableComment": "",
-    "schemaText": "表名: dataset_operator_words\n列:\n  - ID varchar(128)\n  - WORDS_TYPE char(1)\n  - WORDS_GROUP char(1)\n  - GROUP_ID varchar(128)\n  - WORDS_NAME varchar(128)\n  - SYNONYM_WORDS varchar(128)\n  - EDITABLE_FLAG char(1)\n  - TENANT_ID varchar(64)\n  - TENANT_NAME varchar(200)\n  - PROJECT_ID varchar(64)\n  - PROJECT_NAME varchar(200)\n  - CRT_USER_ID varchar(64)\n  - CRT_USER_NAME varchar(64)\n  - CRT_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "数据集操作词汇表",
+    "schemaText": "表名: dataset_operator_words ([AI推断]数据集操作词汇表)\n列:\n  - ID varchar(128) ([AI推断]标识)\n  - WORDS_TYPE char(1) ([AI推断]词汇类型)\n  - WORDS_GROUP char(1) ([AI推断]词汇分组)\n  - GROUP_ID varchar(128) ([AI推断]分组ID)\n  - WORDS_NAME varchar(128) ([AI推断]词汇名称)\n  - SYNONYM_WORDS varchar(128) ([AI推断]同义词)\n  - EDITABLE_FLAG char(1) ([AI推断]可编辑标志)\n  - TENANT_ID varchar(64) ([AI推断]租户ID)\n  - TENANT_NAME varchar(200) ([AI推断]租户名称)\n  - PROJECT_ID varchar(64) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(200) ([AI推断]项目名称)\n  - CRT_USER_ID varchar(64) ([AI推断]创建用户ID)\n  - CRT_USER_NAME varchar(64) ([AI推断]创建用户名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "dataset_process_file",
-    "tableComment": "",
-    "schemaText": "表名: dataset_process_file\n列:\n  - FILE_ID varchar(50)\n  - SOURCE_ID varchar(50)\n  - FILE_NAME varchar(200)\n  - FILE_URL varchar(2000)\n  - FILE_SIZE varchar(50)\n  - FILE_DSC varchar(500)\n  - CRT_TIME datetime\n  - CRT_USER varchar(255)\n  - CRT_NAME varchar(255)\n  - UPT_TIME datetime\n  - UPT_USER varchar(255)\n  - UPT_NAME varchar(255)\n  - FILE_MARK_STATUS char(1)\n  - IS_UPDATE char(1)\n  - DEL_FLAG char(1)\n  - COS_URL varchar(1024)\n"
+    "tableComment": "数据集处理文件",
+    "schemaText": "表名: dataset_process_file ([AI推断]数据集处理文件)\n列:\n  - FILE_ID varchar(50) ([AI推断]文件ID)\n  - SOURCE_ID varchar(50) ([AI推断]源ID)\n  - FILE_NAME varchar(200) ([AI推断]文件名)\n  - FILE_URL varchar(2000) ([AI推断]文件URL)\n  - FILE_SIZE varchar(50) ([AI推断]文件大小)\n  - FILE_DSC varchar(500) ([AI推断]文件描述)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_USER varchar(255) ([AI推断]创建用户)\n  - CRT_NAME varchar(255) ([AI推断]创建名称)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - UPT_USER varchar(255) ([AI推断]更新用户)\n  - UPT_NAME varchar(255) ([AI推断]更新名称)\n  - FILE_MARK_STATUS char(1) ([AI推断]文件标记状态)\n  - IS_UPDATE char(1) ([AI推断]是否更新)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - COS_URL varchar(1024) ([AI推断]云对象存储URL)"
   },
   {
     "tableName": "dataset_process_operator",
-    "tableComment": "",
-    "schemaText": "表名: dataset_process_operator\n列:\n  - OPERATOR_ID varchar(150)\n  - OPERATOR_NAME varchar(300)\n  - LEVEL_ZERO varchar(150)\n  - DIM_ID varchar(150)\n  - LEVEL_ONE varchar(150)\n  - LEVEL_TWO varchar(150)\n  - SORT int(11)\n  - VERSION varchar(150)\n  - VERSION_DETAIL varchar(600)\n  - DESCRIPTION varchar(4096)\n  - CREATE_TIME datetime\n  - UPDATE_TIME datetime\n  - VALID_FLAG varchar(10)\n  - EDITOR varchar(150)\n  - PARAMS text\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE text\n  - CALLABLE_FLAG varchar(10)\n  - ENV_CONFIG text\n  - TENANT_ID varchar(150)\n  - TENANT_NAME varchar(500)\n  - PROJECT_ID varchar(150)\n  - PROJECT_NAME varchar(500)\n  - CRT_USER varchar(150)\n  - CODE_FILE_NAME varchar(500)\n  - APPROVAL_STATUS char(1)\n  - EXEC_MODE char(1)\n  - CODE_STATUS char(1)\n  - PROFILE text (简介)\n  - CONTEST_FLAG char(1) (0：非算子大赛算子；1：算子大赛算子)\n"
+    "tableComment": "数据集处理操作员表",
+    "schemaText": "表名: dataset_process_operator ([AI推断]数据集处理操作员表)\n列:\n  - OPERATOR_ID varchar(150) ([AI推断]操作员ID)\n  - OPERATOR_NAME varchar(300) ([AI推断]操作员名称)\n  - LEVEL_ZERO varchar(150) ([AI推断]级别零)\n  - DIM_ID varchar(150) ([AI推断]维度ID)\n  - LEVEL_ONE varchar(150) ([AI推断]级别一)\n  - LEVEL_TWO varchar(150) ([AI推断]级别二)\n  - SORT int(11) ([AI推断]排序)\n  - VERSION varchar(150) ([AI推断]版本)\n  - VERSION_DETAIL varchar(600) ([AI推断]版本详情)\n  - DESCRIPTION varchar(4096) ([AI推断]描述)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - VALID_FLAG varchar(10) ([AI推断]有效标志)\n  - EDITOR varchar(150) ([AI推断]编辑者)\n  - PARAMS text ([AI推断]参数)\n  - RESERVE_TWO varchar(150) ([AI推断]预留字段二)\n  - RESERVE_THREE text ([AI推断]预留字段三)\n  - CALLABLE_FLAG varchar(10) ([AI推断]可调用标志)\n  - ENV_CONFIG text ([AI推断]环境配置)\n  - TENANT_ID varchar(150) ([AI推断]租户ID)\n  - TENANT_NAME varchar(500) ([AI推断]租户名称)\n  - PROJECT_ID varchar(150) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(500) ([AI推断]项目名称)\n  - CRT_USER varchar(150) ([AI推断]创建用户)\n  - CODE_FILE_NAME varchar(500) ([AI推断]代码文件名)\n  - APPROVAL_STATUS char(1) ([AI推断]审批状态)\n  - EXEC_MODE char(1) ([AI推断]执行模式)\n  - CODE_STATUS char(1) ([AI推断]代码状态)\n  - PROFILE text (简介)\n  - CONTEST_FLAG char(1) (0：非算子大赛算子；1：算子大赛算子)"
   },
   {
     "tableName": "dataset_process_operator_info",
-    "tableComment": "",
-    "schemaText": "表名: dataset_process_operator_info\n列:\n  - ID bigint(20)\n  - TASK_ID varchar(100)\n  - OPERATOR_ID varchar(100)\n  - OPERATOR_TASK_STATUS tinyint(4)\n  - PROCESS_RESULT varchar(200)\n  - CRT_TIME datetime\n  - FINISH_TIME datetime\n  - UPT_TIME datetime\n  - DEL_FLAG char(1)\n  - SCHEDULE int(11)\n  - START_TIME datetime\n"
+    "tableComment": "数据集处理操作员信息表",
+    "schemaText": "表名: dataset_process_operator_info ([AI推断]数据集处理操作员信息表)\n列:\n  - ID bigint(20) ([AI推断]主键标识)\n  - TASK_ID varchar(100) ([AI推断]任务标识)\n  - OPERATOR_ID varchar(100) ([AI推断]操作员标识)\n  - OPERATOR_TASK_STATUS tinyint(4) ([AI推断]操作员任务状态)\n  - PROCESS_RESULT varchar(200) ([AI推断]处理结果)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)\n  - SCHEDULE int(11) ([AI推断]调度)\n  - START_TIME datetime ([AI推断]开始时间)"
   },
   {
     "tableName": "dataset_process_task",
-    "tableComment": "",
-    "schemaText": "表名: dataset_process_task\n列:\n  - TASK_ID varchar(150)\n  - SOURCE_DATA_ID varchar(50)\n  - VERSION varchar(150)\n  - SOURCE_PATH text\n  - TARGET_PATH varchar(150)\n  - OPERATOR_LIST text\n  - SERVER_LOCATION varchar(150)\n  - STATUS varchar(150)\n  - VERSION_DETAIL varchar(600)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - VALID_FLAG varchar(10)\n  - EDITOR varchar(150)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - PROCESS_FAILURE text\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n  - DATASET_ID varchar(100)\n  - DATASET_NAME varchar(255)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(100)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(255)\n  - PROCESS_SCHEDULE varchar(100)\n  - UPDATE_TIME datetime\n  - START_TIME datetime\n  - DATASET_VERSION int(11)\n  - TASK_NAME varchar(255)\n  - PID varchar(150)\n  - IS_HISTORY int(11)\n  - IS_VERIFIABLE_DETAIL int(11)\n  - ES_STATE char(1)\n"
+    "tableComment": "数据集处理任务",
+    "schemaText": "表名: dataset_process_task ([AI推断]数据集处理任务)\n列:\n  - TASK_ID varchar(150) ([AI推断]任务ID)\n  - SOURCE_DATA_ID varchar(50) ([AI推断]源数据ID)\n  - VERSION varchar(150) ([AI推断]版本)\n  - SOURCE_PATH text ([AI推断]源路径)\n  - TARGET_PATH varchar(150) ([AI推断]目标路径)\n  - OPERATOR_LIST text ([AI推断]操作员列表)\n  - SERVER_LOCATION varchar(150) ([AI推断]服务器位置)\n  - STATUS varchar(150) ([AI推断]状态)\n  - VERSION_DETAIL varchar(600) ([AI推断]版本详情)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)\n  - VALID_FLAG varchar(10) ([AI推断]有效标志)\n  - EDITOR varchar(150) ([AI推断]编辑者)\n  - TENANT_ID varchar(50) ([AI推断]租户ID)\n  - TENANT_NAME varchar(50) ([AI推断]租户名称)\n  - PROCESS_FAILURE text ([AI推断]处理失败)\n  - RESERVE_TWO varchar(150) ([AI推断]保留字段2)\n  - RESERVE_THREE varchar(150) ([AI推断]保留字段3)\n  - DATASET_ID varchar(100) ([AI推断]数据集ID)\n  - DATASET_NAME varchar(255) ([AI推断]数据集名称)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]源数据名称)\n  - DATA_TYPE varchar(100) ([AI推断]数据类型)\n  - PROJECT_ID varchar(100) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(255) ([AI推断]项目名称)\n  - PROCESS_SCHEDULE varchar(100) ([AI推断]处理计划)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - START_TIME datetime ([AI推断]开始时间)\n  - DATASET_VERSION int(11) ([AI推断]数据集版本)\n  - TASK_NAME varchar(255) ([AI推断]任务名称)\n  - PID varchar(150) ([AI推断]进程ID)\n  - IS_HISTORY int(11) ([AI推断]是否历史)\n  - IS_VERIFIABLE_DETAIL int(11) ([AI推断]是否可验证详情)\n  - ES_STATE char(1) ([AI推断]ES状态)"
   },
   {
     "tableName": "dataset_process_task_detail",
-    "tableComment": "",
-    "schemaText": "表名: dataset_process_task_detail\n列:\n  - ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - PROCESS_RESULT int(11)\n  - FAIL_REASON text\n  - PROCESS_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - SOURCE_COS_URL text\n  - TARGER_COS_URL text\n  - FILE_SUFFIX varchar(100)\n  - ORIGIN_FILE_NAME varchar(255)\n  - ORIGIN_FILE_SUFFIX varchar(100)\n"
+    "tableComment": "数据集处理任务详情",
+    "schemaText": "表名: dataset_process_task_detail ([AI推断]数据集处理任务详情)\n列:\n  - ID varchar(100) ([AI推断]任务详情ID)\n  - SOURCE_DATA_ID varchar(100) ([AI推断]来源数据ID)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]来源数据名称)\n  - DATA_TYPE varchar(50) ([AI推断]数据类型)\n  - SOURCE_PATH varchar(500) ([AI推断]来源路径)\n  - TARGET_PATH varchar(500) ([AI推断]目标路径)\n  - FILE_NAME varchar(255) ([AI推断]文件名)\n  - PROCESS_RESULT int(11) ([AI推断]处理结果)\n  - FAIL_REASON text ([AI推断]失败原因)\n  - PROCESS_ID varchar(100) ([AI推断]处理ID)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - OPERATOR_ID varchar(100) ([AI推断]操作员ID)\n  - SOURCE_COS_URL text ([AI推断]来源COS URL)\n  - TARGER_COS_URL text ([AI推断]目标COS URL)\n  - FILE_SUFFIX varchar(100) ([AI推断]文件后缀)\n  - ORIGIN_FILE_NAME varchar(255) ([AI推断]原始文件名)\n  - ORIGIN_FILE_SUFFIX varchar(100) ([AI推断]原始文件后缀)"
   },
   {
     "tableName": "dataset_process_task_detail_record",
-    "tableComment": "",
-    "schemaText": "表名: dataset_process_task_detail_record\n列:\n  - ID varchar(100)\n  - SOURCE_DATA_ID varchar(100)\n  - SOURCE_DATA_NAME varchar(255)\n  - DATA_TYPE varchar(50)\n  - SOURCE_PATH varchar(500)\n  - TARGET_PATH varchar(500)\n  - FILE_NAME varchar(255)\n  - PROCESS_RESULT int(11)\n  - FAIL_REASON text\n  - PROCESS_ID varchar(100)\n  - FILE_SIZE bigint(20)\n  - OPERATOR_ID varchar(100)\n  - SOURCE_COS_URL text\n  - TARGER_COS_URL text\n  - FILE_SUFFIX varchar(100)\n  - ORIGIN_FILE_NAME varchar(255)\n  - ORIGIN_FILE_SUFFIX varchar(100)\n  - CREATE_TIME datetime\n"
+    "tableComment": "数据集处理任务详情记录",
+    "schemaText": "表名: dataset_process_task_detail_record ([AI推断]数据集处理任务详情记录)\n列:\n  - ID varchar(100) ([AI推断]记录ID)\n  - SOURCE_DATA_ID varchar(100) ([AI推断]源数据ID)\n  - SOURCE_DATA_NAME varchar(255) ([AI推断]源数据名称)\n  - DATA_TYPE varchar(50) ([AI推断]数据类型)\n  - SOURCE_PATH varchar(500) ([AI推断]源路径)\n  - TARGET_PATH varchar(500) ([AI推断]目标路径)\n  - FILE_NAME varchar(255) ([AI推断]文件名)\n  - PROCESS_RESULT int(11) ([AI推断]处理结果)\n  - FAIL_REASON text ([AI推断]失败原因)\n  - PROCESS_ID varchar(100) ([AI推断]处理ID)\n  - FILE_SIZE bigint(20) ([AI推断]文件大小)\n  - OPERATOR_ID varchar(100) ([AI推断]操作者ID)\n  - SOURCE_COS_URL text ([AI推断]源对象存储URL)\n  - TARGER_COS_URL text ([AI推断]目标对象存储URL)\n  - FILE_SUFFIX varchar(100) ([AI推断]文件后缀)\n  - ORIGIN_FILE_NAME varchar(255) ([AI推断]原始文件名)\n  - ORIGIN_FILE_SUFFIX varchar(100) ([AI推断]原始文件后缀)\n  - CREATE_TIME datetime ([AI推断]创建时间)"
   },
   {
     "tableName": "dataset_quality_report",
-    "tableComment": "",
-    "schemaText": "表名: dataset_quality_report\n列:\n  - ID varchar(100)\n  - REPORT_NAME varchar(500)\n  - DATASET_TYPE varchar(50)\n  - CREATE_USER varchar(100)\n  - REPORT_JSON text\n  - DATASET_NAMES text\n  - CREATE_USER_NAME varchar(100)\n  - CREATE_TIME datetime\n  - TENANT_ID varchar(100)\n  - PROJECT_ID varchar(100)\n"
+    "tableComment": "数据集质量报告",
+    "schemaText": "表名: dataset_quality_report ([AI推断]数据集质量报告)\n列:\n  - ID varchar(100) ([AI推断]报告ID)\n  - REPORT_NAME varchar(500) ([AI推断]报告名称)\n  - DATASET_TYPE varchar(50) ([AI推断]数据集类型)\n  - CREATE_USER varchar(100) ([AI推断]创建用户)\n  - REPORT_JSON text ([AI推断]报告JSON内容)\n  - DATASET_NAMES text ([AI推断]数据集名称)\n  - CREATE_USER_NAME varchar(100) ([AI推断]创建用户名称)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - TENANT_ID varchar(100) ([AI推断]租户ID)\n  - PROJECT_ID varchar(100) ([AI推断]项目ID)"
   },
   {
     "tableName": "dataset_quality_report_index_info",
-    "tableComment": "",
-    "schemaText": "表名: dataset_quality_report_index_info\n列:\n  - ID varchar(100)\n  - EVALUATION_INDEX_CODE varchar(50)\n  - EVALUATION_INDEX_NAME varchar(100)\n  - EVALUATION_INDEX_VALUE double\n  - EVALUATION_INDEX_APERTURE text\n  - EVALUATION_INDEX_DESC text\n  - QUALITY_OBJECTIVE double\n  - EVALUATION_METHOD varchar(100)\n  - EVALUATION_METHOD_DESC varchar(500)\n  - EVALUATION_FORMULA varchar(500)\n  - EVALUATION_RESULT varchar(500)\n  - dataset_type varchar(50)\n"
+    "tableComment": "数据集质量报告指标信息表",
+    "schemaText": "表名: dataset_quality_report_index_info ([AI推断]数据集质量报告指标信息表)\n列:\n  - ID varchar(100) ([AI推断]标识符)\n  - EVALUATION_INDEX_CODE varchar(50) ([AI推断]评估指标代码)\n  - EVALUATION_INDEX_NAME varchar(100) ([AI推断]评估指标名称)\n  - EVALUATION_INDEX_VALUE double ([AI推断]评估指标值)\n  - EVALUATION_INDEX_APERTURE text ([AI推断]评估指标口径)\n  - EVALUATION_INDEX_DESC text ([AI推断]评估指标描述)\n  - QUALITY_OBJECTIVE double ([AI推断]质量目标)\n  - EVALUATION_METHOD varchar(100) ([AI推断]评估方法)\n  - EVALUATION_METHOD_DESC varchar(500) ([AI推断]评估方法描述)\n  - EVALUATION_FORMULA varchar(500) ([AI推断]评估公式)\n  - EVALUATION_RESULT varchar(500) ([AI推断]评估结果)\n  - dataset_type varchar(50) ([AI推断]数据集类型)"
   },
   {
     "tableName": "dataset_scene_sub",
-    "tableComment": "",
-    "schemaText": "表名: dataset_scene_sub\n列:\n  - SUB_ID varchar(50)\n  - SCENE_ID varchar(100)\n  - MODEL_ID varchar(100)\n  - SCENE_NAME varchar(500)\n  - SUB_STATUS char(1)\n  - APPROVE_STATUS char(1)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(200)\n  - CRT_TIME datetime\n  - PROJECT_ID varchar(50)\n  - PROJECT_NAME varchar(500)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(500)\n  - APPROVAL_TIME datetime\n  - APPROVAL_NAME varchar(200)\n  - APPROVAL_USER varchar(50)\n  - APPROVAL_PROJECT_ID varchar(50)\n  - APPROVAL_PROJECT_NAME varchar(500)\n  - APPROVAL_TENANT_ID varchar(50)\n  - APPROVAL_TENANT_NAME varchar(500)\n  - APPROVAL_OPINION varchar(500)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "数据集场景子表",
+    "schemaText": "表名: dataset_scene_sub ([AI推断]数据集场景子表)\n列:\n  - SUB_ID varchar(50) ([AI推断]子记录ID)\n  - SCENE_ID varchar(100) ([AI推断]场景ID)\n  - MODEL_ID varchar(100) ([AI推断]模型ID)\n  - SCENE_NAME varchar(500) ([AI推断]场景名称)\n  - SUB_STATUS char(1) ([AI推断]子状态)\n  - APPROVE_STATUS char(1) ([AI推断]审批状态)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - CRT_NAME varchar(200) ([AI推断]创建人姓名)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - PROJECT_ID varchar(50) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(500) ([AI推断]项目名称)\n  - TENANT_ID varchar(50) ([AI推断]租户ID)\n  - TENANT_NAME varchar(500) ([AI推断]租户名称)\n  - APPROVAL_TIME datetime ([AI推断]审批时间)\n  - APPROVAL_NAME varchar(200) ([AI推断]审批人姓名)\n  - APPROVAL_USER varchar(50) ([AI推断]审批用户)\n  - APPROVAL_PROJECT_ID varchar(50) ([AI推断]审批项目ID)\n  - APPROVAL_PROJECT_NAME varchar(500) ([AI推断]审批项目名称)\n  - APPROVAL_TENANT_ID varchar(50) ([AI推断]审批租户ID)\n  - APPROVAL_TENANT_NAME varchar(500) ([AI推断]审批租户名称)\n  - APPROVAL_OPINION varchar(500) ([AI推断]审批意见)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "dataset_scene_tag_user",
-    "tableComment": "",
-    "schemaText": "表名: dataset_scene_tag_user\n列:\n  - ID varchar(50)\n  - SCENE_TAG text\n  - CRT_TIME datetime\n  - CRT_NAME varchar(50)\n  - TENANT_ID varchar(200)\n  - PROJECT_ID varchar(50)\n  - CRT_USER varchar(50)\n"
+    "tableComment": "数据集场景标签用户表",
+    "schemaText": "表名: dataset_scene_tag_user ([AI推断]数据集场景标签用户表)\n列:\n  - ID varchar(50) ([AI推断]唯一标识符)\n  - SCENE_TAG text ([AI推断]场景标签)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_NAME varchar(50) ([AI推断]创建者名称)\n  - TENANT_ID varchar(200) ([AI推断]租户ID)\n  - PROJECT_ID varchar(50) ([AI推断]项目ID)\n  - CRT_USER varchar(50) ([AI推断]创建用户)"
   },
   {
     "tableName": "dataset_source_after_process_status",
-    "tableComment": "",
-    "schemaText": "表名: dataset_source_after_process_status\n列:\n  - STATUS_ID varchar(150)\n  - SOURCE_ID varchar(150)\n  - TASK_ID varchar(100)\n  - VERSION varchar(150)\n  - SOURCE_PATH varchar(1000)\n  - TARGET_PATH varchar(150)\n  - STATUS varchar(10)\n  - DESCRIPTION varchar(500)\n  - VALID_FLAG varchar(10)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - RESERVE_ONE varchar(150)\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n"
+    "tableComment": "数据集来源后处理状态表",
+    "schemaText": "表名: dataset_source_after_process_status ([AI推断]数据集来源后处理状态表)\n列:\n  - STATUS_ID varchar(150) ([AI推断]状态标识)\n  - SOURCE_ID varchar(150) ([AI推断]来源标识)\n  - TASK_ID varchar(100) ([AI推断]任务标识)\n  - VERSION varchar(150) ([AI推断]版本)\n  - SOURCE_PATH varchar(1000) ([AI推断]来源路径)\n  - TARGET_PATH varchar(150) ([AI推断]目标路径)\n  - STATUS varchar(10) ([AI推断]状态)\n  - DESCRIPTION varchar(500) ([AI推断]描述)\n  - VALID_FLAG varchar(10) ([AI推断]有效标志)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)\n  - RESERVE_ONE varchar(150) ([AI推断]保留字段一)\n  - RESERVE_TWO varchar(150) ([AI推断]保留字段二)\n  - RESERVE_THREE varchar(150) ([AI推断]保留字段三)"
   },
   {
     "tableName": "dataset_source_mark",
-    "tableComment": "",
-    "schemaText": "表名: dataset_source_mark\n列:\n  - MARK_ID varchar(100)\n  - SOURCE_ID varchar(100)\n  - SOURCE_MARK_STATUS tinyint(4)\n  - SOURCE_MARK_NUM varchar(50)\n  - SOURCE_DATA_NUM varchar(50)\n  - SOURCE_MARK_TIME datetime\n  - CRT_TIME datetime\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(50)\n  - UPT_TIME datetime\n  - UPT_USER varchar(50)\n  - UPT_NAME varchar(50)\n  - TENANT_ID varchar(50)\n  - TENANT_NAME varchar(50)\n  - DEL_FLAG char(1)\n"
+    "tableComment": "数据集来源标记表",
+    "schemaText": "表名: dataset_source_mark ([AI推断]数据集来源标记表)\n列:\n  - MARK_ID varchar(100) ([AI推断]标记标识)\n  - SOURCE_ID varchar(100) ([AI推断]来源标识)\n  - SOURCE_MARK_STATUS tinyint(4) ([AI推断]标记状态)\n  - SOURCE_MARK_NUM varchar(50) ([AI推断]标记编号)\n  - SOURCE_DATA_NUM varchar(50) ([AI推断]数据编号)\n  - SOURCE_MARK_TIME datetime ([AI推断]标记时间)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - CRT_NAME varchar(50) ([AI推断]创建人姓名)\n  - UPT_TIME datetime ([AI推断]更新时间)\n  - UPT_USER varchar(50) ([AI推断]更新用户)\n  - UPT_NAME varchar(50) ([AI推断]更新人姓名)\n  - TENANT_ID varchar(50) ([AI推断]租户标识)\n  - TENANT_NAME varchar(50) ([AI推断]租户名称)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "dataset_source_process_status",
-    "tableComment": "",
-    "schemaText": "表名: dataset_source_process_status\n列:\n  - STATUS_ID varchar(150)\n  - SOURCE_ID varchar(150)\n  - TASK_ID varchar(100)\n  - VERSION varchar(150)\n  - SOURCE_PATH text\n  - TARGET_PATH varchar(150)\n  - STATUS varchar(10)\n  - DESCRIPTION varchar(1000)\n  - VALID_FLAG varchar(10)\n  - CREATE_TIME datetime\n  - FINISH_TIME datetime\n  - RESERVE_ONE varchar(150)\n  - RESERVE_TWO varchar(150)\n  - RESERVE_THREE varchar(150)\n"
+    "tableComment": "数据集来源处理状态表",
+    "schemaText": "表名: dataset_source_process_status ([AI推断]数据集来源处理状态表)\n列:\n  - STATUS_ID varchar(150) ([AI推断]状态ID)\n  - SOURCE_ID varchar(150) ([AI推断]来源ID)\n  - TASK_ID varchar(100) ([AI推断]任务ID)\n  - VERSION varchar(150) ([AI推断]版本号)\n  - SOURCE_PATH text ([AI推断]来源路径)\n  - TARGET_PATH varchar(150) ([AI推断]目标路径)\n  - STATUS varchar(10) ([AI推断]状态)\n  - DESCRIPTION varchar(1000) ([AI推断]描述)\n  - VALID_FLAG varchar(10) ([AI推断]有效标志)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - FINISH_TIME datetime ([AI推断]完成时间)\n  - RESERVE_ONE varchar(150) ([AI推断]保留字段一)\n  - RESERVE_TWO varchar(150) ([AI推断]保留字段二)\n  - RESERVE_THREE varchar(150) ([AI推断]保留字段三)"
   },
   {
     "tableName": "dataset_tenant_domain",
-    "tableComment": "",
-    "schemaText": "表名: dataset_tenant_domain\n列:\n  - ID int(11)\n  - TENANT_ID varchar(300)\n  - DOMAIN_NAME varchar(500)\n  - CREATE_TIME datetime\n  - UPDATE_TIME datetime\n"
+    "tableComment": "数据集租户域名表",
+    "schemaText": "表名: dataset_tenant_domain ([AI推断]数据集租户域名表)\n列:\n  - ID int(11) ([AI推断]ID)\n  - TENANT_ID varchar(300) ([AI推断]租户ID)\n  - DOMAIN_NAME varchar(500) ([AI推断]域名)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - UPDATE_TIME datetime ([AI推断]更新时间)"
   },
   {
     "tableName": "digital_transformation_tianti_sysextend",
-    "tableComment": "",
-    "schemaText": "表名: digital_transformation_tianti_sysextend\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - ATTR_CODE text\n  - ATTR_VALUE text\n  - CREATE_TIME datetime\n  - REMARK text\n"
+    "tableComment": "数字化转型天梯系统扩展表",
+    "schemaText": "表名: digital_transformation_tianti_sysextend ([AI推断]数字化转型天梯系统扩展表)\n列:\n  - BATCH_ID varchar(32) ([AI推断]批次标识)\n  - SYS_CODE varchar(100) ([AI推断]系统编码)\n  - SYS_TYPE varchar(4) ([AI推断]系统类型)\n  - ATTR_CODE text ([AI推断]属性编码)\n  - ATTR_VALUE text ([AI推断]属性值)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - REMARK text ([AI推断]备注)"
   },
   {
     "tableName": "digital_transformation_tianti_sysextend_his",
-    "tableComment": "",
-    "schemaText": "表名: digital_transformation_tianti_sysextend_his\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - ATTR_CODE text\n  - ATTR_VALUE text\n  - CREATE_TIME datetime\n  - REMARK text\n"
+    "tableComment": "数字化转型天梯系统扩展历史表",
+    "schemaText": "表名: digital_transformation_tianti_sysextend_his ([AI推断]数字化转型天梯系统扩展历史表)\n列:\n  - BATCH_ID varchar(32) ([AI推断]批次ID)\n  - SYS_CODE varchar(100) ([AI推断]系统代码)\n  - SYS_TYPE varchar(4) ([AI推断]系统类型)\n  - ATTR_CODE text ([AI推断]属性代码)\n  - ATTR_VALUE text ([AI推断]属性值)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - REMARK text ([AI推断]备注)"
   },
   {
     "tableName": "digital_transformation_tianti_syslist",
-    "tableComment": "",
-    "schemaText": "表名: digital_transformation_tianti_syslist\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - SYS_LEVEL varchar(4)\n  - SYS_NAME varchar(100)\n  - SYS_FRAMEWORK varchar(100)\n  - DOMAIN_TYPE varchar(100)\n  - PARENT_SYS_CODE varchar(100)\n  - CREATE_TIME datetime\n  - REMARK varchar(255)\n"
+    "tableComment": "数字化转型天梯系统清单",
+    "schemaText": "表名: digital_transformation_tianti_syslist ([AI推断]数字化转型天梯系统清单)\n列:\n  - BATCH_ID varchar(32) ([AI推断]批次ID)\n  - SYS_CODE varchar(100) ([AI推断]系统代码)\n  - SYS_TYPE varchar(4) ([AI推断]系统类型)\n  - SYS_LEVEL varchar(4) ([AI推断]系统级别)\n  - SYS_NAME varchar(100) ([AI推断]系统名称)\n  - SYS_FRAMEWORK varchar(100) ([AI推断]系统框架)\n  - DOMAIN_TYPE varchar(100) ([AI推断]领域类型)\n  - PARENT_SYS_CODE varchar(100) ([AI推断]父系统代码)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - REMARK varchar(255) ([AI推断]备注)"
   },
   {
     "tableName": "digital_transformation_tianti_syslist_his",
-    "tableComment": "",
-    "schemaText": "表名: digital_transformation_tianti_syslist_his\n列:\n  - BATCH_ID varchar(32)\n  - SYS_CODE varchar(100)\n  - SYS_TYPE varchar(4)\n  - SYS_LEVEL varchar(4)\n  - SYS_NAME varchar(100)\n  - SYS_FRAMEWORK varchar(100)\n  - DOMAIN_TYPE varchar(100)\n  - PARENT_SYS_CODE varchar(100)\n  - CREATE_TIME datetime\n  - REMARK varchar(255)\n"
+    "tableComment": "数字化转型天梯系统历史清单",
+    "schemaText": "表名: digital_transformation_tianti_syslist_his ([AI推断]数字化转型天梯系统历史清单)\n列:\n  - BATCH_ID varchar(32) ([AI推断]批次ID)\n  - SYS_CODE varchar(100) ([AI推断]系统代码)\n  - SYS_TYPE varchar(4) ([AI推断]系统类型)\n  - SYS_LEVEL varchar(4) ([AI推断]系统级别)\n  - SYS_NAME varchar(100) ([AI推断]系统名称)\n  - SYS_FRAMEWORK varchar(100) ([AI推断]系统框架)\n  - DOMAIN_TYPE varchar(100) ([AI推断]域类型)\n  - PARENT_SYS_CODE varchar(100) ([AI推断]父系统代码)\n  - CREATE_TIME datetime ([AI推断]创建时间)\n  - REMARK varchar(255) ([AI推断]备注)"
   },
   {
     "tableName": "quality_report_select_dataset",
-    "tableComment": "",
-    "schemaText": "表名: quality_report_select_dataset\n列:\n  - ID varchar(100)\n  - REPORT_ID varchar(100)\n  - DATASET_ID varchar(100)\n"
+    "tableComment": "质量报告选取数据集表",
+    "schemaText": "表名: quality_report_select_dataset ([AI推断]质量报告选取数据集表)\n列:\n  - ID varchar(100) ([AI推断]标识)\n  - REPORT_ID varchar(100) ([AI推断]报告标识)\n  - DATASET_ID varchar(100) ([AI推断]数据集标识)"
   },
   {
     "tableName": "sftp_dir_config",
-    "tableComment": "",
-    "schemaText": "表名: sftp_dir_config\n列:\n  - ID varchar(100)\n  - SFTP_SOURCE_NAME varchar(100)\n  - SFTP_DIR varchar(400)\n  - TENANT_ID varchar(100)\n  - TENANT_NAME varchar(300)\n  - PROJECT_ID varchar(100)\n  - PROJECT_NAME varchar(300)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "SFTP目录配置",
+    "schemaText": "表名: sftp_dir_config ([AI推断]SFTP目录配置)\n列:\n  - ID varchar(100) ([AI推断]ID)\n  - SFTP_SOURCE_NAME varchar(100) ([AI推断]SFTP源名称)\n  - SFTP_DIR varchar(400) ([AI推断]SFTP目录路径)\n  - TENANT_ID varchar(100) ([AI推断]租户ID)\n  - TENANT_NAME varchar(300) ([AI推断]租户名称)\n  - PROJECT_ID varchar(100) ([AI推断]项目ID)\n  - PROJECT_NAME varchar(300) ([AI推断]项目名称)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - CRT_NAME varchar(100) ([AI推断]创建者名称)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_USER varchar(50) ([AI推断]更新用户)\n  - UPDATE_NAME varchar(100) ([AI推断]更新者名称)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "source_data_system",
-    "tableComment": "",
-    "schemaText": "表名: source_data_system\n列:\n  - ID varchar(100)\n  - SOURCE_SYSTEM_NAME varchar(200)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "数据来源系统",
+    "schemaText": "表名: source_data_system ([AI推断]数据来源系统)\n列:\n  - ID varchar(100) ([AI推断]标识)\n  - SOURCE_SYSTEM_NAME varchar(200) ([AI推断]来源系统名称)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - CRT_NAME varchar(100) ([AI推断]创建人姓名)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_USER varchar(50) ([AI推断]更新用户)\n  - UPDATE_NAME varchar(100) ([AI推断]更新人姓名)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   },
   {
     "tableName": "sys_para_config",
-    "tableComment": "",
-    "schemaText": "表名: sys_para_config\n列:\n  - ID varchar(100)\n  - PARA_KIND varchar(50)\n  - PARA_KEY varchar(100)\n  - PARA_VALUE varchar(400)\n  - NOTE varchar(200)\n  - CRT_USER varchar(50)\n  - CRT_NAME varchar(100)\n  - CRT_TIME datetime\n  - UPDATE_USER varchar(50)\n  - UPDATE_NAME varchar(100)\n  - UPDATE_TIME datetime\n  - DEL_FLAG char(1)\n"
+    "tableComment": "系统参数配置表",
+    "schemaText": "表名: sys_para_config ([AI推断]系统参数配置表)\n列:\n  - ID varchar(100) ([AI推断]参数ID)\n  - PARA_KIND varchar(50) ([AI推断]参数种类)\n  - PARA_KEY varchar(100) ([AI推断]参数键)\n  - PARA_VALUE varchar(400) ([AI推断]参数值)\n  - NOTE varchar(200) ([AI推断]备注)\n  - CRT_USER varchar(50) ([AI推断]创建用户)\n  - CRT_NAME varchar(100) ([AI推断]创建人姓名)\n  - CRT_TIME datetime ([AI推断]创建时间)\n  - UPDATE_USER varchar(50) ([AI推断]更新用户)\n  - UPDATE_NAME varchar(100) ([AI推断]更新人姓名)\n  - UPDATE_TIME datetime ([AI推断]更新时间)\n  - DEL_FLAG char(1) ([AI推断]删除标志)"
   }
 ]
