@@ -1,6 +1,6 @@
 """Pydantic 数据模型定义"""
 
-from typing import Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 
 
@@ -17,10 +17,17 @@ class SchemaSyncResponse(BaseModel):
     message: str
 
 
+class ChatMessage(BaseModel):
+    """对话消息"""
+    role: str = Field(..., description="消息角色: user / assistant")
+    content: str = Field(..., description="消息内容")
+
+
 class AgentQueryRequest(BaseModel):
     """Agent 查询请求"""
     query: str = Field(..., description="用户的自然语言查询")
     databaseName: Optional[str] = Field(None, description="数据库名称")
+    history: Optional[List[ChatMessage]] = Field(default=None, description="对话历史")
 
 
 class AgentQueryResponse(BaseModel):

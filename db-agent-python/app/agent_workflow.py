@@ -15,7 +15,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from app import rag_store
-from app.models import SqlExecutionResponse
+from app.models import ChatMessage, SqlExecutionResponse
 
 logger = logging.getLogger(__name__)
 
@@ -36,15 +36,15 @@ SYSTEM_PROMPT = """你是一个高级数据库 DBA 和 SQL 专家。你的任务
 5. 注意处理 NULL 值和数据类型
 6. 对于模糊查询使用 LIKE 操作符
 7. 合理使用聚合函数 (COUNT, SUM, AVG, MAX, MIN)
-8. 如果用户问题不明确，生成最可能的查询"""
+8. 如果用户问题不明确，生成最可能的查询
+9. 当存在对话历史时，判断当前问题是否与之前的查询相关。如果相关（如追问、补充、细化），沿用之前 SQL 涉及的表和条件；如果不相关（话题已切换），则独立分析"""
 
 # SQL 生成 Prompt 模板
 SQL_GENERATION_PROMPT = """根据以下表结构信息和用户问题，生成 SQL 查询语句。
 
 ## 相关表结构：
 {schema_context}
-
-## 用户问题：
+{history_section}## 用户问题：
 {query}
 
 请直接输出 SQL 语句："""
@@ -65,8 +65,7 @@ SQL_FIX_PROMPT = """之前的 SQL 执行出错，请根据错误信息修正 SQL
 
 # 结果总结 Prompt 模板
 RESULT_SUMMARY_PROMPT = """根据用户的问题和查询结果，生成简洁的中文业务回答。
-
-## 用户问题：
+{history_section}## 用户问题：
 {query}
 
 ## 查询结果 (JSON 格式)：
@@ -116,19 +115,48 @@ def clean_sql_response(content: str) -> str:
     return sql.strip()
 
 
-def retrieve_schema_context(query: str) -> str:
+def format_history_for_prompt(history: Optional[list[ChatMessage]], max_messages: int = 10) -> str:
+    """
+    将对话历史格式化为 Prompt 可读文本
+    截取最近 N 条消息，避免 token 过长
+    """
+    if not history:
+        return ""
+
+    recent = history[-max_messages:]
+    lines = []
+    for msg in recent:
+        role_label = "用户" if msg.role == "user" else "助手"
+        # 截断过长的回答，保留关键信息
+        content = msg.content[:500] + "..." if len(msg.content) > 500 else msg.content
+        lines.append(f"{role_label}：{content}")
+
+    return "## 对话历史：\n" + "\n".join(lines) + "\n\n"
+
+
+def retrieve_schema_context(query: str, history: Optional[list[ChatMessage]] = None) -> str:
     """
     使用 RAG 检索相关表结构
+    有对话历史时，将上下文融入检索查询以提高准确度
 
     Args:
         query: 用户查询
+        history: 对话历史
 
     Returns:
         拼接完成的表结构上下文
     """
     start_time = time.perf_counter()
-    logger.info("开始检索 Schema 上下文 query=%s", query)
-    relevant_schemas = rag_store.search_relevant_tables(query, top_k=5)
+
+    # 有历史时，将最近的用户问题拼接到查询中，帮助 RAG 检索到正确的表
+    search_query = query
+    if history:
+        recent_user_messages = [m.content for m in history if m.role == "user"][-3:]
+        if recent_user_messages:
+            search_query = " ".join(recent_user_messages) + " " + query
+
+    logger.info("开始检索 Schema 上下文 query=%s, searchQuery=%s", query, abbreviate_text(search_query, 200))
+    relevant_schemas = rag_store.search_relevant_tables(search_query, top_k=5)
 
     if not relevant_schemas:
         logger.warning("Schema 上下文检索为空 query=%s", query)
@@ -149,7 +177,7 @@ def retrieve_schema_context(query: str) -> str:
     return context
 
 
-def generate_sql(llm: ChatOpenAI, query: str, schema_context: str) -> str:
+def generate_sql(llm: ChatOpenAI, query: str, schema_context: str, history: Optional[list[ChatMessage]] = None) -> str:
     """
     调用 LLM 生成 SQL
 
@@ -157,6 +185,7 @@ def generate_sql(llm: ChatOpenAI, query: str, schema_context: str) -> str:
         llm: LLM 客户端
         query: 用户查询
         schema_context: 表结构上下文
+        history: 对话历史
 
     Returns:
         生成的 SQL 语句
@@ -164,6 +193,7 @@ def generate_sql(llm: ChatOpenAI, query: str, schema_context: str) -> str:
     start_time = time.perf_counter()
     prompt = SQL_GENERATION_PROMPT.format(
         schema_context=schema_context,
+        history_section=format_history_for_prompt(history),
         query=query
     )
 
@@ -173,8 +203,9 @@ def generate_sql(llm: ChatOpenAI, query: str, schema_context: str) -> str:
     ]
 
     logger.info(
-        "开始调用 LLM 生成 SQL query=%s, schemaContextLength=%d, promptLength=%d",
+        "开始调用 LLM 生成 SQL query=%s, historyCount=%d, schemaContextLength=%d, promptLength=%d",
         query,
+        len(history or []),
         len(schema_context),
         len(prompt)
     )
@@ -276,7 +307,7 @@ def fix_sql(llm: ChatOpenAI, original_sql: str, error_message: str, schema_conte
     return fixed_sql
 
 
-def build_result_summary_messages(query: str, result_data: list) -> list:
+def build_result_summary_messages(query: str, result_data: list, history: Optional[list[ChatMessage]] = None) -> list:
     """
     构建查询结果总结所需的消息列表
     查询结果过长时会截断，避免模型上下文过大
@@ -288,6 +319,7 @@ def build_result_summary_messages(query: str, result_data: list) -> list:
         result_json = result_json[:4000] + "\n... (结果已截断)"
 
     prompt = RESULT_SUMMARY_PROMPT.format(
+        history_section=format_history_for_prompt(history),
         query=query,
         result_json=result_json
     )
@@ -298,7 +330,7 @@ def build_result_summary_messages(query: str, result_data: list) -> list:
     ]
 
 
-def generate_answer(llm: ChatOpenAI, query: str, result_data: list) -> str:
+def generate_answer(llm: ChatOpenAI, query: str, result_data: list, history: Optional[list[ChatMessage]] = None) -> str:
     """
     根据查询结果生成中文业务回答
 
@@ -306,13 +338,14 @@ def generate_answer(llm: ChatOpenAI, query: str, result_data: list) -> str:
         llm: LLM 客户端
         query: 用户原始问题
         result_data: 查询结果数据
+        history: 对话历史
 
     Returns:
         中文业务回答
     """
     start_time = time.perf_counter()
-    logger.info("开始调用 LLM 生成业务回答 query=%s, rowCount=%d", query, len(result_data or []))
-    response = llm.invoke(build_result_summary_messages(query, result_data))
+    logger.info("开始调用 LLM 生成业务回答 query=%s, historyCount=%d, rowCount=%d", query, len(history or []), len(result_data or []))
+    response = llm.invoke(build_result_summary_messages(query, result_data, history))
     answer = response.content.strip()
     logger.info(
         "LLM 业务回答生成完成 query=%s, answerLength=%d, costMs=%d",
@@ -323,7 +356,7 @@ def generate_answer(llm: ChatOpenAI, query: str, result_data: list) -> str:
     return answer
 
 
-def stream_answer(llm: ChatOpenAI, query: str, result_data: list) -> Iterator[str]:
+def stream_answer(llm: ChatOpenAI, query: str, result_data: list, history: Optional[list[ChatMessage]] = None) -> Iterator[str]:
     """
     流式生成中文业务回答
     模型输出的文本片段会逐段返回给前端
@@ -331,8 +364,8 @@ def stream_answer(llm: ChatOpenAI, query: str, result_data: list) -> Iterator[st
     start_time = time.perf_counter()
     chunk_count = 0
     total_length = 0
-    logger.info("开始流式生成业务回答 query=%s, rowCount=%d", query, len(result_data or []))
-    for chunk in llm.stream(build_result_summary_messages(query, result_data)):
+    logger.info("开始流式生成业务回答 query=%s, historyCount=%d, rowCount=%d", query, len(history or []), len(result_data or []))
+    for chunk in llm.stream(build_result_summary_messages(query, result_data, history)):
         content = chunk.content
         if isinstance(content, str) and content:
             chunk_count += 1
@@ -348,7 +381,7 @@ def stream_answer(llm: ChatOpenAI, query: str, result_data: list) -> Iterator[st
     )
 
 
-def run_agent_workflow(query: str, databaseName: Optional[str] = None) -> dict:
+def run_agent_workflow(query: str, databaseName: Optional[str] = None, history: Optional[list[ChatMessage]] = None) -> dict:
     """
     执行完整的 Agent 工作流
 
@@ -360,19 +393,20 @@ def run_agent_workflow(query: str, databaseName: Optional[str] = None) -> dict:
     Args:
         query: 用户的自然语言查询
         databaseName: 数据库名称 (可选)
+        history: 对话历史
 
     Returns:
         包含完整结果的字典
     """
     trace_id = uuid.uuid4().hex[:12]
     start_time = time.perf_counter()
-    logger.info("Agent 查询开始 traceId=%s, query=%s, databaseName=%s", trace_id, query, databaseName)
+    logger.info("Agent 查询开始 traceId=%s, query=%s, historyCount=%d, databaseName=%s", trace_id, query, len(history or []), databaseName)
     llm = get_llm()
     retry_count = 0
 
-    schema_context = retrieve_schema_context(query)
+    schema_context = retrieve_schema_context(query, history)
 
-    current_sql = generate_sql(llm, query, schema_context)
+    current_sql = generate_sql(llm, query, schema_context, history)
 
     while retry_count <= MAX_RETRY_COUNT:
         logger.info(
@@ -384,7 +418,7 @@ def run_agent_workflow(query: str, databaseName: Optional[str] = None) -> dict:
         execution_result = execute_sql_via_java(current_sql, databaseName)
 
         if execution_result.success:
-            answer = generate_answer(llm, query, execution_result.data or [])
+            answer = generate_answer(llm, query, execution_result.data or [], history)
             logger.info(
                 "Agent 查询成功 traceId=%s, retryCount=%d, rowCount=%d, costMs=%d",
                 trace_id,
@@ -448,14 +482,14 @@ def run_agent_workflow(query: str, databaseName: Optional[str] = None) -> dict:
     }
 
 
-def run_agent_workflow_stream(query: str, databaseName: Optional[str] = None) -> Iterator[dict]:
+def run_agent_workflow_stream(query: str, databaseName: Optional[str] = None, history: Optional[list[ChatMessage]] = None) -> Iterator[dict]:
     """
     流式执行 Agent 查询工作流
     前端可以即时收到状态、SQL、数据和回答片段
     """
     trace_id = uuid.uuid4().hex[:12]
     start_time = time.perf_counter()
-    logger.info("Agent 流式查询开始 traceId=%s, query=%s, databaseName=%s", trace_id, query, databaseName)
+    logger.info("Agent 流式查询开始 traceId=%s, query=%s, historyCount=%d, databaseName=%s", trace_id, query, len(history or []), databaseName)
     llm = get_llm()
     retry_count = 0
     current_sql = None
@@ -466,14 +500,14 @@ def run_agent_workflow_stream(query: str, databaseName: Optional[str] = None) ->
             "type": "status",
             "message": "正在检索相关表结构..."
         }
-        schema_context = retrieve_schema_context(query)
+        schema_context = retrieve_schema_context(query, history)
 
         logger.info("Agent 流式阶段开始 traceId=%s, stage=generate_sql", trace_id)
         yield {
             "type": "status",
             "message": "正在生成 SQL..."
         }
-        current_sql = generate_sql(llm, query, schema_context)
+        current_sql = generate_sql(llm, query, schema_context, history)
         logger.info("Agent 流式 SQL 生成完成 traceId=%s, sqlPreview=%s", trace_id, abbreviate_text(current_sql))
         yield {
             "type": "sql",
@@ -506,7 +540,7 @@ def run_agent_workflow_stream(query: str, databaseName: Optional[str] = None) ->
                     "type": "answer_start"
                 }
                 answer_parts = []
-                for chunk in stream_answer(llm, query, result_data):
+                for chunk in stream_answer(llm, query, result_data, history):
                     answer_parts.append(chunk)
                     yield {
                         "type": "answer_delta",
