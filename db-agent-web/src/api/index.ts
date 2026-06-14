@@ -154,22 +154,28 @@ export async function syncAllSchemasStream(
   const decoder = new TextDecoder('utf-8');
   let buffer = '';
 
+  const parseAndEmit = (raw: string) => {
+    const dataText = raw
+      .split('\n')
+      .filter((line) => line.startsWith('data:'))
+      .map((line) => line.slice(5).trimStart())
+      .join('\n');
+
+    if (dataText) {
+      try {
+        onEvent(JSON.parse(dataText) as SchemaSyncEvent);
+      } catch (e) {
+        console.warn('SSE JSON 解析失败:', dataText, e);
+      }
+    }
+  };
+
   const emitBufferedEvents = () => {
     let eventEndIndex = buffer.indexOf('\n\n');
     while (eventEndIndex !== -1) {
       const eventBlock = buffer.slice(0, eventEndIndex).trim();
       buffer = buffer.slice(eventEndIndex + 2);
-
-      const dataText = eventBlock
-        .split('\n')
-        .filter((line) => line.startsWith('data:'))
-        .map((line) => line.slice(5).trimStart())
-        .join('\n');
-
-      if (dataText) {
-        onEvent(JSON.parse(dataText) as SchemaSyncEvent);
-      }
-
+      parseAndEmit(eventBlock);
       eventEndIndex = buffer.indexOf('\n\n');
     }
   };
@@ -185,15 +191,7 @@ export async function syncAllSchemasStream(
   }
 
   if (buffer.trim()) {
-    const dataText = buffer
-      .split('\n')
-      .filter((line) => line.startsWith('data:'))
-      .map((line) => line.slice(5).trimStart())
-      .join('\n');
-
-    if (dataText) {
-      onEvent(JSON.parse(dataText) as SchemaSyncEvent);
-    }
+    parseAndEmit(buffer.trim());
   }
 }
 

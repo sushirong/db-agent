@@ -45,11 +45,12 @@ public class SchemaController {
     public SseEmitter syncSchemasToAI(
             @PathVariable String databaseName,
             @RequestParam(defaultValue = "false") boolean force) {
-        SseEmitter emitter = new SseEmitter();
-        AtomicBoolean completed = new AtomicBoolean(false);
+        // 同步大量表结构可能耗时很长，设置 30 分钟超时
+        SseEmitter emitter = new SseEmitter(60 * 60 * 1000L);
+        AtomicBoolean emitterClosed = new AtomicBoolean(false);
 
-        Runnable doComplete = () -> {
-            if (completed.compareAndSet(false, true)) {
+        Runnable closeEmitter = () -> {
+            if (emitterClosed.compareAndSet(false, true)) {
                 emitter.complete();
             }
         };
@@ -57,39 +58,35 @@ public class SchemaController {
         executor.execute(() -> {
             try {
                 SyncResult result = force
-                        ? syncService.syncAllSchemas(databaseName, progressCallback(emitter, completed))
-                        : syncService.incrementalSync(databaseName, progressCallback(emitter, completed));
+                        ? syncService.syncAllSchemas(databaseName, progressCallback(emitter))
+                        : syncService.incrementalSync(databaseName, progressCallback(emitter));
 
-                if (!completed.get()) {
-                    sendEvent(emitter, SchemaSyncEvent.complete(
-                            result.getTotal(), result.getSuccess(), result.getFail(), result.getMessage()));
-                    doComplete.run();
-                }
+                sendEvent(emitter, SchemaSyncEvent.complete(
+                        result.getTotal(), result.getSuccess(), result.getFail(), result.getMessage()));
+                log.info("表结构同步完成 databaseName={}, total={}, success={}, fail={}",
+                        databaseName, result.getTotal(), result.getSuccess(), result.getFail());
 
             } catch (Exception e) {
                 log.error("表结构同步流程异常 databaseName={}", databaseName, e);
-                if (!completed.get()) {
-                    sendEvent(emitter, SchemaSyncEvent.error(e.getMessage()));
-                }
-                doComplete.run();
+                sendEvent(emitter, SchemaSyncEvent.error(e.getMessage()));
+            } finally {
+                closeEmitter.run();
             }
         });
 
-        emitter.onTimeout(doComplete);
-        emitter.onError(t -> {
-            log.warn("SSE 连接异常 databaseName={}", databaseName, t);
-            completed.set(true);
+        emitter.onTimeout(() -> {
+            log.warn("SSE 连接超时 databaseName={}", databaseName);
+            closeEmitter.run();
         });
+        emitter.onError(t -> log.warn("SSE 连接异常 databaseName={}", databaseName, t));
 
         return emitter;
     }
 
-    private SchemaSyncService.ProgressCallback progressCallback(SseEmitter emitter, AtomicBoolean completed) {
+    private SchemaSyncService.ProgressCallback progressCallback(SseEmitter emitter) {
         return (current, total, tableName, status, message) -> {
-            if (completed.get()) {
-                return;
-            }
             if ("start".equals(status)) {
+                log.info("同步开始 total={}", total);
                 sendEvent(emitter, SchemaSyncEvent.start(total));
             } else {
                 sendEvent(emitter, SchemaSyncEvent.progress(current, total, tableName, status, message));
@@ -101,7 +98,7 @@ public class SchemaController {
         try {
             emitter.send(SseEmitter.event().name("sync").data(event));
         } catch (IllegalStateException e) {
-            log.warn("SSE 连接已关闭，忽略事件 type={}", event.getType());
+            log.debug("SSE 连接已关闭，忽略事件 type={}", event.getType());
         } catch (Exception e) {
             log.warn("SSE 推送事件失败 type={}", event.getType(), e);
         }
