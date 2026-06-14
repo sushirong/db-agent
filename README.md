@@ -16,11 +16,11 @@
 
 ## 三端职责
 
-| 模块 | 职责 |
-| --- | --- |
-| 前端 `db-agent-web` | 提供聊天界面、发起自然语言查询、触发表结构同步、展示业务回答、SQL 和表格结果 |
-| Java `db-agent-java` | 连接业务数据库、读取 `information_schema` 表结构、推送表结构给 Python、执行只读 SQL 查询 |
-| Python `db-agent-python` | 接收表结构并写入 FAISS 向量库、检索相关表结构、调用 LLM 生成 SQL、失败时修正 SQL、总结中文业务回答 |
+| 模块                       | 职责                                                            |
+| ------------------------ | ------------------------------------------------------------- |
+| 前端 `db-agent-web`        | 提供聊天界面、发起自然语言查询、触发表结构同步、展示业务回答、SQL 和表格结果                      |
+| Java `db-agent-java`     | 连接业务数据库、读取 `information_schema` 表结构、推送表结构给 Python、执行只读 SQL 查询 |
+| Python `db-agent-python` | 接收表结构并写入 FAISS 向量库、检索相关表结构、调用 LLM 生成 SQL、失败时修正 SQL、总结中文业务回答   |
 
 ## 整体业务流程
 
@@ -48,17 +48,44 @@ Python 生成中文业务回答
 
 ## 表结构同步流程
 
-表结构同步用于让 Python AI 服务了解数据库中的表、字段、字段类型和中文注释，是自然语言生成 SQL 的基础数据准备流程。
+表结构同步用于让 Python AI 服务了解数据库中的表、字段、字段类型和中文注释，是自然语言生成 SQL 的基础数据准备流程。支持增量同步和全量同步两种模式，同步过程中通过 SSE 实时推送进度。
 
-1. 用户在前端点击“同步最新表结构”。
-2. 前端调用 Java 接口 `POST http://localhost:8080/api/schema/{databaseName}/sync`。
-3. Java 通过主数据源查询 `information_schema.TABLES` 和 `information_schema.COLUMNS`。
-4. Java 将每张表整理成包含表名、表注释、字段名、字段类型、字段注释的格式化文本。
-5. Java 逐张表调用 Python 接口 `POST http://localhost:8000/ai/schema/sync`。
-6. Python 使用 HuggingFace Embedding 将表结构文本转换成向量。
-7. Python 将向量写入 FAISS，并将表结构文档持久化到 `db-agent-python/faiss_data/`。
+### 同步模式
 
-同步完成后，Python 可以在用户提问时基于语义相似度检索相关表结构。
+| 模式   | 触发方式                   | 说明                             |
+| ---- | ---------------------- | ------------------------------ |
+| 增量同步 | 左键点击”同步表结构”            | 仅同步新增表、结构变更的表，删除已不存在的表，跳过未变化的表 |
+| 全量同步 | 右键点击”同步表结构” → 选择”全量同步” | 强制同步所有表结构，忽略哈希比对               |
+
+### 增量同步流程
+
+1. 用户在前端左键点击”同步表结构”按钮（默认增量同步）。
+2. 前端通过 SSE 调用 Java 接口 `POST http://localhost:8080/api/schema/{databaseName}/sync`。
+3. Java 通过主数据源查询 `information_schema.TABLES` 和 `information_schema.COLUMNS`，获取当前所有表结构。
+4. Java 调用 Python 接口 `GET http://localhost:8000/ai/schema/metadata`，获取已存储表的元数据（表名 + MD5 哈希）。
+5. Java 逐表计算 MD5 哈希比对，识别出新增表、结构变更表和已删除表。
+6. Java 仅对变更的表逐张调用 Python 接口 `POST http://localhost:8000/ai/schema/sync`。
+7. Java 对已删除的表调用 Python 接口 `DELETE http://localhost:8000/ai/schema/{tableName}`。
+8. 每张表同步完成后，Java 通过 SSE 实时向前端推送进度事件。
+9. Python 接收表结构后，先通过 LLM 推断缺失的表注释和字段注释（标记为 `[AI推断]`），再向量化写入 FAISS。
+
+### LLM 注释推断
+
+当数据库表缺少中文注释时，Python 端会调用 LLM 自动推断：
+
+- 表注释缺失 → LLM 根据表名和字段推断用途
+- 字段注释缺失 → LLM 根据字段名、类型和上下文推断含义
+- 推断结果标记 `[AI推断]` 前缀，与真实注释区分
+- 推断结果同时写入 `schemaText` 和 `tableComment`，确保向量检索和元数据一致
+
+### 前端进度展示
+
+同步过程中，前端通过 SSE 接收实时进度并在侧边栏展示：
+
+- 进度条显示当前/总数
+- 当前同步的表名
+- 每张表的同步状态（成功/失败）
+- 同步完成后 Toast 提示结果摘要
 
 ## 智能查询流程
 
@@ -77,27 +104,33 @@ Python 生成中文业务回答
 
 ## 关键接口说明
 
-| 接口 | 方向 | 说明 |
-| --- | --- | --- |
-| `POST /api/schema/{databaseName}/sync` | 前端 -> Java | 触发表结构同步，Java 提取业务库表结构并推送给 Python |
-| `GET /api/schema/{databaseName}` | 前端/调试 -> Java | 获取指定数据库的所有表结构 |
-| `POST /ai/schema/sync` | Java -> Python | 接收单张表结构，向量化后写入 FAISS |
-| `GET /ai/schema/list` | 前端/调试 -> Python | 查看已同步到向量库的表结构列表 |
-| `DELETE /ai/schema/clear` | 前端/调试 -> Python | 清空 Python 端已同步的表结构数据 |
-| `POST /ai/agent/query` | 前端 -> Python | 提交自然语言问题，返回 SQL、查询数据和中文回答 |
-| `POST /api/internal/db/execute` | Python -> Java | 执行 Python 生成的只读 SQL |
+| 接口                                                 | 方向              | 说明                                    |
+| -------------------------------------------------- | --------------- | ------------------------------------- |
+| `POST /api/schema/{databaseName}/sync?force=false` | 前端 -> Java      | 触发表结构同步（SSE），默认增量同步，`force=true` 全量同步 |
+| `GET /api/schema/{databaseName}`                   | 前端/调试 -> Java   | 获取指定数据库的所有表结构                         |
+| `POST /ai/schema/sync`                             | Java -> Python  | 接收单表结构，LLM 推断缺失注释后向量化写入 FAISS         |
+| `GET /ai/schema/metadata`                          | Java -> Python  | 获取已存储表的元数据（表名 + MD5 哈希），用于增量比对        |
+| `DELETE /ai/schema/{tableName}`                    | Java -> Python  | 删除指定表的向量数据                            |
+| `GET /ai/schema/list`                              | 前端/调试 -> Python | 查看已同步到向量库的表结构列表                       |
+| `DELETE /ai/schema/clear`                          | 前端/调试 -> Python | 清空 Python 端已同步的表结构数据                  |
+| `POST /ai/agent/query`                             | 前端 -> Python    | 提交自然语言问题，返回 SQL、查询数据和中文回答             |
+| `POST /ai/agent/query/stream`                      | 前端 -> Python    | 流式提交自然语言问题（SSE），实时返回状态、SQL、数据和回答      |
+| `POST /api/internal/db/execute`                    | Python -> Java  | 执行 Python 生成的只读 SQL                   |
 
 ## 数据流说明
 
-### 表结构数据流
+### 表结构数据流（增量同步）
 
 ```text
 业务数据库 information_schema
-  → Java DatabaseSchemaService
-  → Java SchemaController
-  → Python /ai/schema/sync
+  → Java DatabaseSchemaService 获取当前表结构
+  → Java SchemaSyncService 调用 Python /ai/schema/metadata 获取已存储哈希
+  → Java MD5 哈希比对，识别新增/变更/删除
+  → Python /ai/schema/sync（仅变更的表）
+  → Python LLM 推断缺失注释
   → HuggingFace Embedding
   → FAISS 向量库
+  → Java SSE 实时推送进度 → 前端进度条
 ```
 
 ### 查询数据流
