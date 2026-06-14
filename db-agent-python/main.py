@@ -201,7 +201,8 @@ async def agent_query(request: AgentQueryRequest):
     try:
         result = run_agent_workflow(
             query=request.query,
-            databaseName=request.databaseName
+            databaseName=request.databaseName,
+            history=request.history
         )
         logger.info(
             "Agent 非流式查询完成 traceId=%s, success=%s, retryCount=%s, costMs=%d",
@@ -249,7 +250,8 @@ async def agent_query_stream(request: AgentQueryRequest):
         event_count = 0
         for event in run_agent_workflow_stream(
             query=request.query,
-            databaseName=request.databaseName
+            databaseName=request.databaseName,
+            history=request.history
         ):
             event_count += 1
             logger.info(

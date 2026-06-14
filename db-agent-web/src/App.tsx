@@ -9,7 +9,7 @@ import {
   saveConversationMessage,
   syncAllSchemasStream,
 } from './api';
-import type { AgentStreamEvent, Message, Conversation, SchemaSyncEvent } from './types';
+import type { AgentStreamEvent, ChatMessage, Message, Conversation, SchemaSyncEvent } from './types';
 import type { SyncProgress } from './components/layout/Sidebar';
 
 // 生成唯一 ID
@@ -173,6 +173,13 @@ export default function App() {
       setActiveConversationId(conversationId);
     }
 
+    // 构建对话历史（当前消息之前的最近 10 条）
+    const existingMessages = messagesMap[conversationId!] || [];
+    const history: ChatMessage[] = existingMessages
+      .filter((m) => !m.isLoading)
+      .slice(-10)
+      .map((m) => ({ role: m.role, content: m.content }));
+
     // 添加用户消息
     const userMessage: Message = {
       id: generateId(),
@@ -225,7 +232,7 @@ export default function App() {
       };
 
       // SSE 事件会实时驱动当前助手消息内容变化
-      await queryAgentStream({ query: content }, (event: AgentStreamEvent) => {
+      await queryAgentStream({ query: content, history }, (event: AgentStreamEvent) => {
         if (event.type === 'status') {
           statusText = event.message;
           updateAssistantMessage(buildAssistantContent(statusText, answerText, generatedSql, resultData));

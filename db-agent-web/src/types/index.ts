@@ -10,10 +10,17 @@ export interface Message {
   isLoading?: boolean;
 }
 
+// 对话消息（传给 Python 的精简格式）
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
 // Agent 查询请求
 export interface AgentQueryRequest {
   query: string;
   databaseName?: string;
+  history?: ChatMessage[];
 }
 
 // Agent 查询响应
